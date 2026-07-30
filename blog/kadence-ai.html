@@ -4,10 +4,17 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Как гуманитарий без опыта в кодинге собрал инди-игру с AI-агентом за полтора месяца — статья Анны Музыки">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Как гуманитарий без опыта в кодинге собрал инди-игру с AI-агентом за полтора месяца">
+  <meta name="twitter:description" content="От концепт-дизайна велосипедного магазина до релизной web-игры на GitHub Pages">
+  <meta name="twitter:image" content="https://kyuuketsukiakado.github.io/hannamuzyka/assets/blog/habr-01.png">
   <meta name="theme-color" content="#0b0b12">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://kyuuketsukiakado.github.io/hannamuzyka/blog/kadence-ai.html">
   <meta property="og:title" content="Как гуманитарий без опыта в кодинге собрал инди-игру с AI-агентом за полтора месяца">
   <meta property="og:description" content="От концепт-дизайна велосипедного магазина до релизной web-игры на GitHub Pages — и почему документация оказалась важнее промптов.">
-  <meta property="og:image" content="../assets/blog/habr-01.png">
+  <meta property="og:image" content="https://kyuuketsukiakado.github.io/hannamuzyka/assets/blog/habr-01.png">
+  <link rel="canonical" href="https://kyuuketsukiakado.github.io/hannamuzyka/blog/kadence-ai.html">
   <title>Блог — Как гуманитарий без опыта в кодинге собрал инди-игру с AI-агентом — Hanna Muzyka</title>
   <link rel="icon" href="../assets/profile/mynotionface.png">
   <link rel="stylesheet" href="../css/style.css">
@@ -25,7 +32,6 @@
       <a href="../index.html#experience">Опыт</a>
     </nav>
     <div class="header-actions">
-      <button class="icon-button" id="theme-toggle" aria-label="Toggle theme">☼</button>
       <a class="small-contact" href="mailto:repro4chful@gmail.com">Связаться</a>
     </div>
   </header>
@@ -43,7 +49,7 @@
       </div>
 
       <figure class="blog-figure">
-        <img src="../assets/blog/habr-01.png" alt="Главное меню игры Kadence">
+        <img src="../assets/blog/habr-01.png" alt="Главное меню игры Kadence" loading="lazy">
         <figcaption>Kadence — инди-игра о буднях веломастерской.</figcaption>
       </figure>
 
@@ -55,7 +61,7 @@
         <p>Отсюда родилась идея сделать концепт-дизайн сайта магазина велосипедов, где не было бы места этим недостаткам. Я нарисовала маскота, продумала скелет сайта и хотела перейти к вайрфреймам. Но цельной картины в голове так и не сложилось.</p>
 
         <figure class="blog-figure">
-          <img src="../assets/blog/habr-02.png" alt="Концепт велосипедного магазина">
+          <img src="../assets/blog/habr-02.png" alt="Концепт велосипедного магазина" loading="lazy">
           <figcaption>Изначально Kadence должна была быть концептом велосипедного магазина, а не игрой.</figcaption>
         </figure>
 
@@ -65,7 +71,7 @@
 
         <p>Так начал зарождаться мой первый настолько масштабный продукт — инди-игра <strong>Kadence</strong> про будни в небольшой веломастерской.</p>
 
-        <p class="blog-cta-link"><a href="https://kyuuketsukiakado.github.io/Kadence-Release/" target="_blank" rel="noreferrer">Демо Kadence v0.1 ↗</a></p>
+        <p class="blog-cta-link"><a href="https://kyuuketsukiakado.github.io/Kadence-Release/" target="_blank" rel="noopener noreferrer">Демо Kadence v0.1 ↗</a></p>
 
         <h2>Немного обо мне и почему здесь вообще оказался AI</h2>
 
@@ -86,7 +92,7 @@
         <p>Мне хотелось не просто дать возможность собирать байки, а сделать этот процесс интуитивно понятным и отзывчивым. Чтобы игрок не перебирал детали вслепую, а постепенно понимал: клиент пришёл не просто за «велосипедом», у него есть конкретная история, ограничения и иногда довольно странные пожелания.</p>
 
         <figure class="blog-figure">
-          <img src="../assets/blog/habr-03.png" alt="Сборка велосипеда в Kadence">
+          <img src="../assets/blog/habr-03.png" alt="Сборка велосипеда в Kadence" loading="lazy">
           <figcaption>Сборка велосипеда — центральная механика Kadence.</figcaption>
         </figure>
 
@@ -115,7 +121,7 @@
         <p>В демо шесть клиентов. У каждого есть собственная история, бюджет, цели по характеристикам велосипеда и специальные условия. Иногда требования вполне рациональны. Иногда — например, «только без тормозов» — требуют от механика отдельно остановиться и подумать, точно ли он хочет это делать.</p>
 
         <figure class="blog-figure">
-          <img src="../assets/blog/habr-04.png" alt="Клиенты с историями">
+          <img src="../assets/blog/habr-04.png" alt="Клиенты с историями" loading="lazy">
           <figcaption>У каждого есть собственная история, бюджет, цели по характеристикам велосипеда и специальные условия.</figcaption>
         </figure>
 
@@ -158,7 +164,7 @@
         <p>Я сразу понимала, что без структуры AI-агент начнёт «плыть». Поэтому репозиторий стал не просто местом, куда складывается код, а базой данных всего проекта.</p>
 
         <figure class="blog-figure">
-          <img src="../assets/blog/habr-05.png" alt="Репозиторий как база знаний">
+          <img src="../assets/blog/habr-05.png" alt="Репозиторий как база знаний" loading="lazy">
           <figcaption>Репозиторий стал не просто местом для кода, а базой знаний проекта.</figcaption>
         </figure>
 
@@ -184,7 +190,7 @@
         <h2>Как я контролировала результат</h2>
 
         <figure class="blog-figure">
-          <img src="../assets/blog/habr-06.png" alt="Рабочий цикл">
+          <img src="../assets/blog/habr-06.png" alt="Рабочий цикл" loading="lazy">
           <figcaption>Мой рабочий цикл: документация → задача → билд → тестирование → итерация.</figcaption>
         </figure>
 
@@ -215,7 +221,7 @@
         <p>Краеугольным камнем в первую очередь оказался мой небольшой опыт работы с GitHub. Впервые в жизни мне пришлось разобраться с pull request и понять, как с помощью GitHub Actions сделать автоматический деплой статической web-игры на GitHub Pages.</p>
 
         <figure class="blog-figure">
-          <img src="../assets/blog/habr-07.png" alt="Деплой на GitHub Pages">
+          <img src="../assets/blog/habr-07.png" alt="Деплой на GitHub Pages" loading="lazy">
           <figcaption>Первый автоматический деплой Kadence на GitHub Pages успешно завершён.</figcaption>
         </figure>
 
@@ -260,7 +266,7 @@ GitHub Pages</code></pre>
         <p>Кажется, это был тот момент, когда проект окончательно начал ощущаться не просто как эксперимент с AI и дизайном, а как настоящая маленькая инди-команда.</p>
 
         <figure class="blog-figure">
-          <img src="../assets/blog/habr-08.png" alt="Оффер Kadence Team">
+          <img src="../assets/blog/habr-08.png" alt="Оффер Kadence Team" loading="lazy">
           <figcaption>Коммерческого бюджета не было, но оффер выглядел вполне официально.</figcaption>
         </figure>
 
@@ -296,7 +302,7 @@ GitHub Pages</code></pre>
         <p>Приоритизация, распределение времени и планирование — лучшие друзья в любой ситуации. Даже если это пет-проект и дедлайн придумал ты сам.</p>
 
         <figure class="blog-figure">
-          <img src="../assets/blog/habr-09.png" alt="Релиз Kadence v0.1">
+          <img src="../assets/blog/habr-09.png" alt="Релиз Kadence v0.1" loading="lazy">
           <figcaption>Стабильный релиз Kadence v0.1, опубликованный на GitHub Pages.</figcaption>
         </figure>
 
@@ -315,14 +321,14 @@ GitHub Pages</code></pre>
         <p>И иногда всё начинается с одного нарисованного пёсика.</p>
 
         <figure class="blog-figure">
-          <img src="../assets/blog/habr-10.png" alt="Ранняя версия игры Cadence">
+          <img src="../assets/blog/habr-10.png" alt="Ранняя версия игры Cadence" loading="lazy">
           <figcaption>В самом начале пути у игры было название Cadence.</figcaption>
         </figure>
 
         <div class="blog-post-footer">
           <div class="blog-post-links">
-            <a class="button button-primary" href="https://kyuuketsukiakado.github.io/Kadence-Release/" target="_blank" rel="noreferrer">Демо Kadence v0.1 ↗</a>
-            <a class="text-link" href="https://github.com/KyuuketsukiAkado/Kadence-Release" target="_blank" rel="noreferrer">Репозиторий на GitHub →</a>
+            <a class="button button-primary" href="https://kyuuketsukiakado.github.io/Kadence-Release/" target="_blank" rel="noopener noreferrer">Демо Kadence v0.1 ↗</a>
+            <a class="text-link" href="https://github.com/KyuuketsukiAkado/Kadence-Release" target="_blank" rel="noopener noreferrer">Репозиторий на GitHub →</a>
           </div>
         </div>
       </div>
@@ -332,11 +338,11 @@ GitHub Pages</code></pre>
   <footer class="site-footer section-wrap">
     <div><strong>Hanna Muzyka</strong><span>Product Designer & AI-assisted Creative Technologist</span></div>
     <div class="footer-links">
-      <a href="https://github.com/KyuuketsukiAkado" target="_blank" rel="noreferrer">GitHub</a>
-      <a href="https://www.linkedin.com/in/hannamuzyka/" target="_blank" rel="noreferrer">LinkedIn</a>
-      <a href="https://www.behance.net/repro4chful" target="_blank" rel="noreferrer">Behance</a>
-      <a href="https://www.artstation.com/repro4chful" target="_blank" rel="noreferrer">ArtStation</a>
-      <a href="https://t.me/KyuuketsukiAkado" target="_blank" rel="noreferrer">Telegram</a>
+      <a href="https://github.com/KyuuketsukiAkado" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a href="https://www.linkedin.com/in/hannamuzyka/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a href="https://www.behance.net/repro4chful" target="_blank" rel="noopener noreferrer">Behance</a>
+      <a href="https://www.artstation.com/repro4chful" target="_blank" rel="noopener noreferrer">ArtStation</a>
+      <a href="https://t.me/KyuuketsukiAkado" target="_blank" rel="noopener noreferrer">Telegram</a>
     </div>
     <div class="footer-bottom"><span>© 2026 Hanna Muzyka</span><span>repro4chful</span><a href="../assets/Hanna-Muzyka-Resume.pdf" download>Скачать CV ↓</a></div>
   </footer>

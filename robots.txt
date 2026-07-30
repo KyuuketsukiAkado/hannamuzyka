@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kyuuketsukiakado.github.io/hannamuzyka/sitemap.xml
