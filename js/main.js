@@ -83,20 +83,20 @@ const themeBtn=document.getElementById('theme-toggle');
 if(themeBtn)themeBtn.addEventListener('click',()=>{document.body.classList.toggle('light');localStorage.setItem('hanna-theme',document.body.classList.contains('light')?'light':'dark');applyTheme()});
 applyLang();applyTheme();
 
-// Hero particles — floating dots for wow effect
+// Hero particles
 (function initHeroParticles(){
   const canvas=document.getElementById('hero-particles');
   if(!canvas)return;
   const ctx=canvas.getContext('2d');
   let w,h,particles=[];
-  function resize(){w=canvas.width=canvas.parentElement.offsetWidth;h=canvas.height=canvas.parentElement.offsetHeight}
+  function resize(){w=canvas.width=canvas.offsetWidth||window.innerWidth;h=canvas.height=canvas.offsetHeight||window.innerHeight}
   resize();window.addEventListener('resize',()=>{resize();initParticles()});
   function initParticles(){
-    particles=Array.from({length:35},()=>({
+    particles=Array.from({length:50},()=>({
       x:Math.random()*w,y:Math.random()*h,
-      r:Math.random()*1.5+.5,
-      vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3-.2,
-      a:Math.random()*.3+.1
+      r:Math.random()*2+.3,
+      vx:(Math.random()-.5)*.4,vy:(Math.random()-.5)*.4-.15,
+      a:Math.random()*.35+.08
     }))
   }
   initParticles();
@@ -107,7 +107,8 @@ applyLang();applyTheme();
       p.x+=p.vx;p.y+=p.vy;
       if(p.x<0)p.x=w;if(p.x>w)p.x=0;if(p.y<0)p.y=h;if(p.y>h)p.y=0;
       ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-      ctx.fillStyle='rgba(119,167,255,'+p.a+')';ctx.fill()
+      var c=p.a<.2?'119,167,255':'177,140,255';
+      ctx.fillStyle='rgba('+c+','+p.a+')';ctx.fill()
     });
     requestAnimationFrame(draw)
   }
