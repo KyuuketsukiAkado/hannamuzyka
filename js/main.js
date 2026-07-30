@@ -82,3 +82,34 @@ if(langBtn)langBtn.addEventListener('click',()=>{lang=lang==='ru'?'en':'ru';loca
 const themeBtn=document.getElementById('theme-toggle');
 if(themeBtn)themeBtn.addEventListener('click',()=>{document.body.classList.toggle('light');localStorage.setItem('hanna-theme',document.body.classList.contains('light')?'light':'dark');applyTheme()});
 applyLang();applyTheme();
+
+// Hero particles — floating dots for wow effect
+(function initHeroParticles(){
+  const canvas=document.getElementById('hero-particles');
+  if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  let w,h,particles=[];
+  function resize(){w=canvas.width=canvas.parentElement.offsetWidth;h=canvas.height=canvas.parentElement.offsetHeight}
+  resize();window.addEventListener('resize',()=>{resize();initParticles()});
+  function initParticles(){
+    particles=Array.from({length:35},()=>({
+      x:Math.random()*w,y:Math.random()*h,
+      r:Math.random()*1.5+.5,
+      vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3-.2,
+      a:Math.random()*.3+.1
+    }))
+  }
+  initParticles();
+  function draw(){
+    if(!canvas.isConnected)return;
+    ctx.clearRect(0,0,w,h);
+    particles.forEach(p=>{
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.x<0)p.x=w;if(p.x>w)p.x=0;if(p.y<0)p.y=h;if(p.y>h)p.y=0;
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle='rgba(119,167,255,'+p.a+')';ctx.fill()
+    });
+    requestAnimationFrame(draw)
+  }
+  draw()
+})();
