@@ -13,12 +13,14 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <div class="noise"></div>
+  <canvas class="noise-canvas" id="noise-canvas"></canvas>
+  <div class="cursor-glow"></div>
   <header class="site-header">
     <a class="wordmark" href="#top" aria-label="Hanna Muzyka home">Hanna<span>Muzyka</span></a>
     <nav class="nav-links" aria-label="Main navigation">
       <a href="#work" data-i18n="nav.work">Работы</a>
       <a href="#about" data-i18n="nav.about">Обо мне</a>
+      <a href="#design" data-i18n="nav.design">Дизайн</a>
       <a href="#blog" data-i18n="nav.blog">Блог</a>
       <a href="#skills" data-i18n="nav.skills">Навыки</a>
       <a href="#experience" data-i18n="nav.experience">Опыт</a>
@@ -27,7 +29,7 @@
     <div class="header-actions">
       <button class="icon-button" id="theme-toggle" aria-label="Toggle theme">☼</button>
       <button class="lang-switch" id="lang-toggle" aria-label="Switch language">EN</button>
-      <a class="small-contact" href="mailto:repro4chful@gmail.com" data-i18n="nav.contact">Связаться</a>
+      <a class="small-contact" href="#connect" data-i18n="nav.contact">Связаться</a>
     </div>
   </header>
 
@@ -39,7 +41,12 @@
         <p class="hero-lede" data-i18n="hero.lede">Product Designer и AI-assisted Creative Technologist. Проектирую интерфейсы, игры и цифровые продукты на стыке человеческой логики и новых инструментов.</p>
         <div class="hero-cta">
           <a class="button button-primary" href="#work" data-i18n="hero.cta">Посмотреть работы <span>↘</span></a>
-          <a class="text-link" href="mailto:repro4chful@gmail.com" data-i18n="hero.contact">Давайте знакомиться →</a>
+          <a class="text-link" href="#connect" data-i18n="hero.contact">Давайте знакомиться →</a>
+        </div>
+        <div class="hero-social">
+          <a href="https://t.me/KyuuketsukiAkado" target="_blank" rel="noreferrer" class="social-pill">Telegram ↗</a>
+          <a href="https://www.linkedin.com/in/hannamuzyka/" target="_blank" rel="noreferrer" class="social-pill">LinkedIn ↗</a>
+          <a href="mailto:repro4chful@gmail.com" class="social-pill">Email ↗</a>
         </div>
       </div>
       <div class="hero-portrait-wrap">
@@ -51,9 +58,14 @@
       </div>
     </section>
 
-    <section class="marquee" aria-label="Areas of practice"><div class="marquee-track"><span>PRODUCT DESIGN</span><b>✦</b><span>AI-ASSISTED DEVELOPMENT</span><b>✦</b><span>UX / UI</span><b>✦</b><span>GAME DESIGN</span><b>✦</b><span>PRODUCT DESIGN</span><b>✦</b><span>AI-ASSISTED DEVELOPMENT</span><b>✦</b><span>UX / UI</span></div></section>
+    <section class="marquee" aria-label="Areas of practice">
+      <div class="marquee-track">
+        <span>PRODUCT DESIGN</span><b>✦</b><span>AI-ASSISTED DEVELOPMENT</span><b>✦</b><span>UX / UI</span><b>✦</b><span>GAME DESIGN</span><b>✦</b><span>PRODUCT DESIGN</span><b>✦</b><span>AI-ASSISTED DEVELOPMENT</span><b>✦</b><span>UX / UI</span><b>✦</b><span>GAME DESIGN</span>
+        <span aria-hidden="true">PRODUCT DESIGN</span><b aria-hidden="true">✦</b><span aria-hidden="true">AI-ASSISTED DEVELOPMENT</span><b aria-hidden="true">✦</b><span aria-hidden="true">UX / UI</span><b aria-hidden="true">✦</b><span aria-hidden="true">GAME DESIGN</span><b aria-hidden="true">✦</b><span aria-hidden="true">PRODUCT DESIGN</span><b aria-hidden="true">✦</b><span aria-hidden="true">AI-ASSISTED DEVELOPMENT</span><b aria-hidden="true">✦</b><span aria-hidden="true">UX / UI</span><b aria-hidden="true">✦</b><span aria-hidden="true">GAME DESIGN</span>
+      </div>
+    </section>
 
-    <section class="intro section-wrap" id="about">
+    <section class="intro section-wrap reveal" id="about">
       <div class="section-kicker"><span>01</span><span data-i18n="about.kicker">ОБО МНЕ</span></div>
       <div class="intro-grid">
         <h2 data-i18n="about.title">Гуманитарий,<br>который решил<br><em>проверить,</em> что будет.</h2>
@@ -63,10 +75,31 @@
           <p class="pullquote" data-i18n="about.quote">AI не снял с меня ответственность за продукт. Он просто помог мне добраться до той части работы, до которой раньше не хватало технических рук.</p>
         </div>
       </div>
+      <div class="intro-photo-row">
+        <img src="assets/profile/photo-anna.jpg" alt="Hanna Muzyka" class="intro-photo">
+        <img src="assets/profile/rendered.png" alt="Hanna Muzyka rendered" class="intro-photo">
+        <img src="assets/profile/upscale-ph.png" alt="Hanna Muzyka portrait" class="intro-photo">
+      </div>
     </section>
 
-    <section class="work section-wrap" id="work">
-      <div class="section-kicker"><span>02</span><span data-i18n="work.kicker">ИЗБРАННЫЕ РАБОТЫ</span></div>
+    <section class="design-philosophy section-wrap reveal" id="design">
+      <div class="section-kicker"><span>02</span><span data-i18n="design.kicker">ПРО ДИЗАЙН</span></div>
+      <div class="design-grid">
+        <div class="design-visual">
+          <img src="assets/profile/ui-preview.png" alt="UI design preview" class="design-preview">
+          <div class="design-orb"></div>
+        </div>
+        <div class="design-text">
+          <h2 data-i18n="design.title">Я не люблю<br>визуальный шум.<br><em>Интерфейс должен дышать.</em></h2>
+          <p data-i18n="design.p1">В UX/UI я пришла не через курсы и не через Figma-туториалы. Я пришла через наблюдение: почему один интерфейс хочется закрыть через три секунды, а в другом зависаешь надолго. Оказалось, дело не в «красиво». Дело в том, насколько легко человеку делать то, за чем он пришёл.</p>
+          <p data-i18n="design.p2">Я не люблю визуальный шум. Считаю, что у интерфейса должно быть пространство, воздух и характер. Когда между «хочу сделать» и «сделал» нет трения — вот тогда интерфейс работает. Моя цель — чтобы экран дышал, а пользователь не думал о том, как им пользоваться.</p>
+          <p class="pullquote" data-i18n="design.quote">Я всё ещё учусь. Но каждый проект для меня — это способ проверить гипотезу и стать чуть лучше, чем вчера. Не «я так вижу». А «давай проверим, сработает ли это».</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="work section-wrap reveal" id="work">
+      <div class="section-kicker"><span>03</span><span data-i18n="work.kicker">ИЗБРАННЫЕ РАБОТЫ</span></div>
       <div class="section-heading"><h2 data-i18n="work.title">Две истории<br>и много деталей.</h2><p data-i18n="work.sub">Проекты, в которых мне было важно не только сделать красиво, но и понять, зачем это существует.</p></div>
       <div class="project-grid">
         <article class="project-card project-kadence">
@@ -88,8 +121,8 @@
       </div>
     </section>
 
-    <section class="blog section-wrap" id="blog">
-      <div class="section-kicker"><span>03</span><span data-i18n="blog.kicker">БЛОГ</span></div>
+    <section class="blog section-wrap reveal" id="blog">
+      <div class="section-kicker"><span>04</span><span data-i18n="blog.kicker">БЛОГ</span></div>
       <div class="section-heading"><h2 data-i18n="blog.title">Мысли<br><em>вслух.</em></h2><p data-i18n="blog.sub">Истории о создании продуктов, работе с AI и жизни гуманитария в IT.</p></div>
       <div class="blog-grid">
         <article class="blog-card">
@@ -102,8 +135,109 @@
       </div>
     </section>
 
-    <section class="art-practice section-wrap" id="art">
-      <div class="section-kicker"><span>04</span><span data-i18n="art.kicker">ВИЗУАЛЬНАЯ ПРАКТИКА</span></div>
+    <section class="skills section-wrap reveal" id="skills">
+      <div class="section-kicker"><span>05</span><span data-i18n="skills.kicker">ЧТО Я ПРИНОШУ</span></div>
+      <div class="skills-intro"><h2 data-i18n="skills.title">Не «умею всё».<br><em>Умею собирать</em><br>нужное.</h2><p data-i18n="skills.sub">Моя сильная сторона — соединять исследование, структуру, визуальное мышление и инструменты так, чтобы идея дошла до работающего прототипа.</p></div>
+      <div class="skill-clusters">
+        <div class="skill-cluster">
+          <div class="skill-cluster-icon">✦</div>
+          <h3>Product / Design</h3>
+          <div class="skill-bars">
+            <div class="skill-bar"><span class="skill-name">UX research</span><span class="skill-track"><span class="skill-fill" style="width:65%"></span></span><span class="skill-level">Working</span></div>
+            <div class="skill-bar"><span class="skill-name">Information architecture</span><span class="skill-track"><span class="skill-fill" style="width:60%"></span></span><span class="skill-level">Working</span></div>
+            <div class="skill-bar"><span class="skill-name">Wireframing</span><span class="skill-track"><span class="skill-fill" style="width:70%"></span></span><span class="skill-level">Working</span></div>
+            <div class="skill-bar"><span class="skill-name">UX writing</span><span class="skill-track"><span class="skill-fill" style="width:75%"></span></span><span class="skill-level">Working</span></div>
+            <div class="skill-bar"><span class="skill-name">UI design</span><span class="skill-track"><span class="skill-fill" style="width:70%"></span></span><span class="skill-level">Working</span></div>
+            <div class="skill-bar"><span class="skill-name">Design systems</span><span class="skill-track"><span class="skill-fill" style="width:55%"></span></span><span class="skill-level">Working</span></div>
+            <div class="skill-bar"><span class="skill-name">User flows</span><span class="skill-track"><span class="skill-fill" style="width:40%"></span></span><span class="skill-level">Exploring</span></div>
+            <div class="skill-bar"><span class="skill-name">Usability testing</span><span class="skill-track"><span class="skill-fill" style="width:35%"></span></span><span class="skill-level">Exploring</span></div>
+          </div>
+        </div>
+        <div class="skill-cluster">
+          <div class="skill-cluster-icon">⬡</div>
+          <h3>Product / Management</h3>
+          <div class="skill-bars">
+            <div class="skill-bar"><span class="skill-name">Task decomposition</span><span class="skill-track"><span class="skill-fill" style="width:75%"></span></span><span class="skill-level">Working</span></div>
+            <div class="skill-bar"><span class="skill-name">Roadmap planning</span><span class="skill-track"><span class="skill-fill" style="width:65%"></span></span><span class="skill-level">Working</span></div>
+            <div class="skill-bar"><span class="skill-name">Kanban</span><span class="skill-track"><span class="skill-fill" style="width:85%"></span></span><span class="skill-level">Confident</span></div>
+            <div class="skill-bar"><span class="skill-name">Documentation</span><span class="skill-track"><span class="skill-fill" style="width:90%"></span></span><span class="skill-level">Confident</span></div>
+            <div class="skill-bar"><span class="skill-name">Prioritization</span><span class="skill-track"><span class="skill-fill" style="width:70%"></span></span><span class="skill-level">Working</span></div>
+            <div class="skill-bar"><span class="skill-name">Project coordination</span><span class="skill-track"><span class="skill-fill" style="width:85%"></span></span><span class="skill-level">Confident</span></div>
+            <div class="skill-bar"><span class="skill-name">Feedback collection</span><span class="skill-track"><span class="skill-fill" style="width:70%"></span></span><span class="skill-level">Working</span></div>
+          </div>
+        </div>
+        <div class="skill-cluster">
+          <div class="skill-cluster-icon">◈</div>
+          <h3>Communication / L&D</h3>
+          <div class="skill-bars">
+            <div class="skill-bar"><span class="skill-name">Business English coaching</span><span class="skill-track"><span class="skill-fill" style="width:90%"></span></span><span class="skill-level">Confident</span></div>
+            <div class="skill-bar"><span class="skill-name">Candidate screening</span><span class="skill-track"><span class="skill-fill" style="width:60%"></span></span><span class="skill-level">Working</span></div>
+            <div class="skill-bar"><span class="skill-name">Cross-functional communication</span><span class="skill-track"><span class="skill-fill" style="width:85%"></span></span><span class="skill-level">Confident</span></div>
+            <div class="skill-bar"><span class="skill-name">Corporate guidelines</span><span class="skill-track"><span class="skill-fill" style="width:65%"></span></span><span class="skill-level">Working</span></div>
+            <div class="skill-bar"><span class="skill-name">Coaching & mentoring</span><span class="skill-track"><span class="skill-fill" style="width:85%"></span></span><span class="skill-level">Confident</span></div>
+          </div>
+        </div>
+        <div class="skill-cluster">
+          <div class="skill-cluster-icon">⬢</div>
+          <h3>AI / Tools</h3>
+          <div class="skill-bars">
+            <div class="skill-bar"><span class="skill-name">Prompt engineering</span><span class="skill-track"><span class="skill-fill" style="width:88%"></span></span><span class="skill-level">Confident</span></div>
+            <div class="skill-bar"><span class="skill-name">AI-assisted development</span><span class="skill-track"><span class="skill-fill" style="width:82%"></span></span><span class="skill-level">Confident</span></div>
+            <div class="skill-bar"><span class="skill-name">AI visual generation</span><span class="skill-track"><span class="skill-fill" style="width:85%"></span></span><span class="skill-level">Confident</span></div>
+            <div class="skill-bar"><span class="skill-name">LLM / agentic workflows</span><span class="skill-track"><span class="skill-fill" style="width:80%"></span></span><span class="skill-level">Confident</span></div>
+            <div class="skill-bar"><span class="skill-name">AI output validation</span><span class="skill-track"><span class="skill-fill" style="width:85%"></span></span><span class="skill-level">Confident</span></div>
+            <div class="skill-bar"><span class="skill-name">Figma</span><span class="skill-track"><span class="skill-fill" style="width:82%"></span></span><span class="skill-level">Confident</span></div>
+            <div class="skill-bar"><span class="skill-name">Krita / Photoshop</span><span class="skill-track"><span class="skill-fill" style="width:65%"></span></span><span class="skill-level">Working</span></div>
+            <div class="skill-bar"><span class="skill-name">Notion / Confluence / Jira</span><span class="skill-track"><span class="skill-fill" style="width:80%"></span></span><span class="skill-level">Confident</span></div>
+            <div class="skill-bar"><span class="skill-name">DaVinci Resolve · Vegas Pro</span><span class="skill-track"><span class="skill-fill" style="width:55%"></span></span><span class="skill-level">Working</span></div>
+            <div class="skill-bar"><span class="skill-name">GitHub / Pages / Actions</span><span class="skill-track"><span class="skill-fill" style="width:40%"></span></span><span class="skill-level">Beginner</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="experience section-wrap reveal" id="experience">
+      <div class="section-kicker"><span>06</span><span data-i18n="experience.kicker">ОПЫТ И ОБРАЗОВАНИЕ</span></div>
+      <div class="timeline">
+        <article class="timeline-item"><div class="timeline-date">FEB 2026 — PRESENT</div><div><h3 data-i18n="experience.azati.title">Team Coordinator <span>· Azati Software</span></h3><p data-i18n="experience.azati">Resource management, pre-sales support, client communication and team enablement. Я сопровождаю путь от профиля разработчика до клиентской презентации, собираю процессы в Confluence и Notion, а ещё создала Business English framework и провела 24+ language assessments.</p><div class="timeline-tags"><span>Resource management</span><span>Pre-sales support</span><span>Business English</span><span>Confluence</span></div></div></article>
+        <article class="timeline-item"><div class="timeline-date">JUL 2025 — FEB 2026</div><div><h3 data-i18n="experience.tutor.title">Преподаватель английского языка <span>· Фриланс</span></h3><p data-i18n="experience.tutor">Индивидуальные занятия для до девяти активных студентов одновременно: General, Conversational and Technical English. Помогала IT-специалистам преодолевать языковой барьер и увереннее чувствовать себя в англоязычной рабочей среде.</p><div class="timeline-tags"><span>Language coaching</span><span>Technical English</span><span>Mentoring</span></div></div></article>
+        <article class="timeline-item"><div class="timeline-date">JUN 2025 — AUG 2025</div><div><h3 data-i18n="experience.secretary.title">Технический секретарь <span>· Гродненский государственный университет имени Янки Купалы</span></h3><p data-i18n="experience.secretary">Координировала команду из шести человек, внедряла Google Workspace, поддерживала master data и табели, представляла команду во внешней коммуникации на русском и английском.</p><div class="timeline-tags"><span>Team coordination</span><span>Data management</span><span>Google Workspace</span></div></div></article>
+        <article class="timeline-item education-item"><div class="timeline-date">2021 — 2026</div><div><h3 data-i18n="experience.education.title">Бакалавриат с отличием <span>· Современные иностранные языки</span></h3><p data-i18n="experience.education">Yanka Kupala State University of Grodno · grade 9.6. Автор 35+ научных работ, участница startup competitions, hackathons and academic conferences. Thesis: The Pragmatic Aspect of Synonymic Series for the AI-Driven Visualization of Fictional Characters in English Literature.</p><div class="timeline-tags"><span>Research</span><span>Scientific writing</span><span>AI & linguistics</span></div></div></article>
+      </div>
+    </section>
+
+    <section class="certs section-wrap reveal" id="certs">
+      <div class="section-kicker"><span data-i18n="certs.kicker">СЕРТИФИКАТЫ</span></div>
+      <div class="certs-grid">
+        <a class="cert-card" href="https://cert.efset.org/bH4uao" target="_blank" rel="noreferrer">
+          <div class="cert-icon">EF</div>
+          <div class="cert-info">
+            <strong>EF SET English</strong>
+            <span>C2 Proficient · 76/100</span>
+            <small>Открыть сертификат ↗</small>
+          </div>
+        </a>
+        <a class="cert-card" href="https://www.coursera.org/account/accomplishments/verify/S05HTWKH552I" target="_blank" rel="noreferrer">
+          <div class="cert-icon">G</div>
+          <div class="cert-info">
+            <strong>Google Project Management</strong>
+            <span>Foundations of Project Management</span>
+            <small>Открыть сертификат ↗</small>
+          </div>
+        </a>
+        <a class="cert-card" href="https://www.coursera.org/account/accomplishments/verify/B06XTYNH4PYU" target="_blank" rel="noreferrer">
+          <div class="cert-icon">G</div>
+          <div class="cert-info">
+            <strong>Google Agile Project Management</strong>
+            <span>Agile Project Management</span>
+            <small>Открыть сертификат ↗</small>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <section class="art-practice section-wrap reveal" id="art">
+      <div class="section-kicker"><span>07</span><span data-i18n="art.kicker">ВИЗУАЛЬНАЯ ПРАКТИКА</span></div>
       <div class="art-intro"><h2 data-i18n="art.title">Я ещё и<br><em>рисовальщик.</em></h2><p data-i18n="art.sub">До интерфейсов, игр и AI я много рисовала руками. И продолжаю: традишка, диджитал, фанарт — все это можно посмотреть в моем профиле на Artstation</p></div>
       <div class="art-gallery">
         <a href="https://www.artstation.com/artwork/vz2Z1d" target="_blank" rel="noreferrer"><img src="assets/art/night-sky.jpg" alt="The Night Sky artwork"><span>The Night Sky</span></a>
@@ -116,34 +250,83 @@
       <a class="arrow-link art-link" href="https://www.artstation.com/repro4chful" target="_blank" rel="noreferrer" data-i18n="art.link">Смотреть весь ArtStation ↗</a>
     </section>
 
-    <section class="experience section-wrap" id="experience">
-      <div class="section-kicker"><span>05</span><span data-i18n="experience.kicker">ОПЫТ И ОБРАЗОВАНИЕ</span></div>
-      <div class="timeline">
-        <article class="timeline-item"><div class="timeline-date">FEB 2026 — PRESENT</div><div><h3 data-i18n="experience.azati.title">Team Coordinator <span>· Azati Software</span></h3><p data-i18n="experience.azati">Resource management, pre-sales support, client communication and team enablement. Я сопровождаю путь от профиля разработчика до клиентской презентации, собираю процессы в Confluence и Notion, а ещё создала Business English framework и провела 24+ language assessments.</p><div class="timeline-tags"><span>Resource management</span><span>Pre-sales support</span><span>Business English</span><span>Confluence</span></div></div></article>
-        <article class="timeline-item"><div class="timeline-date">JUL 2025 — FEB 2026</div><div><h3 data-i18n="experience.tutor.title">Преподаватель английского языка <span>· Фриланс</span></h3><p data-i18n="experience.tutor">Индивидуальные занятия для до девяти активных студентов одновременно: General, Conversational and Technical English. Помогала IT-специалистам преодолевать языковой барьер и увереннее чувствовать себя в англоязычной рабочей среде.</p><div class="timeline-tags"><span>Language coaching</span><span>Technical English</span><span>Mentoring</span></div></div></article>
-        <article class="timeline-item"><div class="timeline-date">JUN 2025 — AUG 2025</div><div><h3 data-i18n="experience.secretary.title">Технический секретарь <span>· Гродненский государственный университет имени Янки Купалы</span></h3><p data-i18n="experience.secretary">Координировала команду из шести человек, внедряла Google Workspace, поддерживала master data и табели, представляла команду во внешней коммуникации на русском и английском.</p><div class="timeline-tags"><span>Team coordination</span><span>Data management</span><span>Google Workspace</span></div></div></article>
-        <article class="timeline-item education-item"><div class="timeline-date">2021 — 2026</div><div><h3 data-i18n="experience.education.title">Бакалавриат с отличием <span>· Современные иностранные языки</span></h3><p data-i18n="experience.education">Yanka Kupala State University of Grodno · grade 9.6. Автор 35+ научных работ, участница startup competitions, hackathons and academic conferences. Thesis: The Pragmatic Aspect of Synonymic Series for the AI-Driven Visualization of Fictional Characters in English Literature.</p><div class="timeline-tags"><span>Research</span><span>Scientific writing</span><span>AI & linguistics</span></div></div></article>
+    <section class="connect section-wrap reveal" id="connect">
+      <div class="section-kicker"><span data-i18n="connect.kicker">СВЯЗЬ</span></div>
+      <div class="connect-grid">
+        <div class="connect-intro">
+          <h2 data-i18n="connect.title">Пишите<br><em>в любой момент.</em></h2>
+          <p data-i18n="connect.sub">Открыта к предложениям, коллаборациям и просто интересным разговорам. Самый быстрый способ связаться — Telegram.</p>
+        </div>
+        <div class="connect-links">
+          <a class="connect-link-card" href="https://t.me/KyuuketsukiAkado" target="_blank" rel="noreferrer">
+            <span class="connect-link-icon">✈</span>
+            <div>
+              <strong>Telegram</strong>
+              <small>@KyuuketsukiAkado</small>
+            </div>
+            <span class="connect-arrow">↗</span>
+          </a>
+          <a class="connect-link-card" href="https://www.linkedin.com/in/hannamuzyka/" target="_blank" rel="noreferrer">
+            <span class="connect-link-icon">in</span>
+            <div>
+              <strong>LinkedIn</strong>
+              <small>hannamuzyka</small>
+            </div>
+            <span class="connect-arrow">↗</span>
+          </a>
+          <a class="connect-link-card" href="mailto:repro4chful@gmail.com">
+            <span class="connect-link-icon">@</span>
+            <div>
+              <strong>Email</strong>
+              <small>repro4chful@gmail.com</small>
+            </div>
+            <span class="connect-arrow">↗</span>
+          </a>
+          <a class="connect-link-card" href="https://github.com/KyuuketsukiAkado" target="_blank" rel="noreferrer">
+            <span class="connect-link-icon">⌥</span>
+            <div>
+              <strong>GitHub</strong>
+              <small>KyuuketsukiAkado</small>
+            </div>
+            <span class="connect-arrow">↗</span>
+          </a>
+          <a class="connect-link-card" href="https://www.behance.net/repro4chful" target="_blank" rel="noreferrer">
+            <span class="connect-link-icon">Be</span>
+            <div>
+              <strong>Behance</strong>
+              <small>repro4chful</small>
+            </div>
+            <span class="connect-arrow">↗</span>
+          </a>
+          <a class="connect-link-card" href="https://habr.com/ru/users/KyuuketsukiAkado/" target="_blank" rel="noreferrer">
+            <span class="connect-link-icon">H</span>
+            <div>
+              <strong>Habr</strong>
+              <small>KyuuketsukiAkado</small>
+            </div>
+            <span class="connect-arrow">↗</span>
+          </a>
+        </div>
       </div>
-      <div class="cert-row"><span data-i18n="experience.cert">Сертификаты</span><strong>EF SET English · C2 Proficient (76/100)</strong><strong>Google Foundations of Project Management</strong><strong>Google Agile Project Management</strong></div>
     </section>
 
-    <section class="skills section-wrap" id="skills">
-      <div class="section-kicker"><span>06</span><span data-i18n="skills.kicker">ЧТО Я ПРИНОШУ</span></div>
-      <div class="skills-intro"><h2 data-i18n="skills.title">Не «умею всё».<br><em>Умею собирать</em><br>нужное.</h2><p data-i18n="skills.sub">Моя сильная сторона — соединять исследование, структуру, визуальное мышление и инструменты так, чтобы идея дошла до работающего прототипа.</p></div>
-      <div class="skill-columns">
-        <div class="skill-group"><h3>Product / Design</h3><ul><li>UX research <small>Working knowledge</small></li><li>Information architecture <small>Working knowledge</small></li><li>Wireframing <small>Working knowledge</small></li><li>UX writing <small>Working knowledge</small></li><li>UI design <small>Working knowledge</small></li><li>Design systems <small>Working knowledge</small></li><li>User flows <small>Exploring</small></li><li>Usability testing <small>Exploring</small></li></ul></div>
-        <div class="skill-group"><h3>Product / Management</h3><ul><li>Task decomposition <small>Working knowledge</small></li><li>Roadmap planning <small>Working knowledge</small></li><li>Kanban <small>Confident</small></li><li>Documentation <small>Confident</small></li><li>Prioritization <small>Working knowledge</small></li><li>Project coordination <small>Confident</small></li><li>Feedback collection <small>Working knowledge</small></li></ul></div>
-        <div class="skill-group"><h3>Communication / L&amp;D</h3><ul><li>Business English coaching <small>Confident</small></li><li>Candidate screening <small>Working knowledge</small></li><li>Cross-functional communication <small>Confident</small></li><li>Corporate guidelines <small>Working knowledge</small></li><li>Coaching &amp; mentoring <small>Confident</small></li></ul></div>
-        <div class="skill-group"><h3>AI / Tools</h3><ul><li>Prompt engineering <small>Confident</small></li><li>AI-assisted development <small>Confident</small></li><li>AI-assisted visual generation <small>Confident</small></li><li>LLM / agentic workflows <small>Confident</small></li><li>AI output validation <small>Confident</small></li><li>Figma <small>Confident</small></li><li>Krita <small>Working knowledge</small></li><li>Adobe Photoshop <small>Working knowledge</small></li><li>Notion <small>Confident</small></li><li>Google Workspace <small>Working knowledge</small></li><li>Confluence <small>Working knowledge</small></li><li>Jira <small>Working knowledge</small></li><li>DaVinci Resolve · Vegas Pro <small>Working knowledge</small></li><li>GitHub / Pages / Actions <small>Beginner</small></li></ul></div>
-      </div>
-    </section>
-
-    <section class="contact section-wrap" id="contact">
+    <section class="contact section-wrap reveal">
       <div class="contact-card"><div><p class="eyebrow"><span class="status-dot"></span><span data-i18n="contact.eyebrow">ОТКРЫТА К РАЗГОВОРУ</span></p><h2 data-i18n="contact.title">Есть задача?<br>Давайте подумаем<br><em>вместе.</em></h2></div><a class="button button-light" href="mailto:repro4chful@gmail.com" data-i18n="contact.button">Contact me <span>↗</span></a></div>
     </section>
   </main>
 
-  <footer class="site-footer section-wrap"><div><strong>Hanna Muzyka</strong><span>Product Designer & AI-assisted Creative Technologist</span></div><div class="footer-links"><a href="https://github.com/KyuuketsukiAkado" target="_blank" rel="noreferrer">GitHub</a><a href="https://www.linkedin.com/in/hannamuzyka/" target="_blank" rel="noreferrer">LinkedIn</a><a href="https://www.behance.net/repro4chful" target="_blank" rel="noreferrer">Behance</a><a href="https://habr.com/ru/users/KyuuketsukiAkado/" target="_blank" rel="noreferrer">Habr</a><a href="https://www.artstation.com/repro4chful" target="_blank" rel="noreferrer">ArtStation</a><a href="https://t.me/KyuuketsukiAkado" target="_blank" rel="noreferrer">Telegram</a></div><div class="footer-bottom"><span>© 2026 Hanna Muzyka</span><span>repro4chful</span><a href="assets/Hanna-Muzyka-Resume.pdf" download data-i18n="footer.cv">Скачать CV ↓</a></div></footer>
+  <footer class="site-footer section-wrap">
+    <div><strong>Hanna Muzyka</strong><span>Product Designer & AI-assisted Creative Technologist</span></div>
+    <div class="footer-links">
+      <a href="https://t.me/KyuuketsukiAkado" target="_blank" rel="noreferrer">Telegram</a>
+      <a href="https://www.linkedin.com/in/hannamuzyka/" target="_blank" rel="noreferrer">LinkedIn</a>
+      <a href="https://github.com/KyuuketsukiAkado" target="_blank" rel="noreferrer">GitHub</a>
+      <a href="https://www.behance.net/repro4chful" target="_blank" rel="noreferrer">Behance</a>
+      <a href="https://habr.com/ru/users/KyuuketsukiAkado/" target="_blank" rel="noreferrer">Habr</a>
+      <a href="https://www.artstation.com/repro4chful" target="_blank" rel="noreferrer">ArtStation</a>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Hanna Muzyka</span><span>repro4chful</span><a href="assets/Hanna-Muzyka-Resume.pdf" download data-i18n="footer.cv">Скачать CV ↓</a></div>
+  </footer>
   <script src="js/main.js"></script>
 </body>
 </html>
