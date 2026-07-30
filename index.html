@@ -36,7 +36,7 @@
   </script>
 </head>
 <body>
-  <a href="#featured-blog" class="skip-link">Перейти к содержимому</a>
+  <a href="#about" class="skip-link">Перейти к содержимому</a>
   <canvas class="noise-canvas" id="noise-canvas"></canvas>
   <div class="cursor-glow"></div>
   <header class="site-header">
@@ -110,28 +110,26 @@
       </div>
     </section>
 
-    <!-- ═══════════════ FEATURED BLOG ═══════ -->
-    <section class="featured-blog section-wrap reveal" id="blog">
-      <div class="featured-blog-card">
-        <div class="featured-blog-badge"><span class="status-dot"></span>СВЕЖАЯ СТАТЬЯ</div>
-        <div class="featured-blog-grid">
-          <div class="featured-blog-image">
-            <a href="blog/kadence-ai.html"><img src="assets/blog/habr-01.png" alt="Kadence game main menu" loading="lazy"></a>
-            <div class="featured-blog-label"><span>GAME DEV · AI</span><span data-i18n="blog.date">30 июля 2026</span></div>
-          </div>
-          <div class="featured-blog-copy">
-            <div class="featured-blog-kicker"><span>✦</span><span data-i18n="blog.kicker">БЛОГ</span></div>
-            <h2 data-i18n="blog.title">Мысли<br><em>вслух.</em></h2>
-            <h3 data-i18n="blog.kadence.title">Как гуманитарий без опыта в кодинге собрал инди-игру с AI-агентом за полтора месяца</h3>
-            <p data-i18n="blog.kadence.short">От концепт-дизайна велосипедного магазина до релизной web-игры на GitHub Pages — и почему документация оказалась важнее промптов.</p>
-            <div class="featured-blog-tags">
-              <span>AI agents</span><span>Game design</span><span>Prompt engineering</span><span>GitHub Actions</span><span>Web dev</span>
+    <!-- ═══════════════ BLOG ═══════ -->
+    <section class="blog-section section-wrap reveal" id="blog">
+      <div class="section-kicker"><span data-i18n="blog.kicker">БЛОГ</span></div>
+      <div class="section-heading"><h2 data-i18n="blog.title">Мысли<br><em>вслух.</em></h2><p data-i18n="blog.sub">Истории о создании продуктов, работе с AI и жизни гуманитария в IT.</p></div>
+      <div class="blog-posts">
+        <article class="blog-featured-card">
+          <div class="blog-featured-badge"><span class="status-dot"></span>СВЕЖАЯ СТАТЬЯ</div>
+          <div class="blog-featured-body">
+            <a class="blog-featured-image" href="blog/kadence-ai.html"><img src="assets/blog/habr-01.png" alt="Kadence game main menu" loading="lazy"></a>
+            <div class="blog-featured-copy">
+              <div class="blog-featured-meta"><span>GAME DEV · AI</span><span data-i18n="blog.date">30 июля 2026</span></div>
+              <h3 data-i18n="blog.kadence.title">Как гуманитарий без опыта в кодинге собрал инди-игру с AI-агентом за полтора месяца</h3>
+              <p data-i18n="blog.kadence.short">От концепт-дизайна велосипедного магазина до релизной web-игры на GitHub Pages — и почему документация оказалась важнее промптов.</p>
+              <div class="blog-featured-tags"><span>AI agents</span><span>Game design</span><span>Prompt engineering</span><span>GitHub Actions</span><span>Web dev</span></div>
+              <a class="arrow-link" href="blog/kadence-ai.html" data-i18n="blog.read">Читать статью <span>↗</span></a>
             </div>
-            <a class="arrow-link" href="blog/kadence-ai.html" data-i18n="blog.read">Читать статью <span>↗</span></a>
           </div>
-        </div>
-        <div class="featured-blog-orb o1"></div>
-        <div class="featured-blog-orb o2"></div>
+          <div class="blog-card-glow o1"></div>
+          <div class="blog-card-glow o2"></div>
+        </article>
       </div>
     </section>
 
@@ -144,6 +142,12 @@
           <p data-i18n="about.p1">Я лингвист и преподаватель двух иностранных языков, Team Coordinator в Azati и человек, который слишком долго смотрел на AI со стороны, чтобы не попробовать собрать с ним что-нибудь настоящее.</p>
           <p data-i18n="about.p2">Сейчас я двигаюсь в сторону Product Design и исследую, как AI может помогать гуманитариям превращать идеи в продукты — без потери смысла, эмпатии и здравого скепсиса.</p>
           <p class="pullquote" data-i18n="about.quote">AI не снял с меня ответственность за продукт. Он просто помог мне добраться до той части работы, до которой раньше не хватало технических рук.</p>
+          <div class="intro-ambient">
+            <span class="ambient-ring"></span>
+            <span class="ambient-dot"></span>
+            <span class="ambient-line"></span>
+            <span class="ambient-square"></span>
+          </div>
         </div>
       </div>
       <div class="intro-photo-row"><img src="assets/profile/rendered.png" alt="Hanna Muzyka" class="intro-photo" loading="lazy"></div>
@@ -156,18 +160,12 @@
         <div class="design-visual">
           <img src="assets/profile/ui-preview.png" alt="UI design preview" class="design-preview" loading="lazy">
           <div class="design-floating-elements"><span>✦ grid</span><span>⬡ spacing</span><span>◈ type</span></div>
-          <div class="design-ambient-lines"></div>
         </div>
         <div class="design-text">
           <h2 data-i18n="design.title">Я не люблю<br>визуальный шум.<br><em>Интерфейс должен дышать.</em></h2>
           <p data-i18n="design.p1">В UX/UI я пришла не через курсы и не через Figma-туториалы. Я пришла через наблюдение: почему один интерфейс хочется закрыть через три секунды, а в другом зависаешь надолго. Оказалось, дело не в «красиво». Дело в том, насколько легко человеку делать то, за чем он пришёл.</p>
           <p data-i18n="design.p2">Я не люблю визуальный шум. Считаю, что у интерфейса должно быть пространство, воздух и характер. Когда между «хочу сделать» и «сделал» нет трения — вот тогда интерфейс работает. Моя цель — чтобы экран дышал, а пользователь получал бесшовный экспириенс.</p>
           <p class="pullquote" data-i18n="design.quote">Я всё ещё учусь. Но каждый проект для меня — это способ проверить гипотезу и стать чуть лучше, чем вчера. Не «я так вижу». А «давай проверим, сработает ли это».</p>
-          <div class="design-text-fill">
-            <span class="fill-ring"></span>
-            <span class="fill-dot"></span>
-            <span class="fill-line"></span>
-          </div>
         </div>
       </div>
     </section>
