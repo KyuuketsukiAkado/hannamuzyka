@@ -99,3 +99,27 @@ img{max-width:100%;height:auto}
 @media(prefers-reduced-motion:reduce){
   *,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}.noise-canvas,.hero-particles{display:none!important}.reveal,.hero-reveal{opacity:1!important;transform:none!important}
 }
+
+/* Performance + overflow hardening */
+html,body{width:100%;max-width:100%;overflow-x:hidden}
+body{background:radial-gradient(circle at 12% 8%,rgba(119,167,255,.08),transparent 26%),radial-gradient(circle at 88% 18%,rgba(177,140,255,.055),transparent 24%),var(--bg)}
+body::before,body::after,.noise-canvas,.hero-particles,.cursor-glow,.blog-card-glow{display:none!important}
+.site-header{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;background:rgba(10,10,15,.96)!important}
+.site-header.is-scrolled{background:rgba(10,10,15,.98)!important}
+.hero-grid,.intro-grid,.intro-lower-grid,.design-grid,.project-grid,.skills-intro,.skill-clusters,.timeline-item,.connect-grid,.art-intro,.blog-shell{min-width:0}
+.hero-grid>*,.intro-grid>*,.intro-lower-grid>*,.design-grid>*,.project-grid>*,.skills-intro>*,.skill-clusters>*,.timeline-item>*,.connect-grid>*,.art-intro>*,.blog-shell>*{min-width:0}
+.hero-bg-circle,.portrait-frame,.hero-sticker,.hero-orb,.status-dot,.hero-scroll-hint,.marquee-track,.design-floating-elements span{animation:none!important}
+.hero-orb{filter:none!important;opacity:.18!important}.portrait-frame img{filter:none!important}.hero-bg-circle{opacity:.45!important}.marquee-track{transform:none!important}
+.design-text::before,.design-text::after{display:none!important}.design-floating-elements{display:none!important}
+
+.intro-visual-card{position:relative;min-height:292px;border:1px solid rgba(119,167,255,.18);border-radius:var(--radius);overflow:hidden;background:linear-gradient(145deg,rgba(17,17,25,.96),rgba(13,18,31,.92));box-shadow:var(--shadow);isolation:isolate}
+.intro-visual-card::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(119,167,255,.075) 1px,transparent 1px),linear-gradient(90deg,rgba(119,167,255,.075) 1px,transparent 1px);background-size:34px 34px;mask-image:radial-gradient(circle at 58% 48%,black 0 46%,transparent 76%);-webkit-mask-image:radial-gradient(circle at 58% 48%,black 0 46%,transparent 76%);opacity:.8}
+.intro-visual-card::after{content:"";position:absolute;width:190px;height:190px;border-radius:50%;right:13%;top:18%;background:radial-gradient(circle,rgba(119,167,255,.22),rgba(119,167,255,.07) 48%,transparent 70%);box-shadow:0 0 0 1px rgba(119,167,255,.18),0 0 0 34px rgba(119,167,255,.025),0 0 0 72px rgba(177,140,255,.018)}
+.visual-orbit,.visual-dot,.visual-line{position:absolute;display:block;pointer-events:none}.visual-orbit{border:1px solid rgba(255,255,255,.11);border-radius:50%}.orbit-a{width:74px;height:74px;left:12%;top:18%}.orbit-b{width:124px;height:124px;right:10%;bottom:12%;border-color:rgba(177,140,255,.18)}.orbit-c{width:46px;height:46px;left:42%;bottom:22%;border-radius:14px;transform:rotate(14deg);border-color:rgba(216,255,112,.18)}.visual-dot{width:10px;height:10px;border-radius:50%;background:var(--blue);box-shadow:0 0 24px rgba(119,167,255,.65)}.dot-a{left:24%;top:38%}.dot-b{right:24%;top:32%;background:var(--purple)}.dot-c{right:36%;bottom:30%;background:var(--lime);box-shadow:0 0 22px rgba(216,255,112,.45)}.visual-line{height:1px;background:linear-gradient(90deg,transparent,rgba(119,167,255,.42),transparent);transform-origin:left center}.line-a{width:42%;left:23%;top:40%;transform:rotate(14deg)}.line-b{width:36%;right:21%;bottom:33%;transform:rotate(-24deg)}
+
+@media(max-width:900px){
+  html,body{overflow-x:hidden!important}.site-header{max-width:100vw}.nav-links{max-width:calc(100vw - 36px);overflow:hidden}.hero-media{overflow:hidden;width:100%}.hero-sticker.s2,.hero-sticker.s3{right:0}.hero-sticker.s5{left:0}.intro-visual-card{min-height:240px}.project-card:nth-child(2){margin-top:12px}
+}
+@media(max-width:620px){
+  .section-wrap,.hero-grid{width:calc(100% - 28px)!important}.hero-portrait-wrap{max-width:100%}.portrait-frame{max-width:84vw;max-height:84vw}.intro-visual-card{min-height:220px}.intro-visual-card::after{width:150px;height:150px;right:8%;top:18%}.art-gallery a,.project-image,.blog-article-card,.contact-card,.intro-photo,.intro-visual-card{max-width:100%}
+}

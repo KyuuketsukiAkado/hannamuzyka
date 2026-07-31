@@ -36,15 +36,15 @@
   </script>
 </head>
 <body>
-  <a href="#work" class="skip-link">Перейти к содержимому</a>
+  <a href="#about" class="skip-link">Перейти к содержимому</a>
   <canvas class="noise-canvas" id="noise-canvas"></canvas>
   <div class="cursor-glow"></div>
   <header class="site-header">
     <a class="wordmark" href="#top" aria-label="Hanna Muzyka home">Hanna<span>Muzyka</span></a>
     <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Открыть меню" aria-controls="main-nav" aria-expanded="false"><span></span><span></span></button>
     <nav class="nav-links" id="main-nav" aria-label="Main navigation">
-      <a href="#work" data-i18n="nav.work">Работы</a>
       <a href="#about" data-i18n="nav.about">Обо мне</a>
+      <a href="#work" data-i18n="nav.work">Работы</a>
       <a href="#design" data-i18n="nav.design">Дизайн</a>
       <a href="#skills" data-i18n="nav.skills">Навыки</a>
       <a href="#experience" data-i18n="nav.experience">Опыт</a>
@@ -100,11 +100,6 @@
             <div class="hero-sticker s4">GAME DESIGN</div>
             <div class="hero-sticker s5">human in the loop ✦</div>
           </div>
-          <div class="hero-snapshot hero-reveal" style="--i:4" aria-label="Hiring snapshot">
-            <div><span data-i18n="hero.snapshot1.kicker">ФОКУС</span><strong data-i18n="hero.snapshot1.value">UX/UI · product thinking</strong></div>
-            <div><span data-i18n="hero.snapshot2.kicker">ИЩУ</span><strong data-i18n="hero.snapshot2.value">junior+/middle roles</strong></div>
-            <div><span data-i18n="hero.snapshot3.kicker">ПЛЮС</span><strong data-i18n="hero.snapshot3.value">AI workflows без потери ответственности</strong></div>
-          </div>
         </div>
       </div>
       <div class="hero-scroll-hint"><span>↓</span></div>
@@ -118,9 +113,35 @@
       </div>
     </section>
 
+    <!-- ── ABOUT ───────────────────────────── -->
+    <section class="intro section-wrap reveal" id="about">
+      <div class="section-kicker"><span>01</span><span data-i18n="about.kicker">ОБО МНЕ</span></div>
+      <div class="intro-grid">
+        <h2 data-i18n="about.title">Гуманитарий,<br>который решил<br><em>проверить,</em> что будет.</h2>
+        <div class="intro-text">
+          <p data-i18n="about.p1">Я лингвист и преподаватель двух иностранных языков, Team Coordinator в Azati и человек, который слишком долго смотрел на AI со стороны, чтобы не попробовать собрать с ним что-нибудь настоящее.</p>
+          <p data-i18n="about.p2">Сейчас я двигаюсь в сторону Product Design и исследую, как AI может помогать гуманитариям превращать идеи в продукты — без потери смысла, эмпатии и здравого скепсиса.</p>
+          <p class="pullquote" data-i18n="about.quote">AI не снял с меня ответственность за продукт. Он просто помог мне добраться до той части работы, до которой раньше не хватало технических рук.</p>
+        </div>
+      </div>
+      <div class="intro-lower-grid">
+        <img src="assets/optimized/profile-rendered-1200.webp" width="1200" height="674" alt="Hanna Muzyka" class="intro-photo" loading="lazy">
+        <div class="intro-visual-card" aria-hidden="true">
+          <span class="visual-orbit orbit-a"></span>
+          <span class="visual-orbit orbit-b"></span>
+          <span class="visual-orbit orbit-c"></span>
+          <span class="visual-dot dot-a"></span>
+          <span class="visual-dot dot-b"></span>
+          <span class="visual-dot dot-c"></span>
+          <span class="visual-line line-a"></span>
+          <span class="visual-line line-b"></span>
+        </div>
+      </div>
+    </section>
+
     <!-- ── WORK ────────────────────────────── -->
     <section class="work section-wrap reveal" id="work">
-      <div class="section-kicker"><span>01</span><span data-i18n="work.kicker">ИЗБРАННЫЕ РАБОТЫ</span></div>
+      <div class="section-kicker"><span>02</span><span data-i18n="work.kicker">ИЗБРАННЫЕ РАБОТЫ</span></div>
       <div class="section-heading"><h2 data-i18n="work.title">Две истории<br>и много деталей.</h2><p data-i18n="work.sub">Проекты, в которых мне было важно не только сделать красиво, но и понять, зачем это существует.</p></div>
       <div class="project-grid">
         <article class="project-card project-kadence">
@@ -139,31 +160,6 @@
           <div class="tag-row"><span>Figma</span><span>Configurator</span><span>B2B Dashboard</span><span>Dark mode</span></div>
           <a class="arrow-link" href="projects/shifted.html" data-i18n="work.case">Смотреть кейс <span>↗</span></a>
         </article>
-      </div>
-    </section>
-
-    <!-- ── ABOUT ───────────────────────────── -->
-    <section class="intro section-wrap reveal" id="about">
-      <div class="section-kicker"><span>02</span><span data-i18n="about.kicker">ОБО МНЕ</span></div>
-      <div class="intro-grid">
-        <h2 data-i18n="about.title">Гуманитарий,<br>который решил<br><em>проверить,</em> что будет.</h2>
-        <div class="intro-text">
-          <p data-i18n="about.p1">Я лингвист и преподаватель двух иностранных языков, Team Coordinator в Azati и человек, который слишком долго смотрел на AI со стороны, чтобы не попробовать собрать с ним что-нибудь настоящее.</p>
-          <p data-i18n="about.p2">Сейчас я двигаюсь в сторону Product Design и исследую, как AI может помогать гуманитариям превращать идеи в продукты — без потери смысла, эмпатии и здравого скепсиса.</p>
-          <p class="pullquote" data-i18n="about.quote">AI не снял с меня ответственность за продукт. Он просто помог мне добраться до той части работы, до которой раньше не хватало технических рук.</p>
-        </div>
-      </div>
-      <div class="intro-lower-grid">
-        <img src="assets/optimized/profile-rendered-1200.webp" width="1200" height="674" alt="Hanna Muzyka" class="intro-photo" loading="lazy">
-        <div class="intro-method-card" aria-label="Product approach">
-          <div class="method-kicker" data-i18n="about.method.kicker">КАК Я СОБИРАЮ ПРОДУКТ</div>
-          <div class="method-flow">
-            <div class="method-node"><span>01</span><strong data-i18n="about.method.observe">Наблюдаю</strong><small data-i18n="about.method.observe.sub">где возникает трение</small></div>
-            <div class="method-node"><span>02</span><strong data-i18n="about.method.structure">Структурирую</strong><small data-i18n="about.method.structure.sub">сценарии, контент, ограничения</small></div>
-            <div class="method-node"><span>03</span><strong data-i18n="about.method.prototype">Прототипирую</strong><small data-i18n="about.method.prototype.sub">быстро, но осознанно</small></div>
-          </div>
-          <p data-i18n="about.method.note">AI ускоряет сборку, но смысл, проверка и финальные решения остаются за человеком.</p>
-        </div>
       </div>
     </section>
 
