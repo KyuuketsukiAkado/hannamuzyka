@@ -152,3 +152,65 @@ section,footer,header{max-width:100vw}
   .section-wrap,.hero-grid{max-width:calc(100vw - 28px)!important;width:calc(100vw - 28px)!important}.hero-sticker.s2,.hero-sticker.s3{right:6px!important}.hero-sticker.s5{left:6px!important}.intro-visual-card::before{width:132px}.intro-visual-card::after{left:calc(50% + 42px)}
 }
 .hero-sticker{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;box-shadow:none!important}
+
+/* Joyful but laptop-friendly motion v4: CSS-only, transform/opacity, no canvas/no mouse tracking */
+@media (prefers-reduced-motion:no-preference){
+  html{scroll-behavior:smooth!important}
+
+  /* soft entrance animations */
+  .hero-reveal{opacity:0!important;transform:translateY(18px)!important;animation:hero-soft-in .72s cubic-bezier(.2,.8,.2,1) forwards!important;animation-delay:calc(var(--i,0)*.09s)!important}
+  @keyframes hero-soft-in{to{opacity:1;transform:translateY(0)}}
+  html.motion-ok .reveal:not(.visible){opacity:0!important;transform:translateY(18px)!important;transition:opacity .55s ease,transform .55s ease!important}
+  html.motion-ok .reveal.visible{opacity:1!important;transform:translateY(0)!important;transition:opacity .55s ease,transform .55s ease!important}
+
+  /* bring back character in hero, without blur/canvas */
+  .portrait-frame{animation:portrait-breathe 5.5s ease-in-out infinite!important;box-shadow:0 0 0 1px rgba(119,167,255,.12),0 18px 48px rgba(0,0,0,.18)!important}
+  @keyframes portrait-breathe{0%,100%{translate:0 0}50%{translate:0 -7px}}
+  .portrait-frame::after{content:"";position:absolute;inset:9px;border-radius:50%;border:1px solid rgba(119,167,255,.24);opacity:.65;animation:ring-pulse 5.5s ease-in-out infinite!important;pointer-events:none}
+  @keyframes ring-pulse{0%,100%{scale:1;opacity:.42}50%{scale:1.035;opacity:.72}}
+  .hero-orb{display:block!important;filter:none!important;border:1px solid rgba(119,167,255,.16);background:transparent!important;opacity:.42!important;animation:orb-drift 9s ease-in-out infinite!important}
+  .hero-orb.o2{border-color:rgba(177,140,255,.18);animation-delay:-3s!important}.hero-orb.o3{border-color:rgba(216,255,112,.18);animation-delay:-5s!important}
+  @keyframes orb-drift{0%,100%{translate:0 0;scale:1}50%{translate:8px -10px;scale:1.05}}
+  .hero-sticker{animation:sticker-bob 6.5s ease-in-out infinite!important;transition:border-color .2s ease,color .2s ease,background .2s ease!important}
+  .hero-sticker.s2{animation-delay:-1s!important}.hero-sticker.s3{animation-delay:-2.1s!important}.hero-sticker.s4{animation-delay:-3.2s!important}.hero-sticker.s5{animation-delay:-4s!important}
+  @keyframes sticker-bob{0%,100%{translate:0 0}50%{translate:0 -8px}}
+  .status-dot{animation:tiny-pulse 2.2s ease-in-out infinite!important}
+  @keyframes tiny-pulse{0%,100%{box-shadow:0 0 8px rgba(216,255,112,.65)}50%{box-shadow:0 0 18px rgba(216,255,112,.9)}}
+
+  /* marquee is back, but slower and cheaper */
+  .marquee{display:block!important}
+  .marquee-track{animation:marquee-slow 56s linear infinite!important;will-change:transform}
+  @keyframes marquee-slow{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
+
+  /* minimal visual card: one calm orbit */
+  .intro-visual-card{transition:border-color .25s ease,background .25s ease!important}
+  .intro-visual-card::before{animation:visual-breathe 7s ease-in-out infinite!important}
+  .intro-visual-card::after{animation:visual-dot 7s ease-in-out infinite!important}
+  @keyframes visual-breathe{0%,100%{scale:1;opacity:.58}50%{scale:1.06;opacity:.86}}
+  @keyframes visual-dot{0%,100%{translate:0 0;opacity:.76}50%{translate:10px -7px;opacity:1}}
+  .intro-visual-card:hover{border-color:rgba(119,167,255,.34)!important;background:linear-gradient(145deg,#111421,#0d0f17)!important}
+
+  /* subtle interactive polish */
+  .button,.project-image,.blog-article-card,.cert-card,.connect-link-card,.art-gallery a{transition:transform .22s ease,border-color .22s ease,background .22s ease,color .22s ease!important}
+  .button:hover{transform:translateY(-2px)!important}
+  .project-image:hover,.blog-article-card:hover,.cert-card:hover,.art-gallery a:hover{transform:translateY(-4px)!important;border-color:rgba(119,167,255,.34)!important}
+  .connect-link-card:hover{transform:translateX(5px)!important;border-color:rgba(119,167,255,.42)!important}
+  .project-image::after,.art-gallery a::before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(120deg,transparent 0%,rgba(255,255,255,.08) 42%,transparent 58%);translate:-120% 0;transition:translate .55s ease!important}
+  .project-image:hover::after,.art-gallery a:hover::before{translate:120% 0!important}
+  .art-gallery a:hover img,.project-image:hover img{transform:scale(1.025)!important;transition:transform .35s ease!important}
+
+  /* tiny decorative corner accents on section titles */
+  .section-kicker::after{content:"";width:32px;height:1px;margin-top:.75em;background:linear-gradient(90deg,var(--blue),transparent);opacity:.72;animation:kicker-line 4s ease-in-out infinite!important}
+  @keyframes kicker-line{0%,100%{scale:1 1;opacity:.5}50%{scale:1.35 1;opacity:.9}}
+}
+
+@media(max-width:900px){
+  .hero-orb{display:none!important}
+  .marquee{display:none!important}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .hero-reveal,.reveal{opacity:1!important;transform:none!important;transition:none!important;animation:none!important}
+  .hero-orb,.portrait-frame,.hero-sticker,.status-dot,.intro-visual-card::before,.intro-visual-card::after,.section-kicker::after{animation:none!important}
+  .marquee{display:none!important}
+}

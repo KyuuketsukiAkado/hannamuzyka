@@ -62,3 +62,20 @@ applyLang();
   nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',close));
   document.addEventListener('keydown',e=>{if(e.key==='Escape')close();});
 })();
+
+
+(function initSoftReveal(){
+  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const targets=[...document.querySelectorAll('.reveal')];
+  if(reduce||!targets.length){targets.forEach(el=>el.classList.add('visible'));return;}
+  document.documentElement.classList.add('motion-ok');
+  const observer=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  },{threshold:.08,rootMargin:'0px 0px -28px 0px'});
+  targets.forEach(el=>observer.observe(el));
+})();
