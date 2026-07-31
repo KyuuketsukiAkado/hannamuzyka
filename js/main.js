@@ -35,25 +35,10 @@ const copy={
 let lang=localStorage.getItem('hanna-lang')||'ru';
 function applyLang(){document.documentElement.lang=lang;document.querySelectorAll('[data-i18n]').forEach(el=>{const key=el.dataset.i18n;if(copy[lang][key]!=null)el.innerHTML=copy[lang][key]});const btn=document.getElementById('lang-toggle');if(btn)btn.textContent=lang==='ru'?'EN':'RU';}
 
-// Canvas noise — high quality, no "shakal"
+// Canvas noise disabled: avoids full-screen canvas scaling/repaint on laptops
 (function initNoise(){
   const canvas=document.getElementById('noise-canvas');
-  if(!canvas||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-  const ctx=canvas.getContext('2d');
-  let w,h,rafId=0;
-  function resize(){w=canvas.width=window.innerWidth;h=canvas.height=window.innerHeight;}
-  function draw(){
-    if(canvas.width!==w||canvas.height!==h)resize();
-    const d=ctx.createImageData(w,h).data;
-    for(let i=0;i<d.length;i+=4){const v=Math.random()*30|0;d[i]=v;d[i+1]=v;d[i+2]=v;d[i+3]=Math.random()*18|0;}
-    ctx.putImageData(new ImageData(d,w,h),0,0);
-    rafId=requestAnimationFrame(draw);
-  }
-  function start(){if(!rafId){resize();draw();}}
-  function stop(){if(rafId){cancelAnimationFrame(rafId);rafId=0;}}
-  window.addEventListener('resize',resize,{passive:true});
-  document.addEventListener('visibilitychange',()=>document.hidden?stop():start());
-  start();
+  if(canvas)canvas.style.display='none';
 })();
 
 // Scroll reveal
@@ -64,63 +49,61 @@ function applyLang(){document.documentElement.lang=lang;document.querySelectorAl
   document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 })();
 
-// Cursor glow — tracks only while visible and active
+// Cursor glow — transform-only and throttled
 (function initCursorGlow(){
   const glow=document.querySelector('.cursor-glow');
   if(!glow||window.matchMedia('(pointer:coarse)').matches||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-  let mx=0,my=0,t,rafId=0,active=false;
-  function track(){
-    if(!active){rafId=0;return;}
-    glow.style.left=mx+'px';
-    glow.style.top=my+'px';
-    rafId=requestAnimationFrame(track);
+  let mx=0,my=0,t=0,rafId=0;
+  function render(){
+    glow.style.transform=`translate3d(${mx-150}px,${my-150}px,0)`;
+    rafId=0;
   }
-  function start(){if(!active){active=true;rafId=requestAnimationFrame(track);}}
-  function stop(){active=false;glow.style.opacity='0';clearTimeout(t);if(rafId){cancelAnimationFrame(rafId);rafId=0;}}
   document.addEventListener('mousemove',e=>{
-    mx=e.clientX;my=e.clientY;
-    glow.style.opacity='1';
-    start();
-    clearTimeout(t);
-    t=setTimeout(stop,800);
+    mx=e.clientX; my=e.clientY; glow.style.opacity='1';
+    if(!rafId)rafId=requestAnimationFrame(render);
+    clearTimeout(t); t=setTimeout(()=>{glow.style.opacity='0'},700);
   },{passive:true});
-  document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();});
 })();
 
 const langBtn=document.getElementById('lang-toggle');
 if(langBtn)langBtn.addEventListener('click',()=>{lang=lang==='ru'?'en':'ru';localStorage.setItem('hanna-lang',lang);applyLang()});
 applyLang();
 
-// Hero particles
+// Hero particles — lighter, disabled on mobile, paused off-screen
 (function initHeroParticles(){
   const canvas=document.getElementById('hero-particles');
-  if(!canvas||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  if(!canvas||window.matchMedia('(prefers-reduced-motion: reduce)').matches||window.matchMedia('(max-width: 800px)').matches)return;
   const ctx=canvas.getContext('2d');
-  let w,h,particles=[],rafId=0;
-  function resize(){w=canvas.width=canvas.offsetWidth||window.innerWidth;h=canvas.height=canvas.offsetHeight||window.innerHeight}
+  const dpr=Math.min(window.devicePixelRatio||1,1.5);
+  let w=0,h=0,particles=[],rafId=0,visible=true;
+  function resize(){
+    const rect=canvas.getBoundingClientRect();
+    w=Math.max(1,Math.floor(rect.width)); h=Math.max(1,Math.floor(rect.height));
+    canvas.width=Math.floor(w*dpr); canvas.height=Math.floor(h*dpr);
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+  }
   function initParticles(){
-    particles=Array.from({length:50},()=>({
-      x:Math.random()*w,y:Math.random()*h,
-      r:Math.random()*2+.3,
-      vx:(Math.random()-.5)*.4,vy:(Math.random()-.5)*.4-.15,
-      a:Math.random()*.35+.08
-    }))
+    const count=Math.min(28,Math.max(14,Math.floor(w*h/32000)));
+    particles=Array.from({length:count},()=>({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.6+.4,vx:(Math.random()-.5)*.22,vy:(Math.random()-.5)*.22-.06,a:Math.random()*.24+.06}));
   }
   function draw(){
-    if(!canvas.isConnected){stop();return;}
+    if(!visible){rafId=0;return;}
     ctx.clearRect(0,0,w,h);
-    particles.forEach(p=>{
-      p.x+=p.vx;p.y+=p.vy;
-      if(p.x<0)p.x=w;if(p.x>w)p.x=0;if(p.y<0)p.y=h;if(p.y>h)p.y=0;
-      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-      const c=p.a<.2?'119,167,255':'177,140,255';
-      ctx.fillStyle='rgba('+c+','+p.a+')';ctx.fill()
-    });
-    rafId=requestAnimationFrame(draw)
+    for(const p of particles){
+      p.x+=p.vx; p.y+=p.vy;
+      if(p.x<0)p.x=w; if(p.x>w)p.x=0; if(p.y<0)p.y=h; if(p.y>h)p.y=0;
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(${p.a<.18?'119,167,255':'177,140,255'},${p.a})`; ctx.fill();
+    }
+    rafId=requestAnimationFrame(draw);
   }
-  function start(){if(!rafId){resize();initParticles();draw();}}
-  function stop(){if(rafId){cancelAnimationFrame(rafId);rafId=0;}}
-  window.addEventListener('resize',()=>{resize();initParticles()},{passive:true});
+  function start(){visible=true;if(!rafId)draw();}
+  function stop(){visible=false;if(rafId){cancelAnimationFrame(rafId);rafId=0;}}
+  function boot(){resize();initParticles();start();}
+  boot();
+  let resizeTimer=0;
+  window.addEventListener('resize',()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(boot,140)},{passive:true});
+  const io=new IntersectionObserver(([entry])=>entry.isIntersecting?start():stop(),{threshold:.02});
+  io.observe(canvas);
   document.addEventListener('visibilitychange',()=>document.hidden?stop():start());
-  start()
 })();

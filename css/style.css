@@ -158,3 +158,57 @@ a{color:inherit;text-decoration:none}button{font:inherit;color:inherit}
 
 .blog-post{padding:50px 0 110px}.blog-post-header{max-width:780px;margin-bottom:45px}.blog-back{font:10px 'DM Mono',monospace;color:var(--blue);letter-spacing:.08em;text-transform:uppercase;display:inline-block;margin-bottom:28px}.blog-back:hover{color:var(--blue-2)}.blog-post-meta{display:flex;gap:16px;font:10px 'DM Mono',monospace;color:var(--muted);letter-spacing:.08em;margin-bottom:20px}.blog-post-meta span:first-child{color:var(--blue)}.blog-post-header h1{font-size:clamp(42px,5.5vw,72px);line-height:1.04;letter-spacing:-.08em;margin:0 0 20px}.blog-post-sub{font-size:20px;line-height:1.5;color:var(--muted);max-width:680px;margin:0}.blog-post-body{max-width:720px;margin:0 auto}.blog-post-body h2{font-size:32px;letter-spacing:-.05em;margin:56px 0 18px;color:var(--text)}.blog-post-body h3{font-size:22px;letter-spacing:-.04em;margin:36px 0 14px;color:var(--blue)}.blog-post-body p{color:var(--muted);font-size:17px;line-height:1.7;margin:0 0 20px}.blog-post-body strong{color:var(--text)}.blog-post-body ul,.blog-post-body ol{margin:0 0 22px;padding-left:22px;color:var(--muted)}.blog-post-body li{font-size:16px;margin-bottom:8px;line-height:1.6}.blog-post-body code{background:var(--surface-2);padding:2px 7px;border-radius:5px;font:13px 'DM Mono',monospace;color:var(--blue)}.blog-post-body pre{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px 26px;overflow-x:auto;margin:22px 0}.blog-post-body pre code{background:none;padding:0;display:block;line-height:1.8;color:var(--text)}.blog-figure{margin:36px 0;text-align:center}.blog-figure img{display:block;width:100%;max-width:100%;height:auto!important;border-radius:var(--radius);border:1px solid var(--line);object-fit:contain}.blog-figure figcaption{font:11px 'DM Mono',monospace;color:var(--muted);margin-top:10px;letter-spacing:.05em}.blog-cta-link{margin:28px 0}.blog-cta-link a{color:var(--blue);font-weight:700;font-size:16px}.blog-post-links{display:flex;gap:22px;align-items:center;margin-top:50px;padding-top:35px;border-top:1px solid var(--line)}.blog-post-footer{margin-top:50px}
 @media(max-width:800px){.blog-post-body h2{font-size:27px}.blog-post-header h1{font-size:42px}.blog-post-links{flex-direction:column;align-items:flex-start;gap:16px}}
+
+/* Safe UX/mobile fixes — single small layer, no layout rewrites */
+html,body{max-width:100%;overflow-x:hidden}
+@supports (overflow:clip){html,body{overflow-x:clip}}
+main,section,footer{max-width:100vw}
+.section-wrap,.hero-grid,.intro-grid,.design-grid,.project-grid,.skills-intro,.skill-clusters,.timeline-item,.certs-grid,.art-intro,.connect-grid,.blog-shell{min-width:0}
+.section-wrap>*,.hero-grid>*,.intro-grid>*,.design-grid>*,.project-grid>*,.skills-intro>*,.skill-clusters>*,.timeline-item>*,.certs-grid>*,.art-intro>*,.connect-grid>*,.blog-shell>*{min-width:0}
+img{max-width:100%;height:auto}
+
+/* Header spans the viewport, content stays aligned to the page grid */
+.site-header{width:100%;max-width:none;padding-left:max(32px,calc((100vw - var(--max))/2 + 32px));padding-right:max(32px,calc((100vw - var(--max))/2 + 32px));box-sizing:border-box}
+
+/* Blog is now a supporting section lower on the page */
+.blog-section{padding-top:96px}
+
+/* Project cards: quick proof points for recruiters */
+.project-proof{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 16px}
+.project-proof span{border:1px solid rgba(119,167,255,.18);background:rgba(119,167,255,.045);border-radius:999px;padding:6px 10px;color:var(--blue-2);font:10px 'DM Mono',monospace;letter-spacing:.04em}
+
+/* Skills: scannable top layer before detailed bars */
+.core-skills{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:-38px 0 28px}
+.core-skills div{border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.025);padding:18px 16px}
+.core-skills strong{display:block;color:var(--text);font-size:15px;letter-spacing:-.025em;margin-bottom:6px}
+.core-skills span{display:block;color:var(--muted);font-size:12px;line-height:1.45}
+
+/* Art gallery: calmer, predictable grid */
+.art-gallery{grid-template-columns:repeat(3,minmax(0,1fr));grid-auto-rows:auto}
+.art-gallery a,.art-gallery a:nth-child(1),.art-gallery a:nth-child(2),.art-gallery a:nth-child(3),.art-gallery a:nth-child(4),.art-gallery a:nth-child(5),.art-gallery a:nth-child(6){grid-column:auto;grid-row:auto;aspect-ratio:1/1}
+
+/* Mobile overflow guard */
+@media(max-width:800px){
+  .section-wrap,.hero-grid{width:calc(100% - 36px);max-width:calc(100vw - 36px)}
+  .site-header{width:100%;max-width:100vw;padding-left:18px;padding-right:18px;left:0;right:0}
+  .hero{overflow:hidden}
+  .hero-media{width:100%;overflow:hidden;min-height:360px}
+  .hero-portrait-wrap{width:min(260px,calc(100vw - 72px));height:min(260px,calc(100vw - 72px));margin-inline:auto}
+  .hero-bg-circle{width:min(90vw,420px);height:min(90vw,420px)}
+  .hero-sticker{max-width:calc(100vw - 48px);white-space:nowrap}
+  .hero-sticker.s2{right:0}.hero-sticker.s3{right:0}.hero-sticker.s5{left:0}
+  .marquee{max-width:100vw;overflow:hidden}
+  .core-skills{grid-template-columns:1fr 1fr;margin:0 0 24px}
+  .art-gallery{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .blog-card-glow{display:none}
+}
+@media(max-width:560px){
+  .section-wrap,.hero-grid{width:calc(100% - 28px);max-width:calc(100vw - 28px)}
+  .hero h1{overflow-wrap:anywhere}
+  .hero-quick-links{max-width:100%;overflow-wrap:anywhere}
+  .hero-sticker{font-size:8px;padding:5px 9px}
+  .hero-sticker.s2,.hero-sticker.s3{right:6px}.hero-sticker.s5{left:6px}
+  .core-skills{grid-template-columns:1fr}
+  .art-gallery{grid-template-columns:1fr}
+  .project-proof{gap:6px}
+}
