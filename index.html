@@ -36,18 +36,19 @@
   </script>
 </head>
 <body>
-  <a href="#about" class="skip-link">Перейти к содержимому</a>
+  <a href="#work" class="skip-link">Перейти к содержимому</a>
   <canvas class="noise-canvas" id="noise-canvas"></canvas>
   <div class="cursor-glow"></div>
   <header class="site-header">
     <a class="wordmark" href="#top" aria-label="Hanna Muzyka home">Hanna<span>Muzyka</span></a>
-    <nav class="nav-links" aria-label="Main navigation">
-      <a href="#blog" data-i18n="nav.blog">Блог</a>
+    <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Открыть меню" aria-controls="main-nav" aria-expanded="false"><span></span><span></span></button>
+    <nav class="nav-links" id="main-nav" aria-label="Main navigation">
       <a href="#work" data-i18n="nav.work">Работы</a>
       <a href="#about" data-i18n="nav.about">Обо мне</a>
       <a href="#design" data-i18n="nav.design">Дизайн</a>
       <a href="#skills" data-i18n="nav.skills">Навыки</a>
       <a href="#experience" data-i18n="nav.experience">Опыт</a>
+      <a href="#blog" data-i18n="nav.blog">Блог</a>
       <a href="#art" data-i18n="nav.art">Арт</a>
     </nav>
     <div class="header-actions">
@@ -92,12 +93,17 @@
             <div class="hero-orb o1"></div>
             <div class="hero-orb o2"></div>
             <div class="hero-orb o3"></div>
-            <div class="portrait-frame"><img src="assets/profile/mynotionface.png" alt="Hanna Muzyka illustrated portrait"></div>
+            <div class="portrait-frame"><img src="assets/optimized/profile-mynotionface-720.webp" width="720" height="720" alt="Hanna Muzyka illustrated portrait" fetchpriority="high"></div>
             <div class="hero-sticker s1">✦ PRODUCT DESIGN</div>
             <div class="hero-sticker s2">UX / UI</div>
             <div class="hero-sticker s3">AI CREATIVE TECH</div>
             <div class="hero-sticker s4">GAME DESIGN</div>
             <div class="hero-sticker s5">human in the loop ✦</div>
+          </div>
+          <div class="hero-snapshot hero-reveal" style="--i:4" aria-label="Hiring snapshot">
+            <div><span data-i18n="hero.snapshot1.kicker">ФОКУС</span><strong data-i18n="hero.snapshot1.value">UX/UI · product thinking</strong></div>
+            <div><span data-i18n="hero.snapshot2.kicker">ИЩУ</span><strong data-i18n="hero.snapshot2.value">junior+/middle roles</strong></div>
+            <div><span data-i18n="hero.snapshot3.kicker">ПЛЮС</span><strong data-i18n="hero.snapshot3.value">AI workflows без потери ответственности</strong></div>
           </div>
         </div>
       </div>
@@ -112,66 +118,61 @@
       </div>
     </section>
 
-    <!-- ═══════════════ BLOG ═══════ -->
-    <section class="blog-section section-wrap reveal" id="blog">
-      <div class="blog-shell">
-        <div class="blog-intro-card">
-          <div class="section-kicker"><span data-i18n="blog.kicker">БЛОГ</span></div>
-          <h2 data-i18n="blog.title">Заметки<br><em>с полей.</em></h2>
-          <p data-i18n="blog.sub">Здесь я иногда пишу собственные мысли и опыт: как собираю продукты, работаю с AI, ошибаюсь, тестирую гипотезы и учусь на пет‑проектах. Заходите почитать, если хочется посмотреть на процесс изнутри.</p>
-          <div class="blog-topic-row" aria-label="Blog topics">
-            <span data-i18n="blog.topic1">product notes</span>
-            <span data-i18n="blog.topic2">AI workflows</span>
-            <span data-i18n="blog.topic3">game dev</span>
-            <span data-i18n="blog.topic4">humanist in IT</span>
-          </div>
-          <a class="arrow-link blog-intro-link" href="blog/kadence-ai.html" data-i18n="blog.invite">Зайти почитать <span>↗</span></a>
-        </div>
-        <div class="blog-articles-grid" aria-label="Blog articles">
-          <article class="blog-article-card is-featured">
-            <div class="blog-featured-badge"><span class="status-dot"></span><span data-i18n="blog.badge">ЗАХОДИТЕ ПОЧИТАТЬ</span></div>
-            <a class="blog-article-image" href="blog/kadence-ai.html"><img src="assets/blog/habr-01.png" alt="Kadence game main menu" loading="lazy"></a>
-            <div class="blog-article-copy">
-              <div class="blog-featured-meta"><span>GAME DEV · AI</span><span data-i18n="blog.date">30 июля 2026</span></div>
-              <h3 data-i18n="blog.kadence.title">Как гуманитарий без опыта в кодинге собрал инди-игру с AI-агентом за полтора месяца</h3>
-              <p data-i18n="blog.kadence.short">От концепт-дизайна велосипедного магазина до релизной web-игры на GitHub Pages — и почему документация оказалась важнее промптов.</p>
-              <div class="blog-featured-tags"><span>AI agents</span><span>Game design</span><span>Prompt engineering</span><span>GitHub Actions</span><span>Web dev</span></div>
-              <a class="arrow-link" href="blog/kadence-ai.html" data-i18n="blog.read">Читать статью <span>↗</span></a>
-            </div>
-            <div class="blog-card-glow o1"></div>
-            <div class="blog-card-glow o2"></div>
-          </article>
-          <!-- Для следующих постов просто дублируй .blog-article-card ниже: сетка сама аккуратно разложит карточки. -->
-        </div>
+    <!-- ── WORK ────────────────────────────── -->
+    <section class="work section-wrap reveal" id="work">
+      <div class="section-kicker"><span>01</span><span data-i18n="work.kicker">ИЗБРАННЫЕ РАБОТЫ</span></div>
+      <div class="section-heading"><h2 data-i18n="work.title">Две истории<br>и много деталей.</h2><p data-i18n="work.sub">Проекты, в которых мне было важно не только сделать красиво, но и понять, зачем это существует.</p></div>
+      <div class="project-grid">
+        <article class="project-card project-kadence">
+          <a class="project-image" href="projects/kadence.html"><img src="assets/optimized/project-kadence-menu-1400.webp" width="1400" height="788" alt="Kadence game main menu" loading="lazy"><span class="image-label">GAME / 2026</span></a>
+          <div class="project-meta"><span>01</span><span data-i18n="kadence.type">INDIE GAME · PRODUCT DESIGN</span></div>
+          <h3>Kadence</h3>
+          <p data-i18n="kadence.short">От концепта велосипедного магазина до уютной сюжетной игры о буднях небольшой веломастерской.</p>
+          <div class="tag-row"><span>Game design</span><span>AI agents</span><span>HTML / CSS / JS</span></div>
+          <a class="arrow-link" href="projects/kadence.html" data-i18n="work.case">Смотреть кейс <span>↗</span></a>
+        </article>
+        <article class="project-card project-shifted">
+          <a class="project-image" href="projects/shifted.html"><img src="assets/optimized/project-shifted-hero-1200.webp" width="1200" height="750" alt="SHIFTED custom keyboard e-commerce interface" loading="lazy"><span class="image-label">UI/UX / 2026</span></a>
+          <div class="project-meta"><span>02</span><span>UI/UX · E-COMMERCE</span></div>
+          <h3>SHIFTED</h3>
+          <p data-i18n="shifted.short">UX/UI-кейс маркетплейса кастомных механических клавиатур: хардварный конфигуратор, проверка совместимости компонентов и B2B-дашборд для продавцов. 14+ экранов в Figma.</p>
+          <div class="tag-row"><span>Figma</span><span>Configurator</span><span>B2B Dashboard</span><span>Dark mode</span></div>
+          <a class="arrow-link" href="projects/shifted.html" data-i18n="work.case">Смотреть кейс <span>↗</span></a>
+        </article>
       </div>
     </section>
 
     <!-- ── ABOUT ───────────────────────────── -->
     <section class="intro section-wrap reveal" id="about">
-      <div class="section-kicker"><span>01</span><span data-i18n="about.kicker">ОБО МНЕ</span></div>
+      <div class="section-kicker"><span>02</span><span data-i18n="about.kicker">ОБО МНЕ</span></div>
       <div class="intro-grid">
         <h2 data-i18n="about.title">Гуманитарий,<br>который решил<br><em>проверить,</em> что будет.</h2>
         <div class="intro-text">
           <p data-i18n="about.p1">Я лингвист и преподаватель двух иностранных языков, Team Coordinator в Azati и человек, который слишком долго смотрел на AI со стороны, чтобы не попробовать собрать с ним что-нибудь настоящее.</p>
           <p data-i18n="about.p2">Сейчас я двигаюсь в сторону Product Design и исследую, как AI может помогать гуманитариям превращать идеи в продукты — без потери смысла, эмпатии и здравого скепсиса.</p>
           <p class="pullquote" data-i18n="about.quote">AI не снял с меня ответственность за продукт. Он просто помог мне добраться до той части работы, до которой раньше не хватало технических рук.</p>
-          <div class="intro-ambient">
-            <span class="ambient-ring"></span>
-            <span class="ambient-dot"></span>
-            <span class="ambient-line"></span>
-            <span class="ambient-square"></span>
-          </div>
         </div>
       </div>
-      <div class="intro-photo-row"><img src="assets/profile/rendered.png" alt="Hanna Muzyka" class="intro-photo" loading="lazy"></div>
+      <div class="intro-lower-grid">
+        <img src="assets/optimized/profile-rendered-1200.webp" width="1200" height="674" alt="Hanna Muzyka" class="intro-photo" loading="lazy">
+        <div class="intro-method-card" aria-label="Product approach">
+          <div class="method-kicker" data-i18n="about.method.kicker">КАК Я СОБИРАЮ ПРОДУКТ</div>
+          <div class="method-flow">
+            <div class="method-node"><span>01</span><strong data-i18n="about.method.observe">Наблюдаю</strong><small data-i18n="about.method.observe.sub">где возникает трение</small></div>
+            <div class="method-node"><span>02</span><strong data-i18n="about.method.structure">Структурирую</strong><small data-i18n="about.method.structure.sub">сценарии, контент, ограничения</small></div>
+            <div class="method-node"><span>03</span><strong data-i18n="about.method.prototype">Прототипирую</strong><small data-i18n="about.method.prototype.sub">быстро, но осознанно</small></div>
+          </div>
+          <p data-i18n="about.method.note">AI ускоряет сборку, но смысл, проверка и финальные решения остаются за человеком.</p>
+        </div>
+      </div>
     </section>
 
     <!-- ── DESIGN ──────────────────────────── -->
     <section class="design-philosophy section-wrap reveal" id="design">
-      <div class="section-kicker"><span>02</span><span data-i18n="design.kicker">ПРО ДИЗАЙН</span></div>
+      <div class="section-kicker"><span>03</span><span data-i18n="design.kicker">ПРО ДИЗАЙН</span></div>
       <div class="design-grid">
         <div class="design-visual">
-          <img src="assets/profile/ui-preview.png" alt="UI design preview" class="design-preview" loading="lazy">
+          <img src="assets/optimized/profile-ui-preview-620.webp" width="620" height="382" alt="UI design preview" class="design-preview" loading="lazy">
           <div class="design-floating-elements"><span>✦ grid</span><span>⬡ spacing</span><span>◈ type</span></div>
         </div>
         <div class="design-text">
@@ -180,30 +181,6 @@
           <p data-i18n="design.p2">Я не люблю визуальный шум. Считаю, что у интерфейса должно быть пространство, воздух и характер. Когда между «хочу сделать» и «сделал» нет трения — вот тогда интерфейс работает. Моя цель — чтобы экран дышал, а пользователь получал бесшовный экспириенс.</p>
           <p class="pullquote" data-i18n="design.quote">Я всё ещё учусь. Но каждый проект для меня — это способ проверить гипотезу и стать чуть лучше, чем вчера. Не «я так вижу». А «давай проверим, сработает ли это».</p>
         </div>
-      </div>
-    </section>
-
-    <!-- ── WORK ────────────────────────────── -->
-    <section class="work section-wrap reveal" id="work">
-      <div class="section-kicker"><span>03</span><span data-i18n="work.kicker">ИЗБРАННЫЕ РАБОТЫ</span></div>
-      <div class="section-heading"><h2 data-i18n="work.title">Две истории<br>и много деталей.</h2><p data-i18n="work.sub">Проекты, в которых мне было важно не только сделать красиво, но и понять, зачем это существует.</p></div>
-      <div class="project-grid">
-        <article class="project-card project-kadence">
-          <a class="project-image" href="projects/kadence.html"><img src="assets/projects/kadence-menu.png" alt="Kadence game main menu" loading="lazy"><span class="image-label">GAME / 2026</span></a>
-          <div class="project-meta"><span>01</span><span data-i18n="kadence.type">INDIE GAME · PRODUCT DESIGN</span></div>
-          <h3>Kadence</h3>
-          <p data-i18n="kadence.short">От концепта велосипедного магазина до уютной сюжетной игры о буднях небольшой веломастерской.</p>
-          <div class="tag-row"><span>Game design</span><span>AI agents</span><span>HTML / CSS / JS</span></div>
-          <a class="arrow-link" href="projects/kadence.html" data-i18n="work.case">Смотреть кейс <span>↗</span></a>
-        </article>
-        <article class="project-card project-shifted">
-          <a class="project-image" href="projects/shifted.html"><img src="assets/projects/shifted-hero.jpg" alt="SHIFTED custom keyboard e-commerce interface" loading="lazy"><span class="image-label">UI/UX / 2026</span></a>
-          <div class="project-meta"><span>02</span><span>UI/UX · E-COMMERCE</span></div>
-          <h3>SHIFTED</h3>
-          <p data-i18n="shifted.short">UX/UI-кейс маркетплейса кастомных механических клавиатур: хардварный конфигуратор, проверка совместимости компонентов и B2B-дашборд для продавцов. 14+ экранов в Figma.</p>
-          <div class="tag-row"><span>Figma</span><span>Configurator</span><span>B2B Dashboard</span><span>Dark mode</span></div>
-          <a class="arrow-link" href="projects/shifted.html" data-i18n="work.case">Смотреть кейс <span>↗</span></a>
-        </article>
       </div>
     </section>
 
@@ -240,17 +217,51 @@
       </div>
     </section>
 
+    <!-- ═══════════════ BLOG ═══════ -->
+    <section class="blog-section section-wrap reveal" id="blog">
+      <div class="blog-shell">
+        <div class="blog-intro-card">
+          <div class="section-kicker"><span data-i18n="blog.kicker">БЛОГ</span></div>
+          <h2 data-i18n="blog.title">Заметки<br><em>с полей.</em></h2>
+          <p data-i18n="blog.sub">Здесь я иногда пишу собственные мысли и опыт: как собираю продукты, работаю с AI, ошибаюсь, тестирую гипотезы и учусь на пет‑проектах. Заходите почитать, если хочется посмотреть на процесс изнутри.</p>
+          <div class="blog-topic-row" aria-label="Blog topics">
+            <span data-i18n="blog.topic1">product notes</span>
+            <span data-i18n="blog.topic2">AI workflows</span>
+            <span data-i18n="blog.topic3">game dev</span>
+            <span data-i18n="blog.topic4">humanist in IT</span>
+          </div>
+          <a class="arrow-link blog-intro-link" href="blog/kadence-ai.html" data-i18n="blog.invite">Зайти почитать <span>↗</span></a>
+        </div>
+        <div class="blog-articles-grid" aria-label="Blog articles">
+          <article class="blog-article-card is-featured">
+            <div class="blog-featured-badge"><span class="status-dot"></span><span data-i18n="blog.badge">ЗАХОДИТЕ ПОЧИТАТЬ</span></div>
+            <a class="blog-article-image" href="blog/kadence-ai.html"><img src="assets/optimized/blog-habr-01-1200.webp" width="1200" height="601" alt="Kadence game main menu" loading="lazy"></a>
+            <div class="blog-article-copy">
+              <div class="blog-featured-meta"><span>GAME DEV · AI</span><span data-i18n="blog.date">30 июля 2026</span></div>
+              <h3 data-i18n="blog.kadence.title">Как гуманитарий без опыта в кодинге собрал инди-игру с AI-агентом за полтора месяца</h3>
+              <p data-i18n="blog.kadence.short">От концепт-дизайна велосипедного магазина до релизной web-игры на GitHub Pages — и почему документация оказалась важнее промптов.</p>
+              <div class="blog-featured-tags"><span>AI agents</span><span>Game design</span><span>Prompt engineering</span><span>GitHub Actions</span><span>Web dev</span></div>
+              <a class="arrow-link" href="blog/kadence-ai.html" data-i18n="blog.read">Читать статью <span>↗</span></a>
+            </div>
+            <div class="blog-card-glow o1"></div>
+            <div class="blog-card-glow o2"></div>
+          </article>
+          <!-- Для следующих постов просто дублируй .blog-article-card ниже: сетка сама аккуратно разложит карточки. -->
+        </div>
+      </div>
+    </section>
+
     <!-- ── ART ─────────────────────────────── -->
     <section class="art-practice section-wrap reveal" id="art">
       <div class="section-kicker"><span>06</span><span data-i18n="art.kicker">ВИЗУАЛЬНАЯ ПРАКТИКА</span></div>
       <div class="art-intro"><h2 data-i18n="art.title">Я ещё и<br><em>рисовальщик.</em></h2><p data-i18n="art.sub">До интерфейсов, игр и AI я много рисовала руками. И продолжаю: традишка, диджитал, фанарт — все это можно посмотреть в моем профиле на Artstation.</p></div>
       <div class="art-gallery">
-        <a href="https://www.artstation.com/artwork/vz2Z1d" target="_blank" rel="noopener noreferrer"><img src="assets/art/night-sky.jpg" alt="The Night Sky artwork" loading="lazy"><span>The Night Sky</span></a>
-        <a href="https://www.artstation.com/artwork/DY5Nxo" target="_blank" rel="noopener noreferrer"><img src="assets/art/aurora.jpg" alt="Aurora Polaris artwork" loading="lazy"><span>Aurora Polaris</span></a>
-        <a href="https://www.artstation.com/artwork/AoqrBq" target="_blank" rel="noopener noreferrer"><img src="assets/art/sasiska.jpg" alt="Sasiska acrylic traditional painting" loading="lazy"><span>Sasiska · acrylic</span></a>
-        <a href="https://www.artstation.com/artwork/8veWlR" target="_blank" rel="noopener noreferrer"><img src="assets/art/defect.jpg" alt="The Defect fanart" loading="lazy"><span>The Defect</span></a>
-        <a href="https://www.artstation.com/artwork/8vl23q" target="_blank" rel="noopener noreferrer"><img src="assets/art/kadence-art.jpg" alt="Kadence main menu art" loading="lazy"><span>Kadence art direction</span></a>
-        <a href="https://www.artstation.com/artwork/mOqJA9" target="_blank" rel="noopener noreferrer"><img src="assets/art/slay-fanart.jpg" alt="Slay the Spire fanart" loading="lazy"><span>Fanart · Slay the Spire</span></a>
+        <a href="https://www.artstation.com/artwork/vz2Z1d" target="_blank" rel="noopener noreferrer"><img src="assets/art/night-sky.jpg" width="400" height="400" alt="The Night Sky artwork" loading="lazy"><span>The Night Sky</span></a>
+        <a href="https://www.artstation.com/artwork/DY5Nxo" target="_blank" rel="noopener noreferrer"><img src="assets/art/aurora.jpg" width="400" height="400" alt="Aurora Polaris artwork" loading="lazy"><span>Aurora Polaris</span></a>
+        <a href="https://www.artstation.com/artwork/AoqrBq" target="_blank" rel="noopener noreferrer"><img src="assets/art/sasiska.jpg" width="400" height="400" alt="Sasiska acrylic traditional painting" loading="lazy"><span>Sasiska · acrylic</span></a>
+        <a href="https://www.artstation.com/artwork/8veWlR" target="_blank" rel="noopener noreferrer"><img src="assets/art/defect.jpg" width="400" height="400" alt="The Defect fanart" loading="lazy"><span>The Defect</span></a>
+        <a href="https://www.artstation.com/artwork/8vl23q" target="_blank" rel="noopener noreferrer"><img src="assets/art/kadence-art.jpg" width="400" height="400" alt="Kadence main menu art" loading="lazy"><span>Kadence art direction</span></a>
+        <a href="https://www.artstation.com/artwork/mOqJA9" target="_blank" rel="noopener noreferrer"><img src="assets/art/slay-fanart.jpg" width="400" height="400" alt="Slay the Spire fanart" loading="lazy"><span>Fanart · Slay the Spire</span></a>
       </div>
       <a class="arrow-link art-link" href="https://www.artstation.com/repro4chful" target="_blank" rel="noopener noreferrer" data-i18n="art.link">Смотреть весь ArtStation ↗</a>
     </section>

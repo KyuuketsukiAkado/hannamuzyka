@@ -1,8 +1,8 @@
 const copy={
  ru:{
   'nav.work':'Работы','nav.about':'Обо мне','nav.design':'Дизайн','nav.skills':'Навыки','nav.experience':'Опыт','nav.art':'Арт','nav.blog':'Блог','nav.contact':'Связаться',
-  'hero.eyebrow':'Портфолио · 2026','hero.title':'Я превращаю<br><em>«а что если?»</em><br>в работающие вещи.','hero.lede':'Product Designer и AI-assisted Creative Technologist. Проектирую интерфейсы, игры и цифровые продукты на стыке человеческой логики и новых инструментов.','hero.role':'Product / UX/UI Designer · открыта к junior+/middle roles, коллаборациям и AI-assisted product work.','hero.cta':'Посмотреть работы <span>↘</span>','hero.cv':'Скачать CV <span>↓</span>','hero.contact':'Давайте знакомиться →','hero.note1':'human<br>in the loop','hero.note2':'made with<br>curiosity ↗',
-  'about.kicker':'ОБО МНЕ','about.title':'Гуманитарий,<br>который решил<br><em>проверить,</em> что будет.','about.p1':'Я лингвист и преподаватель двух иностранных языков, Team Coordinator в Azati и человек, который слишком долго смотрел на AI со стороны, чтобы не попробовать собрать с ним что-нибудь настоящее.','about.p2':'Сейчас я двигаюсь в сторону Product Design и исследую, как AI может помогать гуманитариям превращать идеи в продукты — без потери смысла, эмпатии и здравого скепсиса.','about.quote':'AI не снял с меня ответственность за продукт. Он просто помог мне добраться до той части работы, до которой раньше не хватало технических рук.',
+  'hero.eyebrow':'Портфолио · 2026','hero.title':'Я превращаю<br><em>«а что если?»</em><br>в работающие вещи.','hero.lede':'Product Designer и AI-assisted Creative Technologist. Проектирую интерфейсы, игры и цифровые продукты на стыке человеческой логики и новых инструментов.','hero.role':'Product / UX/UI Designer · открыта к junior+/middle roles, коллаборациям и AI-assisted product work.','hero.cta':'Посмотреть работы <span>↘</span>','hero.cv':'Скачать CV <span>↓</span>','hero.contact':'Давайте знакомиться →','hero.note1':'human<br>in the loop','hero.note2':'made with<br>curiosity ↗','hero.snapshot1.kicker':'ФОКУС','hero.snapshot1.value':'UX/UI · product thinking','hero.snapshot2.kicker':'ИЩУ','hero.snapshot2.value':'junior+/middle roles','hero.snapshot3.kicker':'ПЛЮС','hero.snapshot3.value':'AI workflows без потери ответственности',
+  'about.kicker':'ОБО МНЕ','about.title':'Гуманитарий,<br>который решил<br><em>проверить,</em> что будет.','about.p1':'Я лингвист и преподаватель двух иностранных языков, Team Coordinator в Azati и человек, который слишком долго смотрел на AI со стороны, чтобы не попробовать собрать с ним что-нибудь настоящее.','about.p2':'Сейчас я двигаюсь в сторону Product Design и исследую, как AI может помогать гуманитариям превращать идеи в продукты — без потери смысла, эмпатии и здравого скепсиса.','about.quote':'AI не снял с меня ответственность за продукт. Он просто помог мне добраться до той части работы, до которой раньше не хватало технических рук.','about.method.kicker':'КАК Я СОБИРАЮ ПРОДУКТ','about.method.observe':'Наблюдаю','about.method.observe.sub':'где возникает трение','about.method.structure':'Структурирую','about.method.structure.sub':'сценарии, контент, ограничения','about.method.prototype':'Прототипирую','about.method.prototype.sub':'быстро, но осознанно','about.method.note':'AI ускоряет сборку, но смысл, проверка и финальные решения остаются за человеком.',
   'design.kicker':'ПРО ДИЗАЙН','design.title':'Я не люблю<br>визуальный шум.<br><em>Интерфейс должен дышать.</em>','design.p1':'В UX/UI я пришла не через курсы и не через Figma-туториалы. Я пришла через наблюдение: почему один интерфейс хочется закрыть через три секунды, а в другом зависаешь надолго. Оказалось, дело не в «красиво». Дело в том, насколько легко человеку делать то, за чем он пришёл.','design.p2':'Я не люблю визуальный шум. Считаю, что у интерфейса должно быть пространство, воздух и характер. Когда между «хочу сделать» и «сделал» нет трения — вот тогда интерфейс работает. Моя цель — чтобы экран дышал, а пользователь получал бесшовный экспириенс.','design.quote':'Я всё ещё учусь. Но каждый проект для меня — это способ проверить гипотезу и стать чуть лучше, чем вчера. Не «я так вижу». А «давай проверим, сработает ли это».',
   'work.kicker':'ИЗБРАННЫЕ РАБОТЫ','work.title':'Две истории<br>и много деталей.','work.sub':'Проекты, в которых мне было важно не только сделать красиво, но и понять, зачем это существует.','kadence.type':'INDIE GAME · PRODUCT DESIGN','kadence.short':'От концепта велосипедного магазина до уютной сюжетной игры о буднях небольшой веломастерской.','shifted.short':'UX/UI-кейс маркетплейса кастомных механических клавиатур: хардварный конфигуратор, проверка совместимости компонентов и B2B-дашборд для продавцов. 14+ экранов в Figma.','work.case':'Смотреть кейс <span>↗</span>',
   'experience.azati.title':'Team Coordinator <span>· Azati Software</span>','experience.tutor.title':'Преподаватель английского языка <span>· Фриланс</span>','experience.secretary.title':'Технический секретарь <span>· Гродненский государственный университет имени Янки Купалы</span>','experience.education.title':'Бакалавриат с отличием <span>· Современные иностранные языки</span>',
@@ -18,8 +18,8 @@ const copy={
  },
  en:{
   'nav.work':'Work','nav.about':'About','nav.design':'Design','nav.skills':'Skills','nav.experience':'Experience','nav.art':'Art','nav.blog':'Blog','nav.contact':'Contact',
-  'hero.eyebrow':'Portfolio · 2026','hero.title':'I turn<br><em>"what if?"</em><br>into working things.','hero.lede':'Product Designer and AI-assisted Creative Technologist. I design interfaces, games and digital products where human logic meets new tools.','hero.role':'Product / UX/UI Designer · open to junior+/middle roles, collaborations and AI-assisted product work.','hero.cta':'See my work <span>↘</span>','hero.cv':'Download CV <span>↓</span>','hero.contact':'Let\'s get acquainted →','hero.note1':'human<br>in the loop','hero.note2':'made with<br>curiosity ↗',
-  'about.kicker':'ABOUT','about.title':'A humanist<br>who decided to<br><em>find out</em> what happens.','about.p1':'I am a linguist, a teacher of two foreign languages, a Team Coordinator at Azati — and someone who watched AI from the sidelines for long enough to finally build something real with it.','about.p2':'Now I am moving towards Product Design and exploring how AI can help humanists turn ideas into products without losing meaning, empathy or healthy skepticism.','about.quote':'AI did not take responsibility for the product away from me. It simply helped me reach the part of the work I did not have enough technical hands for.',
+  'hero.eyebrow':'Portfolio · 2026','hero.title':'I turn<br><em>"what if?"</em><br>into working things.','hero.lede':'Product Designer and AI-assisted Creative Technologist. I design interfaces, games and digital products where human logic meets new tools.','hero.role':'Product / UX/UI Designer · open to junior+/middle roles, collaborations and AI-assisted product work.','hero.cta':'See my work <span>↘</span>','hero.cv':'Download CV <span>↓</span>','hero.contact':'Let’s get acquainted →','hero.note1':'human<br>in the loop','hero.note2':'made with<br>curiosity ↗','hero.snapshot1.kicker':'FOCUS','hero.snapshot1.value':'UX/UI · product thinking','hero.snapshot2.kicker':'LOOKING FOR','hero.snapshot2.value':'junior+/middle roles','hero.snapshot3.kicker':'PLUS','hero.snapshot3.value':'AI workflows with human ownership',
+  'about.kicker':'ABOUT','about.title':'A humanist<br>who decided to<br><em>find out</em> what happens.','about.p1':'I am a linguist, a teacher of two foreign languages, a Team Coordinator at Azati — and someone who watched AI from the sidelines for long enough to finally build something real with it.','about.p2':'Now I am moving towards Product Design and exploring how AI can help humanists turn ideas into products without losing meaning, empathy or healthy skepticism.','about.quote':'AI did not take responsibility for the product away from me. It simply helped me reach the part of the work I did not have enough technical hands for.','about.method.kicker':'HOW I BUILD A PRODUCT','about.method.observe':'Observe','about.method.observe.sub':'where friction appears','about.method.structure':'Structure','about.method.structure.sub':'scenarios, content, constraints','about.method.prototype':'Prototype','about.method.prototype.sub':'fast, but deliberately','about.method.note':'AI accelerates the build, but meaning, validation and final decisions stay human-owned.',
   'design.kicker':'ABOUT DESIGN','design.title':'I don\'t like<br>visual clutter.<br><em>Interfaces should breathe.</em>','design.p1':'I came to UX/UI not through courses or Figma tutorials. I came through observation: why do you want to close one interface within three seconds, while another makes you linger? Turns out, it\'s not about "pretty." It\'s about how easy it is for a person to do what they came for.','design.p2':'I don\'t like visual clutter. I believe an interface should have space, air, and character. When there\'s no friction between "I want to do this" and "I did it" — that\'s when an interface works. My goal is for the screen to breathe, and for the user to get a seamless experience.','design.quote':'I\'m still learning. But every project is a way to test a hypothesis and become a little better than yesterday. Not "this is my vision." More like "let\'s see if this actually works."',
   'work.kicker':'SELECTED WORK','work.title':'Two stories<br>and a lot of details.','work.sub':'Projects where making things look good was only half the question. I also wanted to understand why they should exist.','kadence.type':'INDIE GAME · PRODUCT DESIGN','kadence.short':'From a bicycle shop concept to a cozy narrative-driven simulator about life in a small bike workshop.','shifted.short':'A UX/UI case study for a custom mechanical keyboard marketplace featuring a hardware configurator, component compatibility checks and a B2B seller dashboard. 14+ screens designed in Figma.','work.case':'View case <span>↗</span>',
   'experience.azati.title':'Team Coordinator <span>· Azati Software</span>','experience.tutor.title':'English Language Tutor <span>· Freelance</span>','experience.secretary.title':'Technical Secretary <span>· Yanka Kupala State University</span>','experience.education.title':'Bachelor\'s Degree with Honors <span>· Modern Foreign Languages</span>',
@@ -35,25 +35,20 @@ const copy={
 let lang=localStorage.getItem('hanna-lang')||'ru';
 function applyLang(){document.documentElement.lang=lang;document.querySelectorAll('[data-i18n]').forEach(el=>{const key=el.dataset.i18n;if(copy[lang][key]!=null)el.innerHTML=copy[lang][key]});const btn=document.getElementById('lang-toggle');if(btn)btn.textContent=lang==='ru'?'EN':'RU';}
 
-// Canvas noise — high quality, no "shakal"
+// Canvas noise — static, low-cost texture instead of repainting the whole viewport every frame
 (function initNoise(){
   const canvas=document.getElementById('noise-canvas');
   if(!canvas||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-  const ctx=canvas.getContext('2d');
-  let w,h,rafId=0;
-  function resize(){w=canvas.width=window.innerWidth;h=canvas.height=window.innerHeight;}
-  function draw(){
-    if(canvas.width!==w||canvas.height!==h)resize();
-    const d=ctx.createImageData(w,h).data;
-    for(let i=0;i<d.length;i+=4){const v=Math.random()*30|0;d[i]=v;d[i+1]=v;d[i+2]=v;d[i+3]=Math.random()*18|0;}
-    ctx.putImageData(new ImageData(d,w,h),0,0);
-    rafId=requestAnimationFrame(draw);
+  const ctx=canvas.getContext('2d',{alpha:true});
+  const size=180;
+  canvas.width=size;canvas.height=size;
+  const image=ctx.createImageData(size,size);
+  const d=image.data;
+  for(let i=0;i<d.length;i+=4){
+    const v=(Math.random()*255)|0;
+    d[i]=v;d[i+1]=v;d[i+2]=v;d[i+3]=18;
   }
-  function start(){if(!rafId){resize();draw();}}
-  function stop(){if(rafId){cancelAnimationFrame(rafId);rafId=0;}}
-  window.addEventListener('resize',resize,{passive:true});
-  document.addEventListener('visibilitychange',()=>document.hidden?stop():start());
-  start();
+  ctx.putImageData(image,0,0);
 })();
 
 // Scroll reveal
@@ -64,63 +59,114 @@ function applyLang(){document.documentElement.lang=lang;document.querySelectorAl
   document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 })();
 
-// Cursor glow — tracks only while visible and active
+// Cursor glow — transform only, throttled by requestAnimationFrame
 (function initCursorGlow(){
   const glow=document.querySelector('.cursor-glow');
   if(!glow||window.matchMedia('(pointer:coarse)').matches||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-  let mx=0,my=0,t,rafId=0,active=false;
-  function track(){
-    if(!active){rafId=0;return;}
-    glow.style.left=mx+'px';
-    glow.style.top=my+'px';
-    rafId=requestAnimationFrame(track);
+  let mx=0,my=0,t=0,rafId=0;
+  function render(){
+    glow.style.transform=`translate3d(${mx-150}px,${my-150}px,0)`;
+    rafId=0;
   }
-  function start(){if(!active){active=true;rafId=requestAnimationFrame(track);}}
-  function stop(){active=false;glow.style.opacity='0';clearTimeout(t);if(rafId){cancelAnimationFrame(rafId);rafId=0;}}
   document.addEventListener('mousemove',e=>{
     mx=e.clientX;my=e.clientY;
     glow.style.opacity='1';
-    start();
+    if(!rafId)rafId=requestAnimationFrame(render);
     clearTimeout(t);
-    t=setTimeout(stop,800);
+    t=setTimeout(()=>{glow.style.opacity='0'},700);
   },{passive:true});
-  document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();});
 })();
 
 const langBtn=document.getElementById('lang-toggle');
 if(langBtn)langBtn.addEventListener('click',()=>{lang=lang==='ru'?'en':'ru';localStorage.setItem('hanna-lang',lang);applyLang()});
 applyLang();
 
-// Hero particles
+// Header state + mobile navigation
+(function initHeader(){
+  const header=document.querySelector('.site-header');
+  const toggle=document.getElementById('mobile-menu-toggle');
+  const nav=document.getElementById('main-nav')||document.querySelector('.nav-links');
+  function syncHeader(){if(header)header.classList.toggle('is-scrolled',window.scrollY>8)}
+  syncHeader();
+  window.addEventListener('scroll',syncHeader,{passive:true});
+  if(toggle&&nav){
+    const close=()=>{toggle.classList.remove('is-open');toggle.setAttribute('aria-expanded','false');nav.classList.remove('is-open');document.body.classList.remove('nav-open')};
+    toggle.addEventListener('click',()=>{
+      const open=toggle.getAttribute('aria-expanded')!=='true';
+      toggle.classList.toggle('is-open',open);
+      toggle.setAttribute('aria-expanded',String(open));
+      nav.classList.toggle('is-open',open);
+      document.body.classList.toggle('nav-open',open);
+    });
+    nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',close));
+    document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
+  }
+})();
+
+// Active nav link based on visible section
+(function initActiveNav(){
+  const links=[...document.querySelectorAll('.nav-links a[href*="#"]')];
+  if(!links.length)return;
+  const pairs=links.map(link=>{
+    const id=link.getAttribute('href').split('#')[1];
+    return {link,section:id?document.getElementById(id):null};
+  }).filter(x=>x.section);
+  if(!pairs.length)return;
+  const observer=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        links.forEach(l=>l.classList.remove('is-active'));
+        const pair=pairs.find(p=>p.section===entry.target);
+        if(pair)pair.link.classList.add('is-active');
+      }
+    });
+  },{rootMargin:'-35% 0px -55% 0px',threshold:0});
+  pairs.forEach(p=>observer.observe(p.section));
+})();
+
+// Hero particles — paused off-screen and disabled on mobile/low-motion
 (function initHeroParticles(){
   const canvas=document.getElementById('hero-particles');
-  if(!canvas||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  if(!canvas||window.matchMedia('(prefers-reduced-motion: reduce)').matches||window.matchMedia('(max-width: 700px)').matches)return;
   const ctx=canvas.getContext('2d');
-  let w,h,particles=[],rafId=0;
-  function resize(){w=canvas.width=canvas.offsetWidth||window.innerWidth;h=canvas.height=canvas.offsetHeight||window.innerHeight}
+  let w=0,h=0,particles=[],rafId=0,visible=true;
+  const dpr=Math.min(window.devicePixelRatio||1,1.5);
+  function resize(){
+    const rect=canvas.getBoundingClientRect();
+    w=Math.max(1,Math.floor(rect.width));
+    h=Math.max(1,Math.floor(rect.height));
+    canvas.width=Math.floor(w*dpr);
+    canvas.height=Math.floor(h*dpr);
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+  }
   function initParticles(){
-    particles=Array.from({length:50},()=>({
+    const count=Math.min(34,Math.max(18,Math.floor(w*h/26000)));
+    particles=Array.from({length:count},()=>({
       x:Math.random()*w,y:Math.random()*h,
-      r:Math.random()*2+.3,
-      vx:(Math.random()-.5)*.4,vy:(Math.random()-.5)*.4-.15,
-      a:Math.random()*.35+.08
-    }))
+      r:Math.random()*1.8+.4,
+      vx:(Math.random()-.5)*.26,vy:(Math.random()-.5)*.26-.08,
+      a:Math.random()*.28+.07
+    }));
   }
   function draw(){
-    if(!canvas.isConnected){stop();return;}
+    if(!visible){rafId=0;return;}
     ctx.clearRect(0,0,w,h);
-    particles.forEach(p=>{
+    for(const p of particles){
       p.x+=p.vx;p.y+=p.vy;
       if(p.x<0)p.x=w;if(p.x>w)p.x=0;if(p.y<0)p.y=h;if(p.y>h)p.y=0;
       ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-      const c=p.a<.2?'119,167,255':'177,140,255';
-      ctx.fillStyle='rgba('+c+','+p.a+')';ctx.fill()
-    });
-    rafId=requestAnimationFrame(draw)
+      ctx.fillStyle=`rgba(${p.a<.2?'119,167,255':'177,140,255'},${p.a})`;
+      ctx.fill();
+    }
+    rafId=requestAnimationFrame(draw);
   }
-  function start(){if(!rafId){resize();initParticles();draw();}}
-  function stop(){if(rafId){cancelAnimationFrame(rafId);rafId=0;}}
-  window.addEventListener('resize',()=>{resize();initParticles()},{passive:true});
+  function start(){if(!rafId){visible=true;draw();}}
+  function stop(){visible=false;if(rafId){cancelAnimationFrame(rafId);rafId=0;}}
+  const boot=()=>{resize();initParticles();start();};
+  boot();
+  let resizeTimer;
+  window.addEventListener('resize',()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(boot,120)},{passive:true});
+  const io=new IntersectionObserver(([entry])=>entry.isIntersecting?start():stop(),{threshold:.02});
+  io.observe(canvas);
   document.addEventListener('visibilitychange',()=>document.hidden?stop():start());
-  start()
 })();
