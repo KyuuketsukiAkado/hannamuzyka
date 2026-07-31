@@ -35,63 +35,30 @@ const copy={
 let lang=localStorage.getItem('hanna-lang')||'ru';
 function applyLang(){document.documentElement.lang=lang;document.querySelectorAll('[data-i18n]').forEach(el=>{const key=el.dataset.i18n;if(copy[lang][key]!=null)el.innerHTML=copy[lang][key]});const btn=document.getElementById('lang-toggle');if(btn)btn.textContent=lang==='ru'?'EN':'RU';}
 
-// Canvas noise disabled for smoother scrolling
-
-// Scroll reveal
-(function initReveal(){
-  const observer=new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}})
-  },{threshold:.12,rootMargin:'0px 0px -40px 0px'});
-  document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
-})();
-
-// Cursor glow disabled for smoother scrolling
-
+// Runtime JS kept intentionally small: language switch + mobile menu only
 const langBtn=document.getElementById('lang-toggle');
-if(langBtn)langBtn.addEventListener('click',()=>{lang=lang==='ru'?'en':'ru';localStorage.setItem('hanna-lang',lang);applyLang()});
+if(langBtn)langBtn.addEventListener('click',()=>{
+  lang=lang==='ru'?'en':'ru';
+  localStorage.setItem('hanna-lang',lang);
+  applyLang();
+});
 applyLang();
 
-// Header state + mobile navigation
-(function initHeader(){
-  const header=document.querySelector('.site-header');
+(function initMobileNav(){
   const toggle=document.getElementById('mobile-menu-toggle');
   const nav=document.getElementById('main-nav')||document.querySelector('.nav-links');
-  function syncHeader(){if(header)header.classList.toggle('is-scrolled',window.scrollY>8)}
-  syncHeader();
-  window.addEventListener('scroll',syncHeader,{passive:true});
-  if(toggle&&nav){
-    const close=()=>{toggle.classList.remove('is-open');toggle.setAttribute('aria-expanded','false');nav.classList.remove('is-open');document.body.classList.remove('nav-open')};
-    toggle.addEventListener('click',()=>{
-      const open=toggle.getAttribute('aria-expanded')!=='true';
-      toggle.classList.toggle('is-open',open);
-      toggle.setAttribute('aria-expanded',String(open));
-      nav.classList.toggle('is-open',open);
-      document.body.classList.toggle('nav-open',open);
-    });
-    nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',close));
-    document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
-  }
+  if(!toggle||!nav)return;
+  const close=()=>{
+    toggle.classList.remove('is-open');
+    toggle.setAttribute('aria-expanded','false');
+    nav.classList.remove('is-open');
+  };
+  toggle.addEventListener('click',()=>{
+    const open=toggle.getAttribute('aria-expanded')!=='true';
+    toggle.classList.toggle('is-open',open);
+    toggle.setAttribute('aria-expanded',String(open));
+    nav.classList.toggle('is-open',open);
+  });
+  nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',close));
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')close();});
 })();
-
-// Active nav link based on visible section
-(function initActiveNav(){
-  const links=[...document.querySelectorAll('.nav-links a[href*="#"]')];
-  if(!links.length)return;
-  const pairs=links.map(link=>{
-    const id=link.getAttribute('href').split('#')[1];
-    return {link,section:id?document.getElementById(id):null};
-  }).filter(x=>x.section);
-  if(!pairs.length)return;
-  const observer=new IntersectionObserver(entries=>{
-    entries.forEach(entry=>{
-      if(entry.isIntersecting){
-        links.forEach(l=>l.classList.remove('is-active'));
-        const pair=pairs.find(p=>p.section===entry.target);
-        if(pair)pair.link.classList.add('is-active');
-      }
-    });
-  },{rootMargin:'-35% 0px -55% 0px',threshold:0});
-  pairs.forEach(p=>observer.observe(p.section));
-})();
-
-// Hero particles disabled for smoother scrolling
