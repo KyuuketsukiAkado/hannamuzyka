@@ -18,7 +18,7 @@ const copy={
  },
  en:{
   'nav.work':'Work','nav.about':'About','nav.design':'Design','nav.skills':'Skills','nav.experience':'Experience','nav.art':'Art','nav.blog':'Blog','nav.contact':'Contact',
-  'hero.eyebrow':'Portfolio · 2026','hero.title':'I turn<br><em>"what if?"</em><br>into working things.','hero.lede':'Product Designer and AI-assisted Creative Technologist. I design interfaces, games and digital products where human logic meets new tools.','hero.role':'Product / UX/UI Designer · open to junior+/middle roles, collaborations and AI-assisted product work.','hero.cta':'See my work <span>↘</span>','hero.cv':'Download CV <span>↓</span>','hero.contact':'Let’s get acquainted →','hero.note1':'human<br>in the loop','hero.note2':'made with<br>curiosity ↗',
+  'hero.eyebrow':'Portfolio · 2026','hero.title':'I turn<br><em>"what if?"</em><br>into working things.','hero.lede':'Product Designer and AI-assisted Creative Technologist. I design interfaces, games and digital products where human logic meets new tools.','hero.role':'Product / UX/UI Designer · open to junior+/middle roles, collaborations and AI-assisted product work.','hero.cta':'See my work <span>↘</span>','hero.cv':'Download CV <span>↓</span>','hero.contact':'Let\'s get acquainted →','hero.note1':'human<br>in the loop','hero.note2':'made with<br>curiosity ↗',
   'about.kicker':'ABOUT','about.title':'A humanist<br>who decided to<br><em>find out</em> what happens.','about.p1':'I am a linguist, a teacher of two foreign languages, a Team Coordinator at Azati — and someone who watched AI from the sidelines for long enough to finally build something real with it.','about.p2':'Now I am moving towards Product Design and exploring how AI can help humanists turn ideas into products without losing meaning, empathy or healthy skepticism.','about.quote':'AI did not take responsibility for the product away from me. It simply helped me reach the part of the work I did not have enough technical hands for.',
   'design.kicker':'ABOUT DESIGN','design.title':'I don\'t like<br>visual clutter.<br><em>Interfaces should breathe.</em>','design.p1':'I came to UX/UI not through courses or Figma tutorials. I came through observation: why do you want to close one interface within three seconds, while another makes you linger? Turns out, it\'s not about "pretty." It\'s about how easy it is for a person to do what they came for.','design.p2':'I don\'t like visual clutter. I believe an interface should have space, air, and character. When there\'s no friction between "I want to do this" and "I did it" — that\'s when an interface works. My goal is for the screen to breathe, and for the user to get a seamless experience.','design.quote':'I\'m still learning. But every project is a way to test a hypothesis and become a little better than yesterday. Not "this is my vision." More like "let\'s see if this actually works."',
   'work.kicker':'SELECTED WORK','work.title':'Two stories<br>and a lot of details.','work.sub':'Projects where making things look good was only half the question. I also wanted to understand why they should exist.','kadence.type':'INDIE GAME · PRODUCT DESIGN','kadence.short':'From a bicycle shop concept to a cozy narrative-driven simulator about life in a small bike workshop.','shifted.short':'A UX/UI case study for a custom mechanical keyboard marketplace featuring a hardware configurator, component compatibility checks and a B2B seller dashboard. 14+ screens designed in Figma.','work.case':'View case <span>↗</span>',
@@ -35,47 +35,92 @@ const copy={
 let lang=localStorage.getItem('hanna-lang')||'ru';
 function applyLang(){document.documentElement.lang=lang;document.querySelectorAll('[data-i18n]').forEach(el=>{const key=el.dataset.i18n;if(copy[lang][key]!=null)el.innerHTML=copy[lang][key]});const btn=document.getElementById('lang-toggle');if(btn)btn.textContent=lang==='ru'?'EN':'RU';}
 
-// Runtime JS kept intentionally small: language switch + mobile menu only
-const langBtn=document.getElementById('lang-toggle');
-if(langBtn)langBtn.addEventListener('click',()=>{
-  lang=lang==='ru'?'en':'ru';
-  localStorage.setItem('hanna-lang',lang);
-  applyLang();
-});
-applyLang();
-
-(function initMobileNav(){
-  const toggle=document.getElementById('mobile-menu-toggle');
-  const nav=document.getElementById('main-nav')||document.querySelector('.nav-links');
-  if(!toggle||!nav)return;
-  const close=()=>{
-    toggle.classList.remove('is-open');
-    toggle.setAttribute('aria-expanded','false');
-    nav.classList.remove('is-open');
-  };
-  toggle.addEventListener('click',()=>{
-    const open=toggle.getAttribute('aria-expanded')!=='true';
-    toggle.classList.toggle('is-open',open);
-    toggle.setAttribute('aria-expanded',String(open));
-    nav.classList.toggle('is-open',open);
-  });
-  nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',close));
-  document.addEventListener('keydown',e=>{if(e.key==='Escape')close();});
+// Canvas noise — high quality, no "shakal"
+(function initNoise(){
+  const canvas=document.getElementById('noise-canvas');
+  if(!canvas||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  const ctx=canvas.getContext('2d');
+  let w,h,rafId=0;
+  function resize(){w=canvas.width=window.innerWidth;h=canvas.height=window.innerHeight;}
+  function draw(){
+    if(canvas.width!==w||canvas.height!==h)resize();
+    const d=ctx.createImageData(w,h).data;
+    for(let i=0;i<d.length;i+=4){const v=Math.random()*30|0;d[i]=v;d[i+1]=v;d[i+2]=v;d[i+3]=Math.random()*18|0;}
+    ctx.putImageData(new ImageData(d,w,h),0,0);
+    rafId=requestAnimationFrame(draw);
+  }
+  function start(){if(!rafId){resize();draw();}}
+  function stop(){if(rafId){cancelAnimationFrame(rafId);rafId=0;}}
+  window.addEventListener('resize',resize,{passive:true});
+  document.addEventListener('visibilitychange',()=>document.hidden?stop():start());
+  start();
 })();
 
+// Scroll reveal
+(function initReveal(){
+  const observer=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}})
+  },{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+})();
 
-(function initSoftReveal(){
-  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const targets=[...document.querySelectorAll('.reveal')];
-  if(reduce||!targets.length){targets.forEach(el=>el.classList.add('visible'));return;}
-  document.documentElement.classList.add('motion-ok');
-  const observer=new IntersectionObserver(entries=>{
-    entries.forEach(entry=>{
-      if(entry.isIntersecting){
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
+// Cursor glow — tracks only while visible and active
+(function initCursorGlow(){
+  const glow=document.querySelector('.cursor-glow');
+  if(!glow||window.matchMedia('(pointer:coarse)').matches||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  let mx=0,my=0,t,rafId=0,active=false;
+  function track(){
+    if(!active){rafId=0;return;}
+    glow.style.left=mx+'px';
+    glow.style.top=my+'px';
+    rafId=requestAnimationFrame(track);
+  }
+  function start(){if(!active){active=true;rafId=requestAnimationFrame(track);}}
+  function stop(){active=false;glow.style.opacity='0';clearTimeout(t);if(rafId){cancelAnimationFrame(rafId);rafId=0;}}
+  document.addEventListener('mousemove',e=>{
+    mx=e.clientX;my=e.clientY;
+    glow.style.opacity='1';
+    start();
+    clearTimeout(t);
+    t=setTimeout(stop,800);
+  },{passive:true});
+  document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();});
+})();
+
+const langBtn=document.getElementById('lang-toggle');
+if(langBtn)langBtn.addEventListener('click',()=>{lang=lang==='ru'?'en':'ru';localStorage.setItem('hanna-lang',lang);applyLang()});
+applyLang();
+
+// Hero particles
+(function initHeroParticles(){
+  const canvas=document.getElementById('hero-particles');
+  if(!canvas||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  const ctx=canvas.getContext('2d');
+  let w,h,particles=[],rafId=0;
+  function resize(){w=canvas.width=canvas.offsetWidth||window.innerWidth;h=canvas.height=canvas.offsetHeight||window.innerHeight}
+  function initParticles(){
+    particles=Array.from({length:50},()=>({
+      x:Math.random()*w,y:Math.random()*h,
+      r:Math.random()*2+.3,
+      vx:(Math.random()-.5)*.4,vy:(Math.random()-.5)*.4-.15,
+      a:Math.random()*.35+.08
+    }))
+  }
+  function draw(){
+    if(!canvas.isConnected){stop();return;}
+    ctx.clearRect(0,0,w,h);
+    particles.forEach(p=>{
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.x<0)p.x=w;if(p.x>w)p.x=0;if(p.y<0)p.y=h;if(p.y>h)p.y=0;
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      const c=p.a<.2?'119,167,255':'177,140,255';
+      ctx.fillStyle='rgba('+c+','+p.a+')';ctx.fill()
     });
-  },{threshold:.08,rootMargin:'0px 0px -28px 0px'});
-  targets.forEach(el=>observer.observe(el));
+    rafId=requestAnimationFrame(draw)
+  }
+  function start(){if(!rafId){resize();initParticles();draw();}}
+  function stop(){if(rafId){cancelAnimationFrame(rafId);rafId=0;}}
+  window.addEventListener('resize',()=>{resize();initParticles()},{passive:true});
+  document.addEventListener('visibilitychange',()=>document.hidden?stop():start());
+  start()
 })();
