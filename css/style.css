@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap');
+
 :root{--bg:#0a0a0f;--surface:#111119;--surface-2:#171722;--text:#f5f4f8;--muted:#a7a5b5;--line:#2a2937;--blue:#77a7ff;--blue-2:#a9c8ff;--purple:#b18cff;--lime:#d8ff70;--max:1200px;--radius:22px}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Manrope,system-ui,sans-serif;font-size:16px;line-height:1.55;overflow-x:hidden}
 :focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:3px}
 .skip-link{position:absolute;top:-100px;left:24px;background:var(--blue);color:#0b0b12;padding:12px 20px;border-radius:999px;font-weight:700;font-size:13px;z-index:200;transition:top .3s}.skip-link:focus{top:16px}
@@ -230,3 +230,7 @@ img{max-width:100%;height:auto}
   .mobile-menu-links a.mobile-menu-contact{margin-top:20px;border:none;color:var(--blue);font-family:'DM Mono',monospace;font-size:15px;font-weight:500;text-transform:uppercase;letter-spacing:.12em}
   body.menu-open{overflow:hidden}
 }
+
+
+/* Skip-link target should not show a focus ring */
+main:focus{outline:none}

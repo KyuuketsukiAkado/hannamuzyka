@@ -18,6 +18,9 @@
   <meta property="og:image:height" content="630">
   <link rel="canonical" href="https://kyuuketsukiakado.github.io/hannamuzyka/">
   <title>Hanna Muzyka — Product Designer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon.png">
   <link rel="stylesheet" href="css/style.css">
   <script type="application/ld+json">
@@ -38,9 +41,9 @@
   </script>
 </head>
 <body>
-  <a href="#about" class="skip-link">Перейти к содержимому</a>
-  <canvas class="noise-canvas" id="noise-canvas"></canvas>
-  <div class="cursor-glow"></div>
+  <a href="#top" class="skip-link">Перейти к содержимому</a>
+  <canvas class="noise-canvas" id="noise-canvas" aria-hidden="true"></canvas>
+  <div class="cursor-glow" aria-hidden="true"></div>
   <header class="site-header">
     <a class="wordmark" href="#top" aria-label="Hanna Muzyka home">Hanna<span>Muzyka</span></a>
     <nav class="nav-links" aria-label="Main navigation">
@@ -71,11 +74,11 @@
     </nav>
   </div>
 
-  <main id="top">
+  <main id="top" tabindex="-1">
 
     <!-- ── HERO ────────────────────────────── -->
     <section class="hero">
-      <canvas class="hero-particles" id="hero-particles"></canvas>
+      <canvas class="hero-particles" id="hero-particles" aria-hidden="true"></canvas>
       <div class="hero-grid section-wrap">
         <div class="hero-copy">
           <p class="eyebrow hero-reveal" style="--i:0"><span class="status-dot"></span><span data-i18n="hero.eyebrow">Портфолио · 2026</span></p>
