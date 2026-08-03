@@ -8,15 +8,17 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Hanna Muzyka — Product Designer & AI-assisted Creative Technologist">
   <meta name="twitter:description" content="Exploring the intersection of UX, games, websites, apps and AI-assisted development.">
-  <meta name="twitter:image" content="https://kyuuketsukiakado.github.io/hannamuzyka/assets/profile/mynotionface.png">
+  <meta name="twitter:image" content="https://kyuuketsukiakado.github.io/hannamuzyka/assets/og/og-home.jpg">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://kyuuketsukiakado.github.io/hannamuzyka/">
   <meta property="og:title" content="Hanna Muzyka — Product Designer & AI-assisted Creative Technologist">
   <meta property="og:description" content="Exploring the intersection of UX, games, websites, apps and AI-assisted development.">
-  <meta property="og:image" content="https://kyuuketsukiakado.github.io/hannamuzyka/assets/profile/mynotionface.png">
+  <meta property="og:image" content="https://kyuuketsukiakado.github.io/hannamuzyka/assets/og/og-home.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <link rel="canonical" href="https://kyuuketsukiakado.github.io/hannamuzyka/">
   <title>Hanna Muzyka — Product Designer</title>
-  <link rel="icon" href="assets/profile/mynotionface.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon.png">
   <link rel="stylesheet" href="css/style.css">
   <script type="application/ld+json">
   {
@@ -53,8 +55,21 @@
     <div class="header-actions">
       <button class="lang-switch" id="lang-toggle" aria-label="Switch language">EN</button>
       <a class="small-contact" href="#connect" data-i18n="nav.contact">Связаться</a>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Открыть меню" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span><span></span></button>
     </div>
   </header>
+  <div class="mobile-menu" id="mobile-menu">
+    <nav class="mobile-menu-links" aria-label="Mobile navigation">
+      <a href="#about" data-i18n="nav.about">Обо мне</a>
+      <a href="#work" data-i18n="nav.work">Работы</a>
+      <a href="#design" data-i18n="nav.design">Дизайн</a>
+      <a href="#skills" data-i18n="nav.skills">Навыки</a>
+      <a href="#experience" data-i18n="nav.experience">Опыт</a>
+      <a href="#blog" data-i18n="nav.blog">Блог</a>
+      <a href="#art" data-i18n="nav.art">Арт</a>
+      <a class="mobile-menu-contact" href="#connect" data-i18n="nav.contact">Связаться</a>
+    </nav>
+  </div>
 
   <main id="top">
 
@@ -68,7 +83,7 @@
           <p class="hero-lede hero-reveal" style="--i:2" data-i18n="hero.lede">Product Designer и AI-assisted Creative Technologist. Проектирую интерфейсы, игры и цифровые продукты на стыке человеческой логики и новых инструментов.</p>
           <p class="hero-role hero-reveal" style="--i:3" data-i18n="hero.role">Product / UX/UI Designer · открыта к junior+/middle roles, коллаборациям и AI-assisted product work.</p>
           <div class="hero-cta hero-reveal" style="--i:4">
-            <a class="button button-primary" href="#work" data-i18n="hero.cta">Посмотреть работы ↗</a>
+            <a class="button button-primary" href="#work" data-i18n="hero.cta">Посмотреть работы <span>↘</span></a>
             <a class="button button-ghost" href="assets/Hanna-Muzyka-Resume.pdf" download data-i18n="hero.cv">Скачать CV <span>↓</span></a>
           </div>
           <div class="hero-quick-links hero-reveal" style="--i:5">
@@ -197,10 +212,10 @@
     <section class="experience section-wrap reveal" id="experience">
       <div class="section-kicker"><span>05</span><span data-i18n="experience.kicker">ОПЫТ И ОБРАЗОВАНИЕ</span></div>
       <div class="timeline">
-        <article class="timeline-item"><div class="timeline-date">FEB 2026 — PRESENT</div><div><h3 data-i18n="experience.azati.title">Team Coordinator <span>· Azati Software</span></h3><p data-i18n="experience.azati">Resource management, pre-sales support, client communication and team enablement. Я сопровождаю путь от профиля разработчика до клиентской презентации, собираю процессы в Confluence и Notion, а ещё создала Business English framework и провела 24+ language assessments.</p><div class="timeline-tags"><span>Resource management</span><span>Pre-sales support</span><span>Business English</span><span>Confluence</span></div></div></article>
-        <article class="timeline-item"><div class="timeline-date">JUL 2025 — FEB 2026</div><div><h3 data-i18n="experience.tutor.title">Преподаватель английского языка <span>· Фриланс</span></h3><p data-i18n="experience.tutor">Индивидуальные занятия для до девяти активных студентов одновременно: General, Conversational and Technical English. Помогала IT-специалистам преодолевать языковой барьер и увереннее чувствовать себя в англоязычной рабочей среде.</p><div class="timeline-tags"><span>Language coaching</span><span>Technical English</span><span>Mentoring</span></div></div></article>
-        <article class="timeline-item"><div class="timeline-date">JUN 2025 — AUG 2025</div><div><h3 data-i18n="experience.secretary.title">Технический секретарь <span>· Гродненский государственный университет имени Янки Купалы</span></h3><p data-i18n="experience.secretary">Координировала команду из шести человек, внедряла Google Workspace, поддерживала master data и табели, представляла команду во внешней коммуникации на русском и английском.</p><div class="timeline-tags"><span>Team coordination</span><span>Data management</span><span>Google Workspace</span></div></div></article>
-        <article class="timeline-item education-item"><div class="timeline-date">2021 — 2026</div><div><h3 data-i18n="experience.education.title">Бакалавриат с отличием <span>· Современные иностранные языки</span></h3><p data-i18n="experience.education">Yanka Kupala State University of Grodno · grade 9.6. Автор 35+ научных работ, участница startup competitions, hackathons and academic conferences. Thesis: The Pragmatic Aspect of Synonymic Series for the AI-Driven Visualization of Fictional Characters in English Literature.</p><div class="timeline-tags"><span>Research</span><span>Scientific writing</span><span>AI & linguistics</span></div></div></article>
+        <article class="timeline-item"><div class="timeline-date">FEB 2026 — PRESENT</div><div><h3 data-i18n="experience.azati.title">Team Coordinator <span>· Azati Software</span></h3><p data-i18n="experience.azati">Координирую работу с ресурсами, поддерживаю пресейл и клиентскую коммуникацию, помогаю выстраивать взаимодействие между разработчиками, отделом продаж и заказчиками. Настраиваю процессы в Confluence и Notion, создала систему Business English и провела более 24 языковых оценок для сотрудников, кандидатов и студентов.</p><div class="timeline-tags"><span>Resource management</span><span>Pre-sales support</span><span>Business English</span><span>Confluence</span></div></div></article>
+        <article class="timeline-item"><div class="timeline-date">JUL 2025 — FEB 2026</div><div><h3 data-i18n="experience.tutor.title">Преподаватель английского языка <span>· Фриланс</span></h3><p data-i18n="experience.tutor">Проводила индивидуальные занятия одновременно для девяти активных студентов: общий, разговорный и технический английский. Помогала IT-специалистам преодолевать языковой барьер и увереннее чувствовать себя в англоязычной рабочей среде.</p><div class="timeline-tags"><span>Language coaching</span><span>Technical English</span><span>Mentoring</span></div></div></article>
+        <article class="timeline-item"><div class="timeline-date">JUN 2025 — AUG 2025</div><div><h3 data-i18n="experience.secretary.title">Технический секретарь <span>· Гродненский государственный университет имени Янки Купалы</span></h3><p data-i18n="experience.secretary">Координировала команду из шести человек, внедрила инструменты Google Workspace, с нуля создала и поддерживала таблицы с основными данными и учётом рабочего времени. Представляла команду во внешней переписке на русском и английском языках.</p><div class="timeline-tags"><span>Team coordination</span><span>Data management</span><span>Google Workspace</span></div></div></article>
+        <article class="timeline-item education-item"><div class="timeline-date">2021 — 2026</div><div><h3 data-i18n="experience.education.title">Бакалавриат с отличием <span>· Современные иностранные языки</span></h3><p data-i18n="experience.education">Гродненский государственный университет имени Янки Купалы · средний балл 9,6. Автор более 35 научных работ, участница стартап-конкурсов, хакатонов и научных конференций. Тема дипломной работы: «Прагматический аспект синонимических рядов при визуализации персонажей художественной литературы с помощью AI».</p><div class="timeline-tags"><span>Research</span><span>Scientific writing</span><span>AI & linguistics</span></div></div></article>
       </div>
     </section>
 

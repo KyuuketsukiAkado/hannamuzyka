@@ -107,3 +107,21 @@ applyLang();
   io.observe(canvas);
   document.addEventListener('visibilitychange',()=>document.hidden?stop():start());
 })();
+
+// Mobile menu
+(function initMobileMenu(){
+  const btn=document.getElementById('menu-toggle');
+  const menu=document.getElementById('mobile-menu');
+  if(!btn||!menu)return;
+  function set(open){
+    btn.classList.toggle('active',open);
+    menu.classList.toggle('open',open);
+    btn.setAttribute('aria-expanded',open?'true':'false');
+    btn.setAttribute('aria-label',open?'Закрыть меню':'Открыть меню');
+    document.body.classList.toggle('menu-open',open);
+  }
+  btn.addEventListener('click',()=>set(!menu.classList.contains('open')));
+  menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>set(false)));
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')set(false)});
+  window.addEventListener('resize',()=>{if(window.innerWidth>800)set(false)},{passive:true});
+})();

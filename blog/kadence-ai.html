@@ -7,16 +7,16 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Как гуманитарий без опыта в кодинге собрал инди-игру с AI-агентом за полтора месяца">
   <meta name="twitter:description" content="От концепт-дизайна велосипедного магазина до релизной web-игры на GitHub Pages">
-  <meta name="twitter:image" content="https://kyuuketsukiakado.github.io/hannamuzyka/assets/blog/habr-01.png">
+  <meta name="twitter:image" content="https://kyuuketsukiakado.github.io/hannamuzyka/assets/og/og-blog.jpg">
   <meta name="theme-color" content="#0b0b12">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://kyuuketsukiakado.github.io/hannamuzyka/blog/kadence-ai.html">
   <meta property="og:title" content="Как гуманитарий без опыта в кодинге собрал инди-игру с AI-агентом за полтора месяца">
   <meta property="og:description" content="От концепт-дизайна велосипедного магазина до релизной web-игры на GitHub Pages — и почему документация оказалась важнее промптов.">
-  <meta property="og:image" content="https://kyuuketsukiakado.github.io/hannamuzyka/assets/blog/habr-01.png">
+  <meta property="og:image" content="https://kyuuketsukiakado.github.io/hannamuzyka/assets/og/og-blog.jpg">
   <link rel="canonical" href="https://kyuuketsukiakado.github.io/hannamuzyka/blog/kadence-ai.html">
   <title>Блог — Как гуманитарий без опыта в кодинге собрал инди-игру с AI-агентом — Hanna Muzyka</title>
-  <link rel="icon" href="../assets/profile/mynotionface.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../assets/favicon.png">
   <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
@@ -24,20 +24,35 @@
   <header class="site-header">
     <a class="wordmark" href="../index.html" aria-label="Hanna Muzyka home">Hanna<span>Muzyka</span></a>
     <nav class="nav-links" aria-label="Main navigation">
-      <a href="../index.html#about">Обо мне</a>
-      <a href="../index.html#work">Работы</a>
-      <a href="../index.html#design">Дизайн</a>
-      <a href="../index.html#blog">Блог</a>
-      <a href="../index.html#skills">Навыки</a>
-      <a href="../index.html#experience">Опыт</a>
+      <a href="../index.html#about" data-i18n="nav.about">Обо мне</a>
+      <a href="../index.html#work" data-i18n="nav.work">Работы</a>
+      <a href="../index.html#design" data-i18n="nav.design">Дизайн</a>
+      <a href="../index.html#skills" data-i18n="nav.skills">Навыки</a>
+      <a href="../index.html#experience" data-i18n="nav.experience">Опыт</a>
+      <a href="../index.html#blog" data-i18n="nav.blog">Блог</a>
+      <a href="../index.html#art" data-i18n="nav.art">Арт</a>
     </nav>
     <div class="header-actions">
-      <a class="small-contact" href="mailto:repro4chful@gmail.com">Связаться</a>
+      <button class="lang-switch" id="lang-toggle" aria-label="Switch language">EN</button>
+      <a class="small-contact" href="../index.html#connect" data-i18n="nav.contact">Связаться</a>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Открыть меню" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span><span></span></button>
     </div>
   </header>
+  <div class="mobile-menu" id="mobile-menu">
+    <nav class="mobile-menu-links" aria-label="Mobile navigation">
+      <a href="../index.html#about" data-i18n="nav.about">Обо мне</a>
+      <a href="../index.html#work" data-i18n="nav.work">Работы</a>
+      <a href="../index.html#design" data-i18n="nav.design">Дизайн</a>
+      <a href="../index.html#skills" data-i18n="nav.skills">Навыки</a>
+      <a href="../index.html#experience" data-i18n="nav.experience">Опыт</a>
+      <a href="../index.html#blog" data-i18n="nav.blog">Блог</a>
+      <a href="../index.html#art" data-i18n="nav.art">Арт</a>
+      <a class="mobile-menu-contact" href="../index.html#connect" data-i18n="nav.contact">Связаться</a>
+    </nav>
+  </div>
 
   <main>
-    <article class="blog-post section-wrap">
+    <article class="blog-post section-wrap" lang="ru">
       <div class="blog-post-header">
         <a class="blog-back" href="../index.html#blog">← Назад к блогу</a>
         <div class="blog-post-meta">
