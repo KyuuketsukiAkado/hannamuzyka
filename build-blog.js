@@ -96,14 +96,17 @@ async function queryNotionDatabase(targetDbId, params) {
   }
 }
 
-// Безопасное обновление index.html (ТОЛЬКО при наличии явных маркеров)
+// Абсолютно безопасное обновление index.html (удаляем бродячие карточки сверху)
 function updateHomepageBlogSection(posts) {
   const indexPath = path.join(process.cwd(), 'index.html');
   if (!fs.existsSync(indexPath)) return;
 
   let indexHtml = fs.readFileSync(indexPath, 'utf8');
 
-  // Меняем старые ссылки #blog на ссылку blog.html
+  // Удаляем любые карточки, если они случайно оказались в самом верху файла (до <!DOCTYPE> или <header>)
+  indexHtml = indexHtml.replace(/^<!-- BLOG_POSTS_START -->[\s\S]*?<!-- BLOG_POSTS_END -->\s*/i, '');
+
+  // Обновляем ссылки на блог
   indexHtml = indexHtml.replace(/href="https:\/\/kyuuketsukiakado\.github\.io\/hannamuzyka\/#blog"/gi, 'href="blog.html"');
   indexHtml = indexHtml.replace(/href="#blog"/gi, 'href="blog.html"');
 
@@ -119,16 +122,15 @@ function updateHomepageBlogSection(posts) {
 </div>
 <!-- BLOG_POSTS_END -->`;
 
-  // Обновляем ТОЛЬКО если маркеровые теги явно проставлены на странице
+  // Вставляем карточки ТОЛЬКО если теги стояли внутри секции #blog или над кнопкой
   if (/<!-- BLOG_POSTS_START -->[\s\S]*?<!-- BLOG_POSTS_END -->/g.test(indexHtml)) {
-    console.log('🏠 Updating latest posts inside marked section of index.html...');
     indexHtml = indexHtml.replace(/<!-- BLOG_POSTS_START -->[\s\S]*?<!-- BLOG_POSTS_END -->/g, latestPostsHtml);
-    fs.writeFileSync(indexPath, indexHtml, 'utf8');
-    console.log('✅ Safely updated index.html!');
-  } else {
-    console.log('ℹ️ No blog markers in index.html, skipping direct homepage injection to keep layout safe.');
-    fs.writeFileSync(indexPath, indexHtml, 'utf8');
+  } else if (/data-i18n="blog\.invite"/i.test(indexHtml)) {
+    indexHtml = indexHtml.replace(/(<a[\s\S]*?data-i18n="blog\.invite"[\s\S]*?<\/a>)/i, `${latestPostsHtml}\n$1`);
   }
+
+  fs.writeFileSync(indexPath, indexHtml, 'utf8');
+  console.log('✅ Safely cleaned and updated index.html!');
 }
 
 const HEADER_HTML = `
@@ -258,8 +260,8 @@ async function main() {
 
     let htmlContent = mdString
       .replace(/^### (.*$)/gim, '<h3>$1</h3>')
-      .replace(/^## (.*$)/gim, '<h2>$1</h2>')
-      .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+      .replace(/^## (.*$)/gim, '## $1')
+      .replace(/^# (.*$)/gim, '# $1')
       .replace(/^\> (.*$)/gim, '<blockquote>$1</blockquote>')
       .replace(/\!\[(.*?)\]\((.*?)\)/gim, '<img src="$2" alt="$1" />')
       .replace(/\[(.*?)\]\((.*?)\)/gim, '<a href="$2" target="_blank" rel="noopener">$1</a>')
@@ -328,7 +330,7 @@ async function main() {
       ${posts.length === 0 ? '<p style="color: var(--text-muted);">Пока нет опубликованных статей. Поставьте галочку "Published" в Notion!</p>' : posts.map((p) => `
         <a href="blog/${p.slug}.html" class="blog-card">
           <div class="article-meta">${p.date}</div>
-          <div class="blog-card-title">${p.title}</div>
+          .blog-card-title">${p.title}</div>
           ${p.description ? `<div class="blog-card-desc">${p.description}</div>` : ''}
           ${p.tags.length ? `<div>${p.tags.map((t) => `<span class="tag-badge">#${t}</span>`).join('')}</div>` : ''}
         </a>
@@ -342,7 +344,7 @@ async function main() {
   fs.writeFileSync(path.join(process.cwd(), 'blog.html'), catalogHtml, 'utf8');
   console.log('✅ Created blog.html successfully!');
 
-  // Безопасно обновляем index.html
+  // Безопасно очищаем и обновляем index.html
   updateHomepageBlogSection(posts);
 }
 
