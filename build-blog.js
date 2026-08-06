@@ -48,6 +48,32 @@ async function downloadImage(url, filename) {
   });
 }
 
+// Универсальная функция запроса к базе данных Notion (совместима со всеми версиями SDK)
+async function queryNotionDatabase(params) {
+  if (notion.databases && typeof notion.databases.query === 'function') {
+    return await notion.databases.query(params);
+  } else if (notion.dataSources && typeof notion.dataSources.query === 'function') {
+    const { database_id, ...rest } = params;
+    return await notion.dataSources.query({ data_source_id: database_id, ...rest });
+  } else {
+    // Прямой запрос к Notion API через fetch для 100% надёжности
+    const res = await fetch(`https://api.notion.com/v1/databases/${params.database_id}/query`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${notionKey}`,
+        'Notion-Version': '2022-06-28',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(params)
+    });
+    if (!res.ok) {
+      const errText = await res.text();
+      throw new Error(`Notion API HTTP ${res.status}: ${errText}`);
+    }
+    return await res.json();
+  }
+}
+
 const HEADER_HTML = `
 <header class="site-header">
   <div class="nav-container">
@@ -107,7 +133,7 @@ async function main() {
 
   let response;
   try {
-    response = await notion.databases.query({
+    response = await queryNotionDatabase({
       database_id: databaseId,
       filter: { property: 'Published', checkbox: { equals: true } },
     });
