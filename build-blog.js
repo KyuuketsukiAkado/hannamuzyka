@@ -96,41 +96,64 @@ async function queryNotionDatabase(targetDbId, params) {
   }
 }
 
-// Абсолютно безопасное обновление index.html (удаляем бродячие карточки сверху)
+// Красивое обновление index.html с карточками и обложками
 function updateHomepageBlogSection(posts) {
   const indexPath = path.join(process.cwd(), 'index.html');
   if (!fs.existsSync(indexPath)) return;
 
+  console.log('🏠 Updating latest posts on homepage index.html...');
   let indexHtml = fs.readFileSync(indexPath, 'utf8');
 
-  // Удаляем любые карточки, если они случайно оказались в самом верху файла (до <!DOCTYPE> или <header>)
-  indexHtml = indexHtml.replace(/^<!-- BLOG_POSTS_START -->[\s\S]*?<!-- BLOG_POSTS_END -->\s*/i, '');
+  // 1. ПРИНУДИТЕЛЬНО ЧИСТИМ любой ошибочный блок с самого верха файла index.html
+  indexHtml = indexHtml.replace(/^([\s\S]*?)(<!-- BLOG_POSTS_START -->[\s\S]*?<!-- BLOG_POSTS_END -->)/i, (match, prefix, blogBlock) => {
+    // Если карточки были вставлены в первые 500 символов файла (до основного контента) — удаляем их оттуда
+    if (prefix.length < 500) {
+      return prefix;
+    }
+    return match;
+  });
 
-  // Обновляем ссылки на блог
-  indexHtml = indexHtml.replace(/href="https:\/\/kyuuketsukiakado\.github\.io\/hannamuzyka\/#blog"/gi, 'href="blog.html"');
-  indexHtml = indexHtml.replace(/href="#blog"/gi, 'href="blog.html"');
-
+  // 2. Формируем стильные карточки с обложками/картинками
   const latestPostsHtml = `<!-- BLOG_POSTS_START -->
-<div class="latest-posts-container" style="display: grid; gap: 1rem; margin: 2rem 0; text-align: left;">
-  ${posts.slice(0, 3).map((p) => `
-    <a href="blog/${p.slug}.html" class="latest-post-card" style="display: block; background: #121215; border: 1px solid #1e1e24; border-radius: 10px; padding: 1.25rem; text-decoration: none; color: inherit; transition: border-color 0.2s;">
-      <div style="font-family: monospace; font-size: 0.8rem; color: #8e8e9c; margin-bottom: 0.3rem;">${p.date}</div>
-      <div style="font-weight: 700; font-size: 1.1rem; color: #fff; margin-bottom: 0.3rem;">${p.title}</div>
-      ${p.description ? `<div style="font-size: 0.88rem; color: #a1a1aa; line-height: 1.4;">${p.description}</div>` : ''}
+<div class="latest-posts-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; margin: 2rem 0; text-align: left;">
+  ${posts.slice(0, 3).map((p) => {
+    const relativeCover = p.coverUrl ? p.coverUrl.replace('../', '') : '';
+    return `
+    <a href="blog/${p.slug}.html" class="latest-post-card" style="display: flex; flex-direction: column; background: #121215; border: 1px solid #1e1e24; border-radius: 12px; overflow: hidden; text-decoration: none; color: inherit; transition: border-color 0.2s, transform 0.2s;">
+      ${relativeCover ? `<div style="width: 100%; height: 140px; background: #18181c; overflow: hidden;"><img src="${relativeCover}" alt="${p.title}" style="width: 100%; height: 100%; object-fit: cover;" /></div>` : ''}
+      <div style="padding: 1.25rem; flex: 1; display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div style="font-family: monospace; font-size: 0.78rem; color: #8e8e9c; margin-bottom: 0.4rem;">${p.date}</div>
+          <div style="font-weight: 700; font-size: 1.1rem; color: #fff; line-height: 1.35; margin-bottom: 0.5rem;">${p.title}</div>
+          ${p.description ? `<div style="font-size: 0.88rem; color: #a1a1aa; line-height: 1.4; margin-bottom: 0.8rem;">${p.description}</div>` : ''}
+        </div>
+        ${p.tags.length ? `<div>${p.tags.map((t) => `<span style="font-family: monospace; font-size: 0.72rem; background: #1c1c22; color: #8e8e9c; padding: 0.2rem 0.5rem; border-radius: 4px; border: 1px solid #1e1e24; margin-right: 0.3rem;">#${t}</span>`).join('')}</div>` : ''}
+      </div>
     </a>
-  `).join('')}
+  `;
+  }).join('')}
 </div>
 <!-- BLOG_POSTS_END -->`;
 
-  // Вставляем карточки ТОЛЬКО если теги стояли внутри секции #blog или над кнопкой
+  // 3. Вставляем карточки ВНУТРЬ секции блога прямо перед кнопкой "Зайти почитать"
+  const blogButtonRegex = /(<a[\s\S]*?data-i18n="blog\.invite"[\s\S]*?<\/a>)/i;
+  const genericBlogButtonRegex = /(<a[\s\S]*?blog-intro-link[\s\S]*?<\/a>)/i;
+
   if (/<!-- BLOG_POSTS_START -->[\s\S]*?<!-- BLOG_POSTS_END -->/g.test(indexHtml)) {
     indexHtml = indexHtml.replace(/<!-- BLOG_POSTS_START -->[\s\S]*?<!-- BLOG_POSTS_END -->/g, latestPostsHtml);
-  } else if (/data-i18n="blog\.invite"/i.test(indexHtml)) {
-    indexHtml = indexHtml.replace(/(<a[\s\S]*?data-i18n="blog\.invite"[\s\S]*?<\/a>)/i, `${latestPostsHtml}\n$1`);
+  } else if (blogButtonRegex.test(indexHtml)) {
+    indexHtml = indexHtml.replace(blogButtonRegex, `${latestPostsHtml}\n$1`);
+  } else if (genericBlogButtonRegex.test(indexHtml)) {
+    indexHtml = indexHtml.replace(genericBlogButtonRegex, `${latestPostsHtml}\n$1`);
   }
 
+  // Обновляем href у кнопки "Зайти почитать", чтобы вела на blog.html
+  indexHtml = indexHtml.replace(/(<a[\s\S]*?data-i18n="blog\.invite"[\s\S]*?<\/a>)/gi, (match) => {
+    return match.replace(/href="[^"]*"/i, 'href="blog.html"');
+  });
+
   fs.writeFileSync(indexPath, indexHtml, 'utf8');
-  console.log('✅ Safely cleaned and updated index.html!');
+  console.log('✅ Safely updated index.html with beautiful cards!');
 }
 
 const HEADER_HTML = `
@@ -260,8 +283,8 @@ async function main() {
 
     let htmlContent = mdString
       .replace(/^### (.*$)/gim, '<h3>$1</h3>')
-      .replace(/^## (.*$)/gim, '## $1')
-      .replace(/^# (.*$)/gim, '# $1')
+      .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+      .replace(/^# (.*$)/gim, '<h1>$1</h1>')
       .replace(/^\> (.*$)/gim, '<blockquote>$1</blockquote>')
       .replace(/\!\[(.*?)\]\((.*?)\)/gim, '<img src="$2" alt="$1" />')
       .replace(/\[(.*?)\]\((.*?)\)/gim, '<a href="$2" target="_blank" rel="noopener">$1</a>')
@@ -298,7 +321,7 @@ async function main() {
 </html>`;
 
     fs.writeFileSync(path.join(BLOG_DIR, `${slug}.html`), articleHtml, 'utf8');
-    posts.push({ title, slug, date, tags, description });
+    posts.push({ title, slug, date, tags, description, coverUrl });
   }
 
   console.log('📝 Generating blog catalog (blog.html)...');
@@ -330,7 +353,7 @@ async function main() {
       ${posts.length === 0 ? '<p style="color: var(--text-muted);">Пока нет опубликованных статей. Поставьте галочку "Published" в Notion!</p>' : posts.map((p) => `
         <a href="blog/${p.slug}.html" class="blog-card">
           <div class="article-meta">${p.date}</div>
-          .blog-card-title">${p.title}</div>
+          <div class="blog-card-title">${p.title}</div>
           ${p.description ? `<div class="blog-card-desc">${p.description}</div>` : ''}
           ${p.tags.length ? `<div>${p.tags.map((t) => `<span class="tag-badge">#${t}</span>`).join('')}</div>` : ''}
         </a>
@@ -344,7 +367,7 @@ async function main() {
   fs.writeFileSync(path.join(process.cwd(), 'blog.html'), catalogHtml, 'utf8');
   console.log('✅ Created blog.html successfully!');
 
-  // Безопасно очищаем и обновляем index.html
+  // Запускаем безопасную очистку верха и обновление секции БЛОГ на главной
   updateHomepageBlogSection(posts);
 }
 
