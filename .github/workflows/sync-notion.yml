@@ -41,7 +41,7 @@ jobs:
 
       - name: Commit and Push Changes to GitHub
         run: |
-          git add -f blog.html blog/ assets/images/blog/
+          git add -f index.html blog.html blog/ assets/images/blog/
           git status
           if ! git diff --staged --quiet; then
             git commit -m "Auto-update blog from Notion"
