@@ -39,7 +39,7 @@ jobs:
           git config --global user.email "actions@github.com"
           git add blog.html blog/ assets/images/blog/
           if ! git diff --staged --quiet; then
-            git commit -m "Auto-update blog from Notion [skip ci]"
+            git commit -m "Auto-update blog from Notion"
             git pull --rebase origin ${GITHUB_REF_NAME}
             git push
           fi
