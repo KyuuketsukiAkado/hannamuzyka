@@ -96,13 +96,16 @@ async function queryNotionDatabase(targetDbId, params) {
   }
 }
 
-// Внедрение свежих постов на главную страницу index.html
+// Безопасное обновление index.html (ТОЛЬКО при наличии явных маркеров)
 function updateHomepageBlogSection(posts) {
   const indexPath = path.join(process.cwd(), 'index.html');
   if (!fs.existsSync(indexPath)) return;
 
-  console.log('🏠 Updating latest posts in index.html...');
   let indexHtml = fs.readFileSync(indexPath, 'utf8');
+
+  // Меняем старые ссылки #blog на ссылку blog.html
+  indexHtml = indexHtml.replace(/href="https:\/\/kyuuketsukiakado\.github\.io\/hannamuzyka\/#blog"/gi, 'href="blog.html"');
+  indexHtml = indexHtml.replace(/href="#blog"/gi, 'href="blog.html"');
 
   const latestPostsHtml = `<!-- BLOG_POSTS_START -->
 <div class="latest-posts-container" style="display: grid; gap: 1rem; margin: 2rem 0; text-align: left;">
@@ -116,22 +119,16 @@ function updateHomepageBlogSection(posts) {
 </div>
 <!-- BLOG_POSTS_END -->`;
 
+  // Обновляем ТОЛЬКО если маркеровые теги явно проставлены на странице
   if (/<!-- BLOG_POSTS_START -->[\s\S]*?<!-- BLOG_POSTS_END -->/g.test(indexHtml)) {
+    console.log('🏠 Updating latest posts inside marked section of index.html...');
     indexHtml = indexHtml.replace(/<!-- BLOG_POSTS_START -->[\s\S]*?<!-- BLOG_POSTS_END -->/g, latestPostsHtml);
+    fs.writeFileSync(indexPath, indexHtml, 'utf8');
+    console.log('✅ Safely updated index.html!');
   } else {
-    // Находим ровно кнопку с классом blog-intro-link и вставляем перед ней карточки
-    const blogLinkRegex = /(<a[\s\S]*?class="[^"]*blog-intro-link[^"]*"[\s\S]*?<\/a>)/i;
-    if (blogLinkRegex.test(indexHtml)) {
-      indexHtml = indexHtml.replace(blogLinkRegex, `${latestPostsHtml}\n$1`);
-    } else if (/blog\.invite/i.test(indexHtml)) {
-      indexHtml = indexHtml.replace(/(<a[\s\S]*?blog\.invite[\s\S]*?<\/a>)/i, `${latestPostsHtml}\n$1`);
-    } else {
-      indexHtml = indexHtml.replace(/(Зайти почитать)/i, `${latestPostsHtml}\n$1`);
-    }
+    console.log('ℹ️ No blog markers in index.html, skipping direct homepage injection to keep layout safe.');
+    fs.writeFileSync(indexPath, indexHtml, 'utf8');
   }
-
-  fs.writeFileSync(indexPath, indexHtml, 'utf8');
-  console.log('✅ Updated index.html with live blog cards!');
 }
 
 const HEADER_HTML = `
@@ -345,7 +342,7 @@ async function main() {
   fs.writeFileSync(path.join(process.cwd(), 'blog.html'), catalogHtml, 'utf8');
   console.log('✅ Created blog.html successfully!');
 
-  // Обновляем index.html
+  // Безопасно обновляем index.html
   updateHomepageBlogSection(posts);
 }
 
