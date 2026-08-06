@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Подкаст с Gemini 3.1 Pro — Hanna Muzyka</title>
+  <meta name="description" content="Про мой опыт работы ментором/коучем, немного про английский и как с ним быть">
+  
+<style>
+  :root {
+    --bg-color: #0b0b0d;
+    --card-bg: #121215;
+    --card-border: #1e1e24;
+    --text-primary: #eceef2;
+    --text-muted: #8e8e9c;
+    --accent: #ffffff;
+    --code-bg: #18181c;
+    --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  }
+  body { background-color: var(--bg-color); color: var(--text-primary); font-family: var(--font-sans); line-height: 1.7; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  .site-header { border-bottom: 1px solid var(--card-border); padding: 1.25rem 2rem; position: sticky; top: 0; background: rgba(11, 11, 13, 0.85); backdrop-filter: blur(12px); z-index: 100; }
+  .nav-container { max-width: 900px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+  .nav-logo { font-weight: 700; font-size: 1.1rem; letter-spacing: -0.02em; }
+  .nav-links a { color: var(--text-muted); margin-left: 1.5rem; font-size: 0.9rem; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+  .container { max-width: 780px; margin: 0 auto; padding: 3rem 1.5rem 6rem; }
+  .article-header { margin-bottom: 3rem; }
+  .article-meta { font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.75rem; }
+  .article-title { font-size: 2.4rem; font-weight: 800; letter-spacing: -0.03em; line-height: 1.2; margin: 0 0 1rem; color: #fff; }
+  .tag-badge { display: inline-block; font-family: var(--font-mono); font-size: 0.75rem; background: #1c1c22; color: var(--text-muted); padding: 0.25rem 0.6rem; border-radius: 6px; margin-right: 0.4rem; margin-bottom: 0.4rem; border: 1px solid var(--card-border); }
+  .article-body { font-size: 1.05rem; }
+  .article-body h1, .article-body h2, .article-body h3 { color: #fff; margin-top: 2.5rem; margin-bottom: 1rem; letter-spacing: -0.02em; }
+  .article-body p { margin-bottom: 1.4rem; color: #d1d1d6; }
+  .article-body ul, .article-body ol { margin-bottom: 1.4rem; padding-left: 1.5rem; color: #d1d1d6; }
+  .article-body li { margin-bottom: 0.4rem; }
+  .article-body img { max-width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--card-border); margin: 2rem 0; display: block; }
+  .article-body blockquote { border-left: 3px solid #3b3b4f; padding-left: 1.2rem; color: var(--text-muted); font-style: italic; margin: 2rem 0; }
+  .article-body pre { background: var(--code-bg); padding: 1.2rem; border-radius: 10px; overflow-x: auto; border: 1px solid var(--card-border); font-family: var(--font-mono); font-size: 0.9em; }
+  .article-body code { font-family: var(--font-mono); background: var(--code-bg); padding: 0.2rem 0.4rem; border-radius: 4px; font-size: 0.9em; }
+  .back-link { display: inline-flex; align-items: center; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 2rem; transition: color 0.2s; }
+  .back-link:hover { color: var(--accent); }
+  footer.site-footer { border-top: 1px solid var(--card-border); margin-top: 5rem; padding-top: 2rem; text-align: center; color: var(--text-muted); font-size: 0.85rem; }
+</style>
+
+</head>
+<body>
+  
+<header class="site-header">
+  <div class="nav-container">
+    <a href="../" class="nav-logo">Hanna Muzyka</a>
+    <nav class="nav-links">
+      <a href="../#work">Работы</a>
+      <a href="../#about">Обо мне</a>
+      <a href="../blog.html" class="active">Блог</a>
+      <a href="https://t.me/KyuuketsukiAkado" target="_blank" rel="noopener">Telegram ↗</a>
+    </nav>
+  </div>
+</header>
+
+  <div class="container">
+    <a href="../blog.html" class="back-link">← К списку всех статей</a>
+    <article>
+      <header class="article-header">
+        <div class="article-meta">2026-08-04</div>
+        <h1 class="article-title">Подкаст с Gemini 3.1 Pro</h1>
+        <div><span class="tag-badge">#ENG</span></div>
+      </header>
+      
+      <div class="article-body"><p>
+<h2>— <strong>Давай начнем с базы. Почему вообще в IT, где все, казалось бы, общаются на одном техническом языке, возникает так много недопониманий с иностранным заказчиком? В чем главная причина этого "lost in translation" (трудностей перевода)?</strong></h2></p><p>
+Это интересный вопрос. Ключевое выражение здесь - “технический язык”. Вижу на своей практике, что многие разработчики учат английский просто… читая документацию. Один раз разговорившись с сотрудником я задала вопрос, а-ля как он начал учить язык? Оказалось, что это self-taught случай, когда человек получил все свои знания об английском исключительно (!) из прочтения документации. И, признаюсь, тут мой мир перевернулся, потому что мы вполне неплохо с ним поговорили. Понимали друг друга, да, не без косяков, но ведь коммуникативный акт состоялся и был успешным! В моей голове сразу возникли идеи по типу “А я ведь могу ему помочь. Взять бы его, да и допилить по базе, и в целом вышло бы очень и очень даже”, - потенциал здесь было видно издалека.</p><p>
+<img src="../assets/images/blog/english-talk-img-1.png" alt="1.png" /></p><p>
+Но вот в чем загвоздка: говорил он бегло больше про стек, проекты. А вот small talk уже подкачал, как и обсуждение будничных вещей по типу “какие твои любимые игры?” И вот здесь мы и начинаем заходить в проблемную зону. Вы когда-нибудь задумывались сколько всего надо знать чтобы просто произвести адекватное первое впечатление на иностранного клиента на созвоне? А ведь это одна из тех вещей, которую ну никак нельзя упускать из вида. Для нас, русскоговорящих людей, при общении это все выглядит не особо важно. В приоритете скорее донести какую-то информацию, презентовать себя. А вот как ответить на How are you doing? мы уже скорее забиваем. И зря, скажу я вам.</p><p>
+Еще одной вытекающей из этой ветки проблемой является отсутствие навыка сглаживания углов, как не звучать too harsh и выглядеть вежливым в глазах собеседника. Да, понятно, что многие не знают даже о разнице между Can/Could в просьбах и звучат ну совсем прямолинейно - на мой взгляд, это простительно для разработчика, но а если речь идет о коммуникаторе или условном Tech Lead? Здесь уже вопрос встает ребром.</p><p>
+<img src="https://prod-files-secure.s3.us-west-2.amazonaws.com/8fc2162a-76da-8156-aab2-0003127445a1/cd86c06f-71a7-4fa0-b487-0c1f9017da26/2.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466WJE7SWHI%2F20260806%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260806T105613Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEHIaCXVzLXdlc3QtMiJHMEUCIQCyUBK3PfiDcnQfd2woI4r%2FsLkcbibq06lObPOMvQHGNwIgSTcX2599pN5pdGRSwhxl%2F1VnljAOYs55GkDTLBzuZP4q%2FwMIOxAAGgw2Mzc0MjMxODM4MDUiDPNcqjC%2FM6ivJy9JxSrcA7hpZqzCleDhAb5kmDJa9WCdkkCJVnbYvqZByKoYQs%2F7hSdx5bum0t2T%2BnHzz0iEFggQlX6JkaKXKDiD2KY1lI6Y1diSIDX5i25gASjEtUDSkwdEsBZfmvZW7EGpTf4vJshfs2p4TJVqUc2RsgCb38I8sWKBQL5jIWEDZiO5fnHBl5rx%2BdFtByCeH9LSOZTXseQ%2Fb8zmQuOjzuC6b2BoE4m7ilmjiZfD7I5R1wM9y2a%2BaDf206HSVi3UK6u6zfIYczBEbvtSMFHfl1XbGqP6ZdKFu4EHVWnuzBn16lHsCfADxR05bQv8VFvbQBKyyD3jk5L7EqlfZRMymN6RcTEwMkfEw4%2FU199AHDyEygTsalCM8KSamiA05HEKCecnbD%2FJVz2O5GcJpbjhgIzFpY4jFWuf42oTdubw11strFXp0pPfpRd9H%2Fxe455AcpYp%2B86h46xukpbUUNSGqW3AXIbAnE4idzF85%2BzdY4fOEHHkYd%2FOj8tSHao14dNG%2BmO2JZG3%2BreZTYiUnuqmhXCvJW2eqW6Z%2BpgBbl8KQl%2BYgrF%2B5XmWLoHFn18vp14V%2BR6F3lY8mGFk6BGvRkbprod%2F1uO5%2FWErc2qLf7Uwtp0XmkVUex735qWHSdsZyD7a2GCXMPCx0dMGOqUBYHaziW%2FvFkuL3nwPawemI6q2M4shOKdysESinGaCAigFAhnXJzCFjvWXqYn9wnfc%2B9c7WvDqxoyMsHl%2F1KslebQQMjCH5qIUyQ3TwNvt7n2zTtfF0KA3xC8C93Tx6y1Jqivf4Fc2EjipcbAMs%2Fu1wrDBx1w5d0jZ5xXnbD4XoyN0nLrLoTqBIxxgbRXcPZS61b12ylvizJBtuIPPNa1B0NluQzqt&X-Amz-Signature=79db8083e7da2ef4089c8766b85380b0b89479fc9335d63645d02df8ffeac94b&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject" alt="2.png" /></p><p>
+Наименьшей проблемой, считаю, является буквальный перевод с русского на английский - на это обращать внимание скорее НЕ будут. А вот что точно режет слух, так это долгие паузы между фразами и словами. Именно с запросом на помощь с этим я работала на протяжении месяца с одним из сотрудников - мы проводили каждодневные созвоны и… просто говорили. Сначала делали мокапы интервью, на них я выясняла в чем вообще подоплека этого и где кроется причина. Потом уже обсуждали проекты, смотрели видосы, вспоминали лексику. В один день мною было принято такое решение: записываем наш звонок и потом мой собеседник наедине с собой уже рефлексирует над ним. Ведь я знаю, как важно иногда бывает просто послушать себя со стороны. И знаете что? Это и был переломный момент. Так что такую практику могу смело рекомендовать брать на вооружение :) Признаюсь, за весь мой опыт преподавания это был самый интересный и один из самых успешных кейсов. Когда я поняла, что он был успешным? Когда в один из синков мой собеседник зашел и мы начали… со small-talk. Причем вообще неожиданно для меня. На протяжении 20+ минут мы обсуждали рабочие обязанности друг друга, ситуацию на рынке труда, как приходится тюнить CV разработчиков для сейлов. Признаюсь, в тот момент было по-настоящему радостно за него, ведь он буквально перешагнул языковой барьер, который все это время мешал звучать бойко и уверенно. Итогом стало успешно пройденное интервью на английском с представителем клиента. И я считаю это нашей совместной заслугой и результатом нашей совместной слаженной работы.</p><p>
+<img src="../assets/images/blog/english-talk-img-2.png" alt="3.png" /></p><p>
+<h2>— Очень частая история на созвонах: клиент объясняет фичу, разработчики (или лид) кивают, говорят "Yes, yes, no problem", а через неделю на демо выясняется, что поняли вообще не то. Почему наши инженеры так боятся переспрашивать, уточнять детали или говорить слово «Нет/Я не понял» иностранцу?</h2></p><p>
+В первую очередь потому, что боятся показать себя в худшем свете, ведь это так сложно - сказать, что ты что-то не расслышал или не знаешь, как переводится эта фраза. Зачастую это просто стыдно сделать. И это абсолютно нормально, но на мой взгляд, гораздо более стыдно потом краснеть на демо :)</p><p>
+Вторая причина: они просто не знают как переспросить, расспросить подробнее, погрузиться в детали. К тому же каждый такой созвон - это pure стресс для человека с условным B1. И неудивительно, что от этого стресса так хочется побыстрее убежать.</p><p>
+Как фиксить? Либо взять человека на L&D, который будет точечно прорабатывать такие вопросы, либо проводить тренинги, вебинары, семинары, конференции - в общем, все, что на нынешнем рынке предлагают специалисты.</p><p>
+<img src="https://prod-files-secure.s3.us-west-2.amazonaws.com/8fc2162a-76da-8156-aab2-0003127445a1/3866d96b-f252-4658-9987-64ed1d55b97b/4.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466WJE7SWHI%2F20260806%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260806T105613Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEHIaCXVzLXdlc3QtMiJHMEUCIQCyUBK3PfiDcnQfd2woI4r%2FsLkcbibq06lObPOMvQHGNwIgSTcX2599pN5pdGRSwhxl%2F1VnljAOYs55GkDTLBzuZP4q%2FwMIOxAAGgw2Mzc0MjMxODM4MDUiDPNcqjC%2FM6ivJy9JxSrcA7hpZqzCleDhAb5kmDJa9WCdkkCJVnbYvqZByKoYQs%2F7hSdx5bum0t2T%2BnHzz0iEFggQlX6JkaKXKDiD2KY1lI6Y1diSIDX5i25gASjEtUDSkwdEsBZfmvZW7EGpTf4vJshfs2p4TJVqUc2RsgCb38I8sWKBQL5jIWEDZiO5fnHBl5rx%2BdFtByCeH9LSOZTXseQ%2Fb8zmQuOjzuC6b2BoE4m7ilmjiZfD7I5R1wM9y2a%2BaDf206HSVi3UK6u6zfIYczBEbvtSMFHfl1XbGqP6ZdKFu4EHVWnuzBn16lHsCfADxR05bQv8VFvbQBKyyD3jk5L7EqlfZRMymN6RcTEwMkfEw4%2FU199AHDyEygTsalCM8KSamiA05HEKCecnbD%2FJVz2O5GcJpbjhgIzFpY4jFWuf42oTdubw11strFXp0pPfpRd9H%2Fxe455AcpYp%2B86h46xukpbUUNSGqW3AXIbAnE4idzF85%2BzdY4fOEHHkYd%2FOj8tSHao14dNG%2BmO2JZG3%2BreZTYiUnuqmhXCvJW2eqW6Z%2BpgBbl8KQl%2BYgrF%2B5XmWLoHFn18vp14V%2BR6F3lY8mGFk6BGvRkbprod%2F1uO5%2FWErc2qLf7Uwtp0XmkVUex735qWHSdsZyD7a2GCXMPCx0dMGOqUBYHaziW%2FvFkuL3nwPawemI6q2M4shOKdysESinGaCAigFAhnXJzCFjvWXqYn9wnfc%2B9c7WvDqxoyMsHl%2F1KslebQQMjCH5qIUyQ3TwNvt7n2zTtfF0KA3xC8C93Tx6y1Jqivf4Fc2EjipcbAMs%2Fu1wrDBx1w5d0jZ5xXnbD4XoyN0nLrLoTqBIxxgbRXcPZS61b12ylvizJBtuIPPNa1B0NluQzqt&X-Amz-Signature=2c0a69b73d49e79820fbedf70660259f07484056eab912fda255ffc7ef3a10c9&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject" alt="4.png" /></p><p>
+<h2>— Бывает ли так, что одно и то же английское слово или фраза для нашего человека значит одно, а для иностранного заказчика — совсем другое, и из-за этого возникают проблемы? И чтобы резюмировать наш разговор: дай 1-2 главных совета инженерам, которые прямо завтра пойдут на созвон с клиентом и очень сильно волнуются. Что им сделать, чтобы созвон прошел успешно?</h2></p><p>
+Конечно бывает. По каким причинам? В основном либо потому, что не хватает словарного запаса, либо где-то в голове каким-то образом отложилось неправильное значение, либо опять же — буквальный дословный перевод с русского на английский. Вариантов возникновения на этой почве проблем просто немеренное количество. А особенно здесь страдает письменная коммуникация. Мой совет: не умеешь писать письма? Попроси помочь с этим LLM, не забивай на это, иначе можешь произвести очень плохое впечатление.</p><p>
+<img src="../assets/images/blog/english-talk-img-3.png" alt="6.png" /></p><p>
+Как подготовиться к созвону? На самом деле, универсальных способов нет — у каждого свои проблемы и боли. Кто-то уверен в себе и говорит бегло без страха с кучей грамматических и стилистических ошибок — и его будут слушать и слышать! Вы не представляете, насколько такой человек звучит живо и как на все неточности закрывают глаза нейтивы. А кто-то подбирает каждое слово и переводит его в голове с русского на английский, делая большие паузы. Зато натренированная по Murphy грамматика у него идеально выверена и за нее можно только хвалить. Так что могу дать лишь общий совет: не бояться делать ошибки и пробовать применять все ранее изученное на практике. Больше спрашивайте, задавайте вопросы. Не забывайте про нетехническую составляющую и что на этом созвоне также есть место и простому человескому общению на тему погоды или просмотра футбола. Настройтесь на иноязычную речь, посмотрите видос на интересную вам тему перед созвоном, буквально 5-10 минут — этого уже будет достаточно, чтобы стартовать было в разы проще.</p><p></p></div>
+    </article>
+    <footer class="site-footer"><p>© 2026 Hanna Muzyka · <a href="../blog.html">Блог</a></p></footer>
+  </div>
+</body>
+</html>

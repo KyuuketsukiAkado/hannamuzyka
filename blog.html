@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Блог — Hanna Muzyka</title>
+  <meta name="description" content="Заметки о продуктовом дизайне, AI, вайбкодинге и геймдеве">
+  
+<style>
+  :root {
+    --bg-color: #0b0b0d;
+    --card-bg: #121215;
+    --card-border: #1e1e24;
+    --text-primary: #eceef2;
+    --text-muted: #8e8e9c;
+    --accent: #ffffff;
+    --code-bg: #18181c;
+    --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  }
+  body { background-color: var(--bg-color); color: var(--text-primary); font-family: var(--font-sans); line-height: 1.7; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  .site-header { border-bottom: 1px solid var(--card-border); padding: 1.25rem 2rem; position: sticky; top: 0; background: rgba(11, 11, 13, 0.85); backdrop-filter: blur(12px); z-index: 100; }
+  .nav-container { max-width: 900px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+  .nav-logo { font-weight: 700; font-size: 1.1rem; letter-spacing: -0.02em; }
+  .nav-links a { color: var(--text-muted); margin-left: 1.5rem; font-size: 0.9rem; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+  .container { max-width: 780px; margin: 0 auto; padding: 3rem 1.5rem 6rem; }
+  .article-header { margin-bottom: 3rem; }
+  .article-meta { font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.75rem; }
+  .article-title { font-size: 2.4rem; font-weight: 800; letter-spacing: -0.03em; line-height: 1.2; margin: 0 0 1rem; color: #fff; }
+  .tag-badge { display: inline-block; font-family: var(--font-mono); font-size: 0.75rem; background: #1c1c22; color: var(--text-muted); padding: 0.25rem 0.6rem; border-radius: 6px; margin-right: 0.4rem; margin-bottom: 0.4rem; border: 1px solid var(--card-border); }
+  .article-body { font-size: 1.05rem; }
+  .article-body h1, .article-body h2, .article-body h3 { color: #fff; margin-top: 2.5rem; margin-bottom: 1rem; letter-spacing: -0.02em; }
+  .article-body p { margin-bottom: 1.4rem; color: #d1d1d6; }
+  .article-body ul, .article-body ol { margin-bottom: 1.4rem; padding-left: 1.5rem; color: #d1d1d6; }
+  .article-body li { margin-bottom: 0.4rem; }
+  .article-body img { max-width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--card-border); margin: 2rem 0; display: block; }
+  .article-body blockquote { border-left: 3px solid #3b3b4f; padding-left: 1.2rem; color: var(--text-muted); font-style: italic; margin: 2rem 0; }
+  .article-body pre { background: var(--code-bg); padding: 1.2rem; border-radius: 10px; overflow-x: auto; border: 1px solid var(--card-border); font-family: var(--font-mono); font-size: 0.9em; }
+  .article-body code { font-family: var(--font-mono); background: var(--code-bg); padding: 0.2rem 0.4rem; border-radius: 4px; font-size: 0.9em; }
+  .back-link { display: inline-flex; align-items: center; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 2rem; transition: color 0.2s; }
+  .back-link:hover { color: var(--accent); }
+  footer.site-footer { border-top: 1px solid var(--card-border); margin-top: 5rem; padding-top: 2rem; text-align: center; color: var(--text-muted); font-size: 0.85rem; }
+</style>
+
+  <style>
+    .blog-grid { display: grid; gap: 1.5rem; margin-top: 2rem; }
+    .blog-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 1.75rem; display: block; transition: transform 0.2s, border-color 0.2s; }
+    .blog-card:hover { transform: translateY(-2px); border-color: #3b3b4f; }
+    .blog-card-title { font-size: 1.35rem; font-weight: 700; color: #fff; margin: 0.4rem 0 0.6rem; }
+    .blog-card-desc { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1rem; }
+  </style>
+</head>
+<body>
+  
+<header class="site-header">
+  <div class="nav-container">
+    <a href="./" class="nav-logo">Hanna Muzyka</a>
+    <nav class="nav-links">
+      <a href="./#work">Работы</a>
+      <a href="./#about">Обо мне</a>
+      <a href="./blog.html" class="active">Блог</a>
+      <a href="https://t.me/KyuuketsukiAkado" target="_blank" rel="noopener">Telegram ↗</a>
+    </nav>
+  </div>
+</header>
+
+  <div class="container">
+    <section style="margin-bottom: 3rem;">
+      <h1 style="font-size: 2.2rem; color: #fff; margin-bottom: 0.5rem;">Заметки с полей ✦</h1>
+      <p style="color: var(--text-muted); font-size: 1.1rem;">Мысли про AI-воркфлоу, продукты, вайбкодинг и эксперименты.</p>
+    </section>
+    <div class="blog-grid">
+      
+        <a href="blog/english-talk.html" class="blog-card">
+          <div class="article-meta">2026-08-04</div>
+          <div class="blog-card-title">Подкаст с Gemini 3.1 Pro</div>
+          <div class="blog-card-desc">Про мой опыт работы ментором/коучем, немного про английский и как с ним быть</div>
+          <div><span class="tag-badge">#ENG</span></div>
+        </a>
+      
+        <a href="blog/creative-shorts-youtube.html" class="blog-card">
+          <div class="article-meta">2026-08-05</div>
+          <div class="blog-card-title">Закулисье генеративного креатива: 500 000 просмотров на YouTube и обход бана в ElevenLabs</div>
+          <div class="blog-card-desc">Кратко про запуск моих ютуб каналов и как выстраивался пайплайн работы</div>
+          <div><span class="tag-badge">#YT</span></div>
+        </a>
+      
+        <a href="blog/ai-future-blitz.html" class="blog-card">
+          <div class="article-meta">2026-08-05</div>
+          <div class="blog-card-title">Блиц о будущем, AI и личном опыте</div>
+          <div class="blog-card-desc">Блиц про AI-инструменты, вайбкодинг, 500k просмотров и мифы про нейросети</div>
+          <div><span class="tag-badge">#AI</span></div>
+        </a>
+      
+    </div>
+    <footer class="site-footer"><p>© 2026 Hanna Muzyka · <a href="./">Главная страница</a></p></footer>
+  </div>
+</body>
+</html>
