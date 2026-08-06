@@ -42,34 +42,37 @@ async function downloadImage(url, filename) {
   });
 }
 
-// Умный автопоиск базы данных в Notion
+// Умный автопоиск базы данных в Notion без жестких ограничений валидации
 async function resolveDatabaseId() {
   try {
-    console.log('🔍 Auto-discovering databases shared with GitHub Blog Bot...');
-    const searchRes = await notion.search({
-      filter: { value: 'database', property: 'object' },
-    });
+    console.log('🔍 Auto-discovering Notion Database shared with bot...');
+    const searchRes = await notion.search({});
 
     if (searchRes.results && searchRes.results.length > 0) {
-      console.log(`✨ Found ${searchRes.results.length} database(s) connected to the bot:`);
-      for (const db of searchRes.results) {
-        const title = db.title?.[0]?.plain_text || 'Untitled';
-        console.log(`   📌 DB Name: "${title}" | ID: ${db.id}`);
+      console.log(`✨ Found ${searchRes.results.length} item(s) connected to the bot.`);
+
+      // 1. Ищем объект базы данных напрямую
+      for (const item of searchRes.results) {
+        if (item.object === 'database' || item.object === 'data_source') {
+          const dbTitle = item.title?.[0]?.plain_text || 'Untitled DB';
+          console.log(`   📌 Found Database: "${dbTitle}" | ID: ${item.id}`);
+          return item.id;
+        }
       }
 
-      const matched = searchRes.results.find((db) => {
-        const title = (db.title?.[0]?.plain_text || '').toLowerCase();
-        return title.includes('blog') || title.includes('пост');
-      }) || searchRes.results[0];
-
-      console.log(`🎯 Auto-selected Database ID: ${matched.id}`);
-      return matched.id;
+      // 2. Если подключены страницы внутри базы — берём ID родительской базы
+      for (const item of searchRes.results) {
+        if (item.parent && item.parent.type === 'database_id') {
+          console.log(`   📌 Found Page inside Database! Parent DB ID: ${item.parent.database_id}`);
+          return item.parent.database_id;
+        }
+      }
     }
   } catch (err) {
-    console.warn('⚠️ Auto-search warning:', err.message);
+    console.warn('⚠️ Auto-search notice:', err.message);
   }
 
-  return databaseId;
+  return databaseId ? databaseId.trim() : '';
 }
 
 async function queryNotionDatabase(targetDbId, params) {
