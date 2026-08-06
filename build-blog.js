@@ -96,7 +96,7 @@ async function queryNotionDatabase(targetDbId, params) {
   }
 }
 
-// Обновление блока со свежими постами на главной странице index.html
+// Умная вставка свежих постов прямо на главную страницу index.html
 function updateHomepageBlogSection(posts) {
   const indexPath = path.join(process.cwd(), 'index.html');
   if (!fs.existsSync(indexPath)) return;
@@ -104,16 +104,14 @@ function updateHomepageBlogSection(posts) {
   console.log('🏠 Updating latest posts in index.html...');
   let indexHtml = fs.readFileSync(indexPath, 'utf8');
 
-  // Обновляем ссылки на "Зайти почитать ↗" на blog.html
-  indexHtml = indexHtml.replace(/href="[^"]*blog[^"]*"/g, 'href="blog.html"');
-
-  // Если в index.html есть маркеры <!-- BLOG_POSTS_START --> ... <!-- BLOG_POSTS_END -->
-  const blogSectionMarker = /<!-- BLOG_POSTS_START -->[\s\S]*?<!-- BLOG_POSTS_END -->/g;
+  // Меняем ссылки на блог на прямое открытие blog.html
+  indexHtml = indexHtml.replace(/href="https:\/\/kyuuketsukiakado\.github\.io\/hannamuzyka\/#blog"/g, 'href="blog.html"');
+  indexHtml = indexHtml.replace(/href="#blog"/g, 'href="blog.html"');
 
   const latestPostsHtml = `<!-- BLOG_POSTS_START -->
-<div class="latest-posts-container" style="display: grid; gap: 1.25rem; margin: 2rem 0;">
+<div class="latest-posts-container" style="display: grid; gap: 1.25rem; margin: 2rem 0; text-align: left;">
   ${posts.slice(0, 3).map((p) => `
-    <a href="blog/${p.slug}.html" class="latest-post-card" style="display: block; background: #121215; border: 1px solid #1e1e24; border-radius: 10px; padding: 1.25rem; text-decoration: none; color: inherit; transition: border-color 0.2s;">
+    <a href="blog/${p.slug}.html" class="latest-post-card" style="display: block; background: #121215; border: 1px solid #1e1e24; border-radius: 12px; padding: 1.25rem; text-decoration: none; color: inherit; transition: border-color 0.2s, transform 0.2s;">
       <div style="font-family: monospace; font-size: 0.8rem; color: #8e8e9c; margin-bottom: 0.4rem;">${p.date}</div>
       <div style="font-weight: 700; font-size: 1.15rem; color: #fff; margin-bottom: 0.4rem;">${p.title}</div>
       ${p.description ? `<div style="font-size: 0.9rem; color: #a1a1aa; line-height: 1.5;">${p.description}</div>` : ''}
@@ -122,12 +120,18 @@ function updateHomepageBlogSection(posts) {
 </div>
 <!-- BLOG_POSTS_END -->`;
 
-  if (blogSectionMarker.test(indexHtml)) {
-    indexHtml = indexHtml.replace(blogSectionMarker, latestPostsHtml);
+  if (/<!-- BLOG_POSTS_START -->[\s\S]*?<!-- BLOG_POSTS_END -->/g.test(indexHtml)) {
+    indexHtml = indexHtml.replace(/<!-- BLOG_POSTS_START -->[\s\S]*?<!-- BLOG_POSTS_END -->/g, latestPostsHtml);
+  } else {
+    // Вставляем карточки прямо перед кнопкой "Зайти почитать"
+    const searchTarget = /Зайти почитать/i;
+    if (searchTarget.test(indexHtml)) {
+      indexHtml = indexHtml.replace(/(<a[^>]*Зайти почитать[\s\S]*?<\/a>)/i, `${latestPostsHtml}\n$1`);
+    }
   }
 
   fs.writeFileSync(indexPath, indexHtml, 'utf8');
-  console.log('✅ Updated index.html successfully!');
+  console.log('✅ Updated index.html with live blog cards!');
 }
 
 const HEADER_HTML = `
@@ -294,9 +298,7 @@ async function main() {
 </body>
 </html>`;
 
-    const articleFilePath = path.join(BLOG_DIR, `${slug}.html`);
-    fs.writeFileSync(articleFilePath, articleHtml, 'utf8');
-    console.log(`   ✅ Wrote file: blog/${slug}.html`);
+    fs.writeFileSync(path.join(BLOG_DIR, `${slug}.html`), articleHtml, 'utf8');
     posts.push({ title, slug, date, tags, description });
   }
 
@@ -343,7 +345,7 @@ async function main() {
   fs.writeFileSync(path.join(process.cwd(), 'blog.html'), catalogHtml, 'utf8');
   console.log('✅ Created blog.html successfully!');
 
-  // Автоматически обновляем главную страницу index.html
+  // Автоматически внедряем карточки статей в index.html
   updateHomepageBlogSection(posts);
 }
 
