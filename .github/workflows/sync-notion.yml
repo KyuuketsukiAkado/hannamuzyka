@@ -23,7 +23,7 @@ jobs:
           node-version: 22
 
       - name: Install Dependencies
-        run: npm install @notionhq/client notion-to-md
+        run: npm install @notionhq/client@2.2.0 notion-to-md@3.1.5
 
       - name: Build Blog Pages from Notion
         env:
