@@ -4,8 +4,8 @@ on:
   push:
     branches: [ main, master ]
   schedule:
-    - cron: '0 0 * * *' # Авто-проверка новых постов каждый день в полночь
-  workflow_dispatch: # Кнопка ручного запуска на GitHub
+    - cron: '0 0 * * *' # Авто-проверка каждый день
+  workflow_dispatch: # Кнопка ручного запуска
 
 permissions:
   contents: write
@@ -20,7 +20,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
 
       - name: Install Dependencies
         run: npm install @notionhq/client notion-to-md
