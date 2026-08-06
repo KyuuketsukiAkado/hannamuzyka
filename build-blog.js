@@ -96,24 +96,19 @@ async function queryNotionDatabase(targetDbId, params) {
   }
 }
 
-// Красивое обновление index.html с карточками и обложками
+// Умная очистка верха index.html и вставка аккуратной карточной сетки в секцию БЛОГ
 function updateHomepageBlogSection(posts) {
   const indexPath = path.join(process.cwd(), 'index.html');
   if (!fs.existsSync(indexPath)) return;
 
-  console.log('🏠 Updating latest posts on homepage index.html...');
+  console.log('🏠 Safely cleaning and updating homepage index.html...');
   let indexHtml = fs.readFileSync(indexPath, 'utf8');
 
-  // 1. ПРИНУДИТЕЛЬНО ЧИСТИМ любой ошибочный блок с самого верха файла index.html
-  indexHtml = indexHtml.replace(/^([\s\S]*?)(<!-- BLOG_POSTS_START -->[\s\S]*?<!-- BLOG_POSTS_END -->)/i, (match, prefix, blogBlock) => {
-    // Если карточки были вставлены в первые 500 символов файла (до основного контента) — удаляем их оттуда
-    if (prefix.length < 500) {
-      return prefix;
-    }
-    return match;
-  });
+  // 1. Полностью стираем старые блоки с карточками, где бы они ни находились (особенно с верха файла)
+  indexHtml = indexHtml.replace(/<!-- BLOG_POSTS_START -->[\s\S]*?<!-- BLOG_POSTS_END -->\s*/gi, '');
+  indexHtml = indexHtml.replace(/<div\s+class="latest-posts-(container|grid)"[\s\S]*?<\/div>\s*/gi, '');
 
-  // 2. Формируем стильные карточки с обложками/картинками
+  // 2. Создаем красивую адаптивную сетку карточек с обложками
   const latestPostsHtml = `<!-- BLOG_POSTS_START -->
 <div class="latest-posts-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; margin: 2rem 0; text-align: left;">
   ${posts.slice(0, 3).map((p) => {
@@ -135,25 +130,26 @@ function updateHomepageBlogSection(posts) {
 </div>
 <!-- BLOG_POSTS_END -->`;
 
-  // 3. Вставляем карточки ВНУТРЬ секции блога прямо перед кнопкой "Зайти почитать"
-  const blogButtonRegex = /(<a[\s\S]*?data-i18n="blog\.invite"[\s\S]*?<\/a>)/i;
-  const genericBlogButtonRegex = /(<a[\s\S]*?blog-intro-link[\s\S]*?<\/a>)/i;
+  // 3. Вставляем карточки ТОЛЬКО внутри секции БЛОГ над кнопкой "Зайти почитать"
+  const blogInviteRegex = /(<a[\s\S]*?data-i18n="blog\.invite"[\s\S]*?<\/a>)/i;
+  const blogLinkRegex = /(<a[\s\S]*?class="[^"]*blog-intro-link[^"]*"[\s\S]*?<\/a>)/i;
 
-  if (/<!-- BLOG_POSTS_START -->[\s\S]*?<!-- BLOG_POSTS_END -->/g.test(indexHtml)) {
-    indexHtml = indexHtml.replace(/<!-- BLOG_POSTS_START -->[\s\S]*?<!-- BLOG_POSTS_END -->/g, latestPostsHtml);
-  } else if (blogButtonRegex.test(indexHtml)) {
-    indexHtml = indexHtml.replace(blogButtonRegex, `${latestPostsHtml}\n$1`);
-  } else if (genericBlogButtonRegex.test(indexHtml)) {
-    indexHtml = indexHtml.replace(genericBlogButtonRegex, `${latestPostsHtml}\n$1`);
+  if (blogInviteRegex.test(indexHtml)) {
+    indexHtml = indexHtml.replace(blogInviteRegex, `${latestPostsHtml}\n$1`);
+  } else if (blogLinkRegex.test(indexHtml)) {
+    indexHtml = indexHtml.replace(blogLinkRegex, `${latestPostsHtml}\n$1`);
+  } else {
+    indexHtml = indexHtml.replace(/(Зайти почитать)/i, `${latestPostsHtml}\n$1`);
   }
 
-  // Обновляем href у кнопки "Зайти почитать", чтобы вела на blog.html
-  indexHtml = indexHtml.replace(/(<a[\s\S]*?data-i18n="blog\.invite"[\s\S]*?<\/a>)/gi, (match) => {
-    return match.replace(/href="[^"]*"/i, 'href="blog.html"');
-  });
+  // Меняем href кнопки, чтобы вела на blog.html
+  indexHtml = indexHtml.replace(
+    /(<a[\s\S]*?data-i18n="blog\.invite"[\s\S]*?<\/a>)/gi,
+    (match) => match.replace(/href="[^"]*"/i, 'href="blog.html"')
+  );
 
   fs.writeFileSync(indexPath, indexHtml, 'utf8');
-  console.log('✅ Safely updated index.html with beautiful cards!');
+  console.log('✅ Safely cleaned top and updated index.html with live cards!');
 }
 
 const HEADER_HTML = `
@@ -367,7 +363,7 @@ async function main() {
   fs.writeFileSync(path.join(process.cwd(), 'blog.html'), catalogHtml, 'utf8');
   console.log('✅ Created blog.html successfully!');
 
-  // Запускаем безопасную очистку верха и обновление секции БЛОГ на главной
+  // Запускаем полную очистку верха и автовставку красивых карточек
   updateHomepageBlogSection(posts);
 }
 
