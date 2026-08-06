@@ -104,8 +104,8 @@ function updateHomepageBlogSection(posts) {
   console.log('🏠 Updating homepage index.html with 2 latest post cards...');
   let indexHtml = fs.readFileSync(indexPath, 'utf8');
 
-  // 1. Полностью срезаем любой случайно приклеившийся мусор из самого начала файла (до <!DOCTYPE или <html или <header)
-  indexHtml = indexHtml.replace(/^[\s\S]*?(?=(<!DOCTYPE|<html|<header|<a[^>]*skip-link|class="skip-link"))/i, '');
+  // 1. Срезаем случайный мусор перед <!DOCTYPE или <html (без повреждения структуры страницы!)
+  indexHtml = indexHtml.replace(/^[\s\S]*?(?=(<!DOCTYPE|<html))/i, '');
 
   // 2. Вычищаем любые старые блоки карточек из прошлого запуска
   indexHtml = indexHtml.replace(/<!-- BLOG_POSTS_START -->[\s\S]*?<!-- BLOG_POSTS_END -->\s*/gi, '');
@@ -136,8 +136,9 @@ function updateHomepageBlogSection(posts) {
 <!-- BLOG_POSTS_END -->`;
 
   // 4. Находим кнопку в секции БЛОГ и вставляем ровно перед ней 2 карточки
-  const blogInviteRegex = /(<a[\s\S]*?data-i18n="blog\.invite"[\s\S]*?<\/a>)/i;
-  const blogLinkRegex = /(<a[\s\S]*?class="[^"]*blog-intro-link[^"]*"[\s\S]*?<\/a>)/i;
+  // ВАЖНО: используем [^>]* вместо [\s\S]*? внутри тега <a ...>, чтобы регулярка НЕ захватывала другие теги от самого начала страницы!
+  const blogInviteRegex = /(<a[^>]*data-i18n="blog\.invite"[^>]*>[\s\S]*?<\/a>)/i;
+  const blogLinkRegex = /(<a[^>]*class="[^"]*blog-intro-link[^"]*"[^>]*>[\s\S]*?<\/a>)/i;
 
   if (blogInviteRegex.test(indexHtml)) {
     indexHtml = indexHtml.replace(blogInviteRegex, `${homepagePostsHtml}\n$1`);
@@ -149,7 +150,7 @@ function updateHomepageBlogSection(posts) {
 
   // 5. Меняем текст и href кнопки на "Смотреть все статьи ↗" -> blog.html
   indexHtml = indexHtml.replace(
-    /(<a[\s\S]*?(data-i18n="blog\.invite"|blog-intro-link)[\s\S]*?>)[\s\S]*?(<\/a>)/gi,
+    /(<a[^>]*?(?:data-i18n="blog\.invite"|blog-intro-link)[^>]*>)[\s\S]*?(<\/a>)/gi,
     '<a class="arrow-link blog-intro-link" href="blog.html" data-i18n="blog.invite">Смотреть все статьи <span>↗</span></a>'
   );
 
