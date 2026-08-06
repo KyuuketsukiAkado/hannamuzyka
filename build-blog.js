@@ -96,7 +96,7 @@ async function queryNotionDatabase(targetDbId, params) {
   }
 }
 
-// Умная вставка свежих постов прямо на главную страницу index.html
+// Внедрение свежих постов на главную страницу index.html
 function updateHomepageBlogSection(posts) {
   const indexPath = path.join(process.cwd(), 'index.html');
   if (!fs.existsSync(indexPath)) return;
@@ -104,17 +104,16 @@ function updateHomepageBlogSection(posts) {
   console.log('🏠 Updating latest posts in index.html...');
   let indexHtml = fs.readFileSync(indexPath, 'utf8');
 
-  // Меняем ссылки на блог на прямое открытие blog.html
-  indexHtml = indexHtml.replace(/href="https:\/\/kyuuketsukiakado\.github\.io\/hannamuzyka\/#blog"/g, 'href="blog.html"');
-  indexHtml = indexHtml.replace(/href="#blog"/g, 'href="blog.html"');
+  // Меняем старые ссылки #blog на ссылку blog.html
+  indexHtml = indexHtml.replace(/href="[^"]*#blog"/gi, 'href="blog.html"');
 
   const latestPostsHtml = `<!-- BLOG_POSTS_START -->
-<div class="latest-posts-container" style="display: grid; gap: 1.25rem; margin: 2rem 0; text-align: left;">
+<div class="latest-posts-container" style="display: grid; gap: 1rem; margin: 2rem 0; text-align: left;">
   ${posts.slice(0, 3).map((p) => `
-    <a href="blog/${p.slug}.html" class="latest-post-card" style="display: block; background: #121215; border: 1px solid #1e1e24; border-radius: 12px; padding: 1.25rem; text-decoration: none; color: inherit; transition: border-color 0.2s, transform 0.2s;">
-      <div style="font-family: monospace; font-size: 0.8rem; color: #8e8e9c; margin-bottom: 0.4rem;">${p.date}</div>
-      <div style="font-weight: 700; font-size: 1.15rem; color: #fff; margin-bottom: 0.4rem;">${p.title}</div>
-      ${p.description ? `<div style="font-size: 0.9rem; color: #a1a1aa; line-height: 1.5;">${p.description}</div>` : ''}
+    <a href="blog/${p.slug}.html" class="latest-post-card" style="display: block; background: #121215; border: 1px solid #1e1e24; border-radius: 10px; padding: 1.25rem; text-decoration: none; color: inherit; transition: border-color 0.2s;">
+      <div style="font-family: monospace; font-size: 0.8rem; color: #8e8e9c; margin-bottom: 0.3rem;">${p.date}</div>
+      <div style="font-weight: 700; font-size: 1.1rem; color: #fff; margin-bottom: 0.3rem;">${p.title}</div>
+      ${p.description ? `<div style="font-size: 0.88rem; color: #a1a1aa; line-height: 1.4;">${p.description}</div>` : ''}
     </a>
   `).join('')}
 </div>
@@ -122,12 +121,8 @@ function updateHomepageBlogSection(posts) {
 
   if (/<!-- BLOG_POSTS_START -->[\s\S]*?<!-- BLOG_POSTS_END -->/g.test(indexHtml)) {
     indexHtml = indexHtml.replace(/<!-- BLOG_POSTS_START -->[\s\S]*?<!-- BLOG_POSTS_END -->/g, latestPostsHtml);
-  } else {
-    // Вставляем карточки прямо перед кнопкой "Зайти почитать"
-    const searchTarget = /Зайти почитать/i;
-    if (searchTarget.test(indexHtml)) {
-      indexHtml = indexHtml.replace(/(<a[^>]*Зайти почитать[\s\S]*?<\/a>)/i, `${latestPostsHtml}\n$1`);
-    }
+  } else if (/Зайти почитать/i.test(indexHtml)) {
+    indexHtml = indexHtml.replace(/(<a[^>]*Зайти почитать)/i, `${latestPostsHtml}\n$1`);
   }
 
   fs.writeFileSync(indexPath, indexHtml, 'utf8');
@@ -345,7 +340,7 @@ async function main() {
   fs.writeFileSync(path.join(process.cwd(), 'blog.html'), catalogHtml, 'utf8');
   console.log('✅ Created blog.html successfully!');
 
-  // Автоматически внедряем карточки статей в index.html
+  // Обновляем index.html
   updateHomepageBlogSection(posts);
 }
 
