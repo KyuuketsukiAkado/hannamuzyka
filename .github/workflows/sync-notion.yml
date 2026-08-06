@@ -27,6 +27,12 @@ jobs:
       - name: Install Dependencies
         run: npm install @notionhq/client@2.2.0 notion-to-md@3.1.5
 
+      - name: Pull Latest Changes from Repository
+        run: |
+          git config --global user.name "GitHub Actions Bot"
+          git config --global user.email "actions@github.com"
+          git pull origin ${GITHUB_REF_NAME} --rebase || git rebase --abort || true
+
       - name: Build Blog Pages from Notion
         env:
           NOTION_KEY: ${{ secrets.NOTION_KEY }}
@@ -35,11 +41,8 @@ jobs:
 
       - name: Commit and Push Changes to GitHub
         run: |
-          git config --global user.name "GitHub Actions Bot"
-          git config --global user.email "actions@github.com"
           git add blog.html blog/ assets/images/blog/
           if ! git diff --staged --quiet; then
             git commit -m "Auto-update blog from Notion"
-            git pull --rebase origin ${GITHUB_REF_NAME}
-            git push
+            git push origin ${GITHUB_REF_NAME}
           fi
