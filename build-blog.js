@@ -96,22 +96,27 @@ async function queryNotionDatabase(targetDbId, params) {
   }
 }
 
-// Умная очистка верха index.html и вставка аккуратной карточной сетки в секцию БЛОГ
+// Умная вставка ровно 2 карточек в раздел БЛОГ и очистка верха
 function updateHomepageBlogSection(posts) {
   const indexPath = path.join(process.cwd(), 'index.html');
   if (!fs.existsSync(indexPath)) return;
 
-  console.log('🏠 Safely cleaning and updating homepage index.html...');
+  console.log('🏠 Updating homepage index.html with 2 latest post cards...');
   let indexHtml = fs.readFileSync(indexPath, 'utf8');
 
-  // 1. Полностью стираем старые блоки с карточками, где бы они ни находились (особенно с верха файла)
+  // 1. Полностью срезаем любой случайно приклеившийся мусор из самого начала файла (до <!DOCTYPE или <html или <header)
+  indexHtml = indexHtml.replace(/^[\s\S]*?(?=(<!DOCTYPE|<html|<header|<a[^>]*skip-link|class="skip-link"))/i, '');
+
+  // 2. Вычищаем любые старые блоки карточек из прошлого запуска
   indexHtml = indexHtml.replace(/<!-- BLOG_POSTS_START -->[\s\S]*?<!-- BLOG_POSTS_END -->\s*/gi, '');
   indexHtml = indexHtml.replace(/<div\s+class="latest-posts-(container|grid)"[\s\S]*?<\/div>\s*/gi, '');
 
-  // 2. Создаем красивую адаптивную сетку карточек с обложками
-  const latestPostsHtml = `<!-- BLOG_POSTS_START -->
-<div class="latest-posts-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; margin: 2rem 0; text-align: left;">
-  ${posts.slice(0, 3).map((p) => {
+  // 3. Берем ровно 2 самые свежие статьи для секции "Заметки с полей"
+  const top2Posts = posts.slice(0, 2);
+
+  const homepagePostsHtml = `<!-- BLOG_POSTS_START -->
+<div class="latest-posts-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; margin: 2rem 0; text-align: left;">
+  ${top2Posts.map((p) => {
     const relativeCover = p.coverUrl ? p.coverUrl.replace('../', '') : '';
     return `
     <a href="blog/${p.slug}.html" class="latest-post-card" style="display: flex; flex-direction: column; background: #121215; border: 1px solid #1e1e24; border-radius: 12px; overflow: hidden; text-decoration: none; color: inherit; transition: border-color 0.2s, transform 0.2s;">
@@ -130,26 +135,26 @@ function updateHomepageBlogSection(posts) {
 </div>
 <!-- BLOG_POSTS_END -->`;
 
-  // 3. Вставляем карточки ТОЛЬКО внутри секции БЛОГ над кнопкой "Зайти почитать"
+  // 4. Находим кнопку в секции БЛОГ и вставляем ровно перед ней 2 карточки
   const blogInviteRegex = /(<a[\s\S]*?data-i18n="blog\.invite"[\s\S]*?<\/a>)/i;
   const blogLinkRegex = /(<a[\s\S]*?class="[^"]*blog-intro-link[^"]*"[\s\S]*?<\/a>)/i;
 
   if (blogInviteRegex.test(indexHtml)) {
-    indexHtml = indexHtml.replace(blogInviteRegex, `${latestPostsHtml}\n$1`);
+    indexHtml = indexHtml.replace(blogInviteRegex, `${homepagePostsHtml}\n$1`);
   } else if (blogLinkRegex.test(indexHtml)) {
-    indexHtml = indexHtml.replace(blogLinkRegex, `${latestPostsHtml}\n$1`);
+    indexHtml = indexHtml.replace(blogLinkRegex, `${homepagePostsHtml}\n$1`);
   } else {
-    indexHtml = indexHtml.replace(/(Зайти почитать)/i, `${latestPostsHtml}\n$1`);
+    indexHtml = indexHtml.replace(/(Зайти почитать)/i, `${homepagePostsHtml}\n$1`);
   }
 
-  // Меняем href кнопки, чтобы вела на blog.html
+  // 5. Меняем текст и href кнопки на "Смотреть все статьи ↗" -> blog.html
   indexHtml = indexHtml.replace(
-    /(<a[\s\S]*?data-i18n="blog\.invite"[\s\S]*?<\/a>)/gi,
-    (match) => match.replace(/href="[^"]*"/i, 'href="blog.html"')
+    /(<a[\s\S]*?(data-i18n="blog\.invite"|blog-intro-link)[\s\S]*?>)[\s\S]*?(<\/a>)/gi,
+    '<a class="arrow-link blog-intro-link" href="blog.html" data-i18n="blog.invite">Смотреть все статьи <span>↗</span></a>'
   );
 
   fs.writeFileSync(indexPath, indexHtml, 'utf8');
-  console.log('✅ Safely cleaned top and updated index.html with live cards!');
+  console.log('✅ Wiped top junk and placed 2 cards in blog section of index.html!');
 }
 
 const HEADER_HTML = `
@@ -363,7 +368,7 @@ async function main() {
   fs.writeFileSync(path.join(process.cwd(), 'blog.html'), catalogHtml, 'utf8');
   console.log('✅ Created blog.html successfully!');
 
-  // Запускаем полную очистку верха и автовставку красивых карточек
+  // Автоматически очищаем верхушку и вставляем 2 карточки в раздел БЛОГ
   updateHomepageBlogSection(posts);
 }
 
