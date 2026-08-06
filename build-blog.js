@@ -105,7 +105,8 @@ function updateHomepageBlogSection(posts) {
   let indexHtml = fs.readFileSync(indexPath, 'utf8');
 
   // Меняем старые ссылки #blog на ссылку blog.html
-  indexHtml = indexHtml.replace(/href="[^"]*#blog"/gi, 'href="blog.html"');
+  indexHtml = indexHtml.replace(/href="https:\/\/kyuuketsukiakado\.github\.io\/hannamuzyka\/#blog"/gi, 'href="blog.html"');
+  indexHtml = indexHtml.replace(/href="#blog"/gi, 'href="blog.html"');
 
   const latestPostsHtml = `<!-- BLOG_POSTS_START -->
 <div class="latest-posts-container" style="display: grid; gap: 1rem; margin: 2rem 0; text-align: left;">
@@ -121,9 +122,20 @@ function updateHomepageBlogSection(posts) {
 
   if (/<!-- BLOG_POSTS_START -->[\s\S]*?<!-- BLOG_POSTS_END -->/g.test(indexHtml)) {
     indexHtml = indexHtml.replace(/<!-- BLOG_POSTS_START -->[\s\S]*?<!-- BLOG_POSTS_END -->/g, latestPostsHtml);
-  } else if (/Зайти почитать/i.test(indexHtml)) {
-    indexHtml = indexHtml.replace(/(<a[^>]*Зайти почитать)/i, `${latestPostsHtml}\n$1`);
+  } else {
+    const blogAnchorRegex = /(<a[\s\S]*?Зайти почитать[\s\S]*?<\/a>)/i;
+    if (blogAnchorRegex.test(indexHtml)) {
+      indexHtml = indexHtml.replace(blogAnchorRegex, `${latestPostsHtml}\n$1`);
+    } else if (/БЛОГ/i.test(indexHtml)) {
+      indexHtml = indexHtml.replace(/(БЛОГ[\s\S]*?<\/h2>)/i, `$1\n${latestPostsHtml}`);
+    }
   }
+
+  // Обновляем кнопку "Зайти почитать", чтобы её href точно вёл на blog.html
+  indexHtml = indexHtml.replace(
+    /(<a[\s\S]*?Зайти почитать[\s\S]*?<\/a>)/gi,
+    (match) => match.replace(/href="[^"]*"/i, 'href="blog.html"')
+  );
 
   fs.writeFileSync(indexPath, indexHtml, 'utf8');
   console.log('✅ Updated index.html with live blog cards!');
