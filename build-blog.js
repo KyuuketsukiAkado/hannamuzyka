@@ -7,20 +7,14 @@ import https from 'node:https';
 console.log('🚀 Starting Notion Blog Builder...');
 
 const notionKey = process.env.NOTION_KEY;
-const databaseId = process.env.NOTION_DATABASE_ID;
+let databaseId = process.env.NOTION_DATABASE_ID;
 
 if (!notionKey) {
   console.error('❌ Error: NOTION_KEY environment variable is missing in GitHub Secrets!');
   process.exit(1);
 }
 
-if (!databaseId) {
-  console.error('❌ Error: NOTION_DATABASE_ID environment variable is missing in GitHub Secrets!');
-  process.exit(1);
-}
-
 console.log(`🔑 NOTION_KEY is present (length: ${notionKey.length})`);
-console.log(`📊 NOTION_DATABASE_ID: ${databaseId}`);
 
 const notion = new Client({ auth: notionKey });
 const n2m = new NotionToMarkdown({ notionClient: notion });
@@ -48,16 +42,43 @@ async function downloadImage(url, filename) {
   });
 }
 
-// Универсальная функция запроса к базе данных Notion (совместима со всеми версиями SDK)
-async function queryNotionDatabase(params) {
+// Умный автопоиск базы данных в Notion
+async function resolveDatabaseId() {
+  try {
+    console.log('🔍 Auto-discovering databases shared with GitHub Blog Bot...');
+    const searchRes = await notion.search({
+      filter: { value: 'database', property: 'object' },
+    });
+
+    if (searchRes.results && searchRes.results.length > 0) {
+      console.log(`✨ Found ${searchRes.results.length} database(s) connected to the bot:`);
+      for (const db of searchRes.results) {
+        const title = db.title?.[0]?.plain_text || 'Untitled';
+        console.log(`   📌 DB Name: "${title}" | ID: ${db.id}`);
+      }
+
+      const matched = searchRes.results.find((db) => {
+        const title = (db.title?.[0]?.plain_text || '').toLowerCase();
+        return title.includes('blog') || title.includes('пост');
+      }) || searchRes.results[0];
+
+      console.log(`🎯 Auto-selected Database ID: ${matched.id}`);
+      return matched.id;
+    }
+  } catch (err) {
+    console.warn('⚠️ Auto-search warning:', err.message);
+  }
+
+  return databaseId;
+}
+
+async function queryNotionDatabase(targetDbId, params) {
   if (notion.databases && typeof notion.databases.query === 'function') {
-    return await notion.databases.query(params);
+    return await notion.databases.query({ database_id: targetDbId, ...params });
   } else if (notion.dataSources && typeof notion.dataSources.query === 'function') {
-    const { database_id, ...rest } = params;
-    return await notion.dataSources.query({ data_source_id: database_id, ...rest });
+    return await notion.dataSources.query({ data_source_id: targetDbId, ...params });
   } else {
-    // Прямой запрос к Notion API через fetch для 100% надёжности
-    const res = await fetch(`https://api.notion.com/v1/databases/${params.database_id}/query`, {
+    const res = await fetch(`https://api.notion.com/v1/databases/${targetDbId}/query`, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${notionKey}`,
@@ -129,17 +150,22 @@ const BLOG_CSS = `
 `;
 
 async function main() {
-  console.log('🔄 Fetching database query from Notion...');
+  const activeDbId = await resolveDatabaseId();
+
+  if (!activeDbId) {
+    console.error('❌ Could not find an active Notion Database ID!');
+    process.exit(1);
+  }
+
+  console.log(`🔄 Querying Notion Database ID: ${activeDbId}...`);
 
   let response;
   try {
-    response = await queryNotionDatabase({
-      database_id: databaseId,
+    response = await queryNotionDatabase(activeDbId, {
       filter: { property: 'Published', checkbox: { equals: true } },
     });
   } catch (err) {
     console.error('❌ Notion Database Query Failed! Reason:', err.message);
-    console.error('💡 Make sure you added the "GitHub Blog Bot" connection in Notion Database settings!');
     process.exit(1);
   }
 
