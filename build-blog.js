@@ -42,7 +42,7 @@ async function downloadImage(url, filename) {
   });
 }
 
-// Умный автопоиск базы данных в Notion без жестких ограничений валидации
+// Умный автопоиск базы данных в Notion
 async function resolveDatabaseId() {
   try {
     console.log('🔍 Auto-discovering Notion Database shared with bot...');
@@ -51,7 +51,6 @@ async function resolveDatabaseId() {
     if (searchRes.results && searchRes.results.length > 0) {
       console.log(`✨ Found ${searchRes.results.length} item(s) connected to the bot.`);
 
-      // 1. Ищем объект базы данных напрямую
       for (const item of searchRes.results) {
         if (item.object === 'database' || item.object === 'data_source') {
           const dbTitle = item.title?.[0]?.plain_text || 'Untitled DB';
@@ -60,7 +59,6 @@ async function resolveDatabaseId() {
         }
       }
 
-      // 2. Если подключены страницы внутри базы — берём ID родительской базы
       for (const item of searchRes.results) {
         if (item.parent && item.parent.type === 'database_id') {
           console.log(`   📌 Found Page inside Database! Parent DB ID: ${item.parent.database_id}`);
@@ -172,7 +170,7 @@ async function main() {
     process.exit(1);
   }
 
-  console.log(`📚 Found ${response.results.length} published pages.`);
+  console.log(`📚 Found ${response.results.length} published pages in Notion.`);
 
   const posts = [];
 
@@ -262,7 +260,9 @@ async function main() {
 </body>
 </html>`;
 
-    fs.writeFileSync(path.join(BLOG_DIR, `${slug}.html`), articleHtml, 'utf8');
+    const articleFilePath = path.join(BLOG_DIR, `${slug}.html`);
+    fs.writeFileSync(articleFilePath, articleHtml, 'utf8');
+    console.log(`   ✅ Wrote file: blog/${slug}.html`);
     posts.push({ title, slug, date, tags, description });
   }
 
@@ -307,7 +307,8 @@ async function main() {
 </html>`;
 
   fs.writeFileSync(path.join(process.cwd(), 'blog.html'), catalogHtml, 'utf8');
-  console.log('✅ Blog build completed successfully!');
+  console.log('✅ Created blog.html successfully!');
+  console.log('📁 Files in blog directory:', fs.readdirSync(BLOG_DIR));
 }
 
 main().catch((err) => {
