@@ -34,6 +34,7 @@ const MANUAL_POSTS = [
     date: '2026-07-30',
     description: 'От концепт-дизайна велосипедного магазина до релизной web-игры на GitHub Pages — и почему документация оказалась важнее промптов.',
     tags: ['GAMEDEV', 'AI'],
+    coverUrl: '../assets/optimized/blog-habr-01-1200.webp',
   },
 ];
 
