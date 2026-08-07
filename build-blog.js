@@ -258,10 +258,12 @@ async function main() {
     console.log(`⏳ Processing post: "${title}" (slug: ${slug})...`);
 
     let coverUrl = '';
+    let pageCoverUrl = '';
     if (page.cover) {
       const rawCoverUrl = page.cover.type === 'external' ? page.cover.external.url : page.cover.file.url;
       const ext = rawCoverUrl.split('?')[0].split('.').pop() || 'jpg';
       coverUrl = await downloadImage(rawCoverUrl, `cover-${slug}.${ext}`);
+      pageCoverUrl = coverUrl;
     }
 
     let mdString = '';
@@ -314,7 +316,7 @@ async function main() {
         <h1 class="article-title">${title}</h1>
         ${tags.length ? `<div>${tags.map((t) => `<span class="tag-badge">#${t}</span>`).join('')}</div>` : ''}
       </header>
-      ${coverUrl ? `<img src="${coverUrl}" alt="${title}" style="width:100%; border-radius:12px; margin-bottom:2rem;" />` : ''}
+      ${pageCoverUrl ? `<img src="${pageCoverUrl}" alt="${title}" style="width:100%; border-radius:12px; margin-bottom:2rem;" />` : ''}
       <div class="article-body"><p>${htmlContent}</p></div>
     </article>
     <footer class="site-footer"><p>© 2026 Hanna Muzyka · <a href="../blog.html">Блог</a></p></footer>
