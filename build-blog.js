@@ -3,6 +3,7 @@ import { NotionToMarkdown } from 'notion-to-md';
 import fs from 'node:fs';
 import path from 'node:path';
 import https from 'node:https';
+import crypto from 'node:crypto';
 
 console.log('🚀 Starting Notion Blog Builder...');
 
@@ -276,17 +277,33 @@ async function main() {
 
     const imgMatches = [...mdString.matchAll(/!\[(.*?)\]\((https?:\/\/.*?)\)/g)];
     let imgCounter = 1;
-    const seenUrls = new Set();
+    const seenHashes = new Set();
     for (const match of imgMatches) {
       const fullTag = match[0];
       const rawImgUrl = match[2];
-      if (seenUrls.has(rawImgUrl)) {
+      const ext = rawImgUrl.split('?')[0].split('.').pop() || 'png';
+      const filename = `${slug}-img-${imgCounter}.${ext}`;
+      const localImgPath = await downloadImage(rawImgUrl, filename);
+
+      // Проверяем настоящий MD5-хеш файла, чтобы исключить любые дубликаты (даже с разными ссылками в Notion!)
+      const absPath = path.join(IMAGES_DIR, filename);
+      let isDuplicate = false;
+      if (fs.existsSync(absPath)) {
+        const fileBuffer = fs.readFileSync(absPath);
+        const hash = crypto.createHash('md5').update(fileBuffer).digest('hex');
+        if (seenHashes.has(hash)) {
+          isDuplicate = true;
+          try { fs.unlinkSync(absPath); } catch (e) {}
+        } else {
+          seenHashes.add(hash);
+        }
+      }
+
+      if (isDuplicate) {
         mdString = mdString.replace(fullTag, '');
         continue;
       }
-      seenUrls.add(rawImgUrl);
-      const ext = rawImgUrl.split('?')[0].split('.').pop() || 'png';
-      const localImgPath = await downloadImage(rawImgUrl, `${slug}-img-${imgCounter}.${ext}`);
+
       if (!coverUrl) coverUrl = localImgPath;
       mdString = mdString.split(rawImgUrl).join(localImgPath);
       imgCounter++;
