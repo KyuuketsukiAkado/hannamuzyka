@@ -5,104 +5,151 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Блог — Hanna Muzyka</title>
   <meta name="description" content="Заметки о продуктовом дизайне, AI, вайбкодинге и геймдеве">
+  <meta name="theme-color" content="#0b0b12">
   
+<link rel="icon" type="image/png" sizes="192x192" href="./assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./css/style.css">
 <style>
-  :root {
-    --bg-color: #0b0b0d;
-    --card-bg: #121215;
-    --card-border: #1e1e24;
-    --text-primary: #eceef2;
-    --text-muted: #8e8e9c;
-    --accent: #ffffff;
-    --code-bg: #18181c;
-    --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
-  }
-  body { background-color: var(--bg-color); color: var(--text-primary); font-family: var(--font-sans); line-height: 1.7; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
-  a { color: inherit; text-decoration: none; }
-  .site-header { border-bottom: 1px solid var(--card-border); padding: 1.25rem 2rem; position: sticky; top: 0; background: rgba(11, 11, 13, 0.85); backdrop-filter: blur(12px); z-index: 100; }
-  .nav-container { max-width: 900px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-  .nav-logo { font-weight: 700; font-size: 1.1rem; letter-spacing: -0.02em; }
-  .nav-links a { color: var(--text-muted); margin-left: 1.5rem; font-size: 0.9rem; transition: color 0.2s; }
-  .nav-links a:hover, .nav-links a.active { color: var(--accent); }
-  .container { max-width: 780px; margin: 0 auto; padding: 3rem 1.5rem 6rem; }
-  .article-header { margin-bottom: 3rem; }
-  .article-meta { font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.75rem; }
-  .article-title { font-size: 2.4rem; font-weight: 800; letter-spacing: -0.03em; line-height: 1.2; margin: 0 0 1rem; color: #fff; }
-  .tag-badge { display: inline-block; font-family: var(--font-mono); font-size: 0.75rem; background: #1c1c22; color: var(--text-muted); padding: 0.25rem 0.6rem; border-radius: 6px; margin-right: 0.4rem; margin-bottom: 0.4rem; border: 1px solid var(--card-border); }
-  .article-body { font-size: 1.05rem; }
-  .article-body h1, .article-body h2, .article-body h3 { color: #fff; margin-top: 2.5rem; margin-bottom: 1rem; letter-spacing: -0.02em; }
-  .article-body p { margin-bottom: 1.4rem; color: #d1d1d6; }
-  .article-body ul, .article-body ol { margin-bottom: 1.4rem; padding-left: 1.5rem; color: #d1d1d6; }
-  .article-body li { margin-bottom: 0.4rem; }
-  .article-body img { max-width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--card-border); margin: 2rem 0; display: block; }
-  .article-body blockquote { border-left: 3px solid #3b3b4f; padding-left: 1.2rem; color: var(--text-muted); font-style: italic; margin: 2rem 0; }
-  .article-body pre { background: var(--code-bg); padding: 1.2rem; border-radius: 10px; overflow-x: auto; border: 1px solid var(--card-border); font-family: var(--font-mono); font-size: 0.9em; }
-  .article-body code { font-family: var(--font-mono); background: var(--code-bg); padding: 0.2rem 0.4rem; border-radius: 4px; font-size: 0.9em; }
-  .back-link { display: inline-flex; align-items: center; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 2rem; transition: color 0.2s; }
-  .back-link:hover { color: var(--accent); }
-  footer.site-footer { border-top: 1px solid var(--card-border); margin-top: 5rem; padding-top: 2rem; text-align: center; color: var(--text-muted); font-size: 0.85rem; }
+  /* ── Блог: дополнения к основному стилю сайта ── */
+  .nav-active{color:var(--blue)!important}
+  .nav-active::after{width:100%}
+  .tag-badge{display:inline-block;border:1px solid rgba(119,167,255,.2);background:rgba(119,167,255,.04);border-radius:999px;padding:5px 10px;color:var(--blue-2);font:10px 'DM Mono',monospace;margin-right:6px;margin-bottom:6px}
+  .blog-post-body img{display:block;width:100%;max-width:100%;height:auto!important;border-radius:var(--radius);border:1px solid var(--line);margin:28px 0;object-fit:contain}
+  .blog-post-body blockquote{border-left:3px solid var(--blue);background:rgba(119,167,255,.05);border-radius:0 var(--radius) var(--radius) 0;padding:18px 24px;margin:28px 0;color:var(--muted);font-style:italic}
+  .blog-post-body blockquote p{margin:0}
+  .blog-post-body a{color:var(--blue);text-decoration:underline;text-underline-offset:3px}
+  .blog-post-body a:hover{color:var(--blue-2)}
+  .blog-post-body h1{font-size:30px;letter-spacing:-.025em;margin:48px 0 18px;color:var(--text)}
 </style>
 
   <style>
-    .blog-grid { display: grid; gap: 1.5rem; margin-top: 2rem; }
-    .blog-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 1.75rem; display: block; transition: transform 0.2s, border-color 0.2s; }
-    .blog-card:hover { transform: translateY(-2px); border-color: #3b3b4f; }
-    .blog-card-title { font-size: 1.35rem; font-weight: 700; color: #fff; margin: 0.4rem 0 0.6rem; }
-    .blog-card-desc { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1rem; }
+    .blog-catalog{padding:70px 0 110px;border-top:1px solid var(--line)}
+    .blog-catalog-head{margin-bottom:48px}
+    .blog-catalog-head h1{font-size:clamp(38px,5vw,62px);line-height:1.03;letter-spacing:-.035em;margin:16px 0 18px}
+    .blog-catalog-head h1 em{font-family:Georgia,serif;font-weight:400;color:var(--purple);letter-spacing:-.03em}
+    .blog-catalog-head p{max-width:520px;color:var(--muted);font-size:16px;line-height:1.7;margin:0}
+    .catalog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;align-items:stretch}
+    .catalog-card{position:relative;display:flex;flex-direction:column;background:linear-gradient(140deg,#13182e,#141525,#101622);border:1px solid rgba(119,167,255,.15);border-radius:var(--radius);overflow:hidden;transition:border-color .3s,transform .3s,box-shadow .3s}
+    .catalog-card:hover{border-color:rgba(119,167,255,.35);transform:translateY(-3px);box-shadow:0 16px 42px #00000024}
+    .catalog-card-cover{display:block;aspect-ratio:16/9;overflow:hidden;background:#eef2ff;border-bottom:1px solid var(--line);position:relative;z-index:1}
+    .catalog-card-cover img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease}
+    .catalog-card:hover .catalog-card-cover img{transform:scale(1.04)}
+    .catalog-card-copy{padding:22px 24px 26px;display:flex;flex-direction:column;flex:1;position:relative;z-index:1}
+    .catalog-card-meta{display:flex;justify-content:space-between;gap:12px;font:10px 'DM Mono',monospace;letter-spacing:.08em;color:var(--muted);margin-bottom:12px;flex-wrap:wrap}
+    .catalog-card-meta .cat-tag{color:var(--blue)}
+    .catalog-card h2{font-size:20px;letter-spacing:-.02em;line-height:1.3;margin:0 0 10px}
+    .catalog-card h2 a{transition:color .25s}
+    .catalog-card h2 a:hover{color:var(--blue)}
+    .catalog-card-copy>p{color:var(--muted);font-size:14px;line-height:1.6;margin:0 0 16px;flex:1}
+    .catalog-card-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+    .catalog-card-tags span{border:1px solid rgba(119,167,255,.2);background:rgba(119,167,255,.04);border-radius:999px;padding:4px 9px;color:var(--blue-2);font:10px 'DM Mono',monospace}
+    .catalog-card .arrow-link{margin-top:auto}
+    @media (max-width: 560px){.catalog-grid{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
+  <a href="#top" class="skip-link">Перейти к содержимому</a>
   
 <header class="site-header">
-  <div class="nav-container">
-    <a href="./" class="nav-logo">Hanna Muzyka</a>
-    <nav class="nav-links">
-      <a href="./#work">Работы</a>
-      <a href="./#about">Обо мне</a>
-      <a href="./blog.html" class="active">Блог</a>
-      <a href="https://t.me/KyuuketsukiAkado" target="_blank" rel="noopener">Telegram ↗</a>
+    <a class="wordmark" href="./index.html" aria-label="Hanna Muzyka home">Hanna<span>Muzyka</span></a>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="./index.html#about" data-i18n="nav.about">Обо мне</a>
+      <a href="./index.html#work" data-i18n="nav.work">Работы</a>
+      <a href="./index.html#skills" data-i18n="nav.skills">Навыки</a>
+      <a href="./index.html#experience" data-i18n="nav.experience">Опыт</a>
+      <a href="./blog.html" class="nav-active" data-i18n="nav.blog">Блог</a>
+      <a href="./index.html#art" data-i18n="nav.art">Арт</a>
+    </nav>
+    <div class="header-actions">
+      <button class="lang-switch" id="lang-toggle" aria-label="Switch language">EN</button>
+      <a class="small-contact" href="./index.html#connect" data-i18n="nav.contact">Связаться</a>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Открыть меню" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+  <div class="mobile-menu" id="mobile-menu">
+    <nav class="mobile-menu-links" aria-label="Mobile navigation">
+      <a href="./index.html#about" data-i18n="nav.about">Обо мне</a>
+      <a href="./index.html#work" data-i18n="nav.work">Работы</a>
+      <a href="./index.html#skills" data-i18n="nav.skills">Навыки</a>
+      <a href="./index.html#experience" data-i18n="nav.experience">Опыт</a>
+      <a href="./blog.html" data-i18n="nav.blog">Блог</a>
+      <a href="./index.html#art" data-i18n="nav.art">Арт</a>
+      <a class="mobile-menu-contact" href="./index.html#connect" data-i18n="nav.contact">Связаться</a>
     </nav>
   </div>
-</header>
 
-  <div class="container">
-    <section style="margin-bottom: 3rem;">
-      <h1 style="font-size: 2.2rem; color: #fff; margin-bottom: 0.5rem;">Заметки с полей ✦</h1>
-      <p style="color: var(--text-muted); font-size: 1.1rem;">Мысли про AI-воркфлоу, продукты, вайбкодинг и эксперименты.</p>
-    </section>
-    <div class="blog-grid">
+  <main id="top" tabindex="-1">
+    <section class="blog-catalog section-wrap">
+      <div class="blog-catalog-head">
+        <div class="section-kicker"><span>✦ БЛОГ</span></div>
+        <h1>Заметки <em>с полей.</em></h1>
+        <p>Мысли про AI-воркфлоу, продукты, вайбкодинг и эксперименты.</p>
+      </div>
+      <div class="catalog-grid">
         
-        <a href="blog/creative-shorts-youtube.html" class="blog-card">
-          <div class="article-meta">2026-08-05</div>
-          <div class="blog-card-title">Закулисье генеративного креатива: 500 000 просмотров на YouTube и обход бана в ElevenLabs</div>
-          <div class="blog-card-desc">Кратко про запуск моих ютуб каналов и как выстраивался пайплайн работы</div>
-          <div><span class="tag-badge">#YT</span></div>
-        </a>
+        <article class="catalog-card reveal">
+          <a class="catalog-card-cover" href="blog/creative-shorts-youtube.html" tabindex="-1" aria-hidden="true"><img src="assets/images/blog/creative-shorts-youtube-img-0a96d417.png" alt="" loading="lazy"></a>
+          <div class="catalog-card-copy">
+            <div class="catalog-card-meta"><span>2026-08-05</span><span class="cat-tag">YT</span></div>
+            <h2><a href="blog/creative-shorts-youtube.html">Закулисье генеративного креатива: 500 000 просмотров на YouTube и обход бана в ElevenLabs</a></h2>
+            <p>Кратко про запуск моих ютуб каналов и как выстраивался пайплайн работы</p>
+            <div class="catalog-card-tags"><span>#YT</span></div>
+            <a class="arrow-link" href="blog/creative-shorts-youtube.html">Читать статью <span>↗</span></a>
+          </div>
+        </article>
       
-        <a href="blog/ai-future-blitz.html" class="blog-card">
-          <div class="article-meta">2026-08-05</div>
-          <div class="blog-card-title">Блиц о будущем, AI и личном опыте</div>
-          <div class="blog-card-desc">Блиц про AI-инструменты, вайбкодинг, 500k просмотров и мифы про нейросети</div>
-          <div><span class="tag-badge">#AI</span></div>
-        </a>
+        <article class="catalog-card reveal">
+          <a class="catalog-card-cover" href="blog/ai-future-blitz.html" tabindex="-1" aria-hidden="true"><img src="assets/images/blog/ai-future-blitz-img-4d650578.png" alt="" loading="lazy"></a>
+          <div class="catalog-card-copy">
+            <div class="catalog-card-meta"><span>2026-08-05</span><span class="cat-tag">AI</span></div>
+            <h2><a href="blog/ai-future-blitz.html">Блиц о будущем, AI и личном опыте</a></h2>
+            <p>Блиц про AI-инструменты, вайбкодинг, 500k просмотров и мифы про нейросети</p>
+            <div class="catalog-card-tags"><span>#AI</span></div>
+            <a class="arrow-link" href="blog/ai-future-blitz.html">Читать статью <span>↗</span></a>
+          </div>
+        </article>
       
-        <a href="blog/english-talk.html" class="blog-card">
-          <div class="article-meta">2026-08-04</div>
-          <div class="blog-card-title">Подкаст с Gemini 3.1 Pro</div>
-          <div class="blog-card-desc">Про мой опыт работы ментором/коучем, немного про английский и как с ним быть</div>
-          <div><span class="tag-badge">#ENG</span></div>
-        </a>
+        <article class="catalog-card reveal">
+          <a class="catalog-card-cover" href="blog/english-talk.html" tabindex="-1" aria-hidden="true"><img src="assets/images/blog/english-talk-img-03388f25.png" alt="" loading="lazy"></a>
+          <div class="catalog-card-copy">
+            <div class="catalog-card-meta"><span>2026-08-04</span><span class="cat-tag">ENG</span></div>
+            <h2><a href="blog/english-talk.html">Подкаст с Gemini 3.1 Pro</a></h2>
+            <p>Про мой опыт работы ментором/коучем, немного про английский и как с ним быть</p>
+            <div class="catalog-card-tags"><span>#ENG</span></div>
+            <a class="arrow-link" href="blog/english-talk.html">Читать статью <span>↗</span></a>
+          </div>
+        </article>
       
-        <a href="blog/kadence-ai.html" class="blog-card">
-          <div class="article-meta">2026-07-30</div>
-          <div class="blog-card-title">Как гуманитарий без опыта в кодинге собрал инди-игру с AI-агентом за полтора месяца</div>
-          <div class="blog-card-desc">От концепт-дизайна велосипедного магазина до релизной web-игры на GitHub Pages — и почему документация оказалась важнее промптов.</div>
-          <div><span class="tag-badge">#GAMEDEV</span><span class="tag-badge">#AI</span></div>
-        </a>
+        <article class="catalog-card reveal">
+          
+          <div class="catalog-card-copy">
+            <div class="catalog-card-meta"><span>2026-07-30</span><span class="cat-tag">GAMEDEV · AI</span></div>
+            <h2><a href="blog/kadence-ai.html">Как гуманитарий без опыта в кодинге собрал инди-игру с AI-агентом за полтора месяца</a></h2>
+            <p>От концепт-дизайна велосипедного магазина до релизной web-игры на GitHub Pages — и почему документация оказалась важнее промптов.</p>
+            <div class="catalog-card-tags"><span>#GAMEDEV</span><span>#AI</span></div>
+            <a class="arrow-link" href="blog/kadence-ai.html">Читать статью <span>↗</span></a>
+          </div>
+        </article>
       
+      </div>
+    </section>
+  </main>
+  
+<footer class="site-footer section-wrap">
+    <div><strong>Hanna Muzyka</strong><span>Product Designer & AI-assisted Creative Technologist</span></div>
+    <div class="footer-links">
+      <a href="https://github.com/KyuuketsukiAkado" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a href="https://www.linkedin.com/in/hannamuzyka/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a href="https://www.behance.net/repro4chful" target="_blank" rel="noopener noreferrer">Behance</a>
+      <a href="https://www.artstation.com/repro4chful" target="_blank" rel="noopener noreferrer">ArtStation</a>
+      <a href="https://t.me/KyuuketsukiAkado" target="_blank" rel="noopener noreferrer">Telegram</a>
     </div>
-    <footer class="site-footer"><p>© 2026 Hanna Muzyka · <a href="./">Главная страница</a></p></footer>
-  </div>
+    <div class="footer-bottom"><span>© 2026 Hanna Muzyka</span><span>repro4chful</span><a href="./assets/Hanna-Muzyka-Resume.pdf" download>Скачать CV ↓</a></div>
+  </footer>
+
+  <script src="js/main.js"></script>
 </body>
 </html>

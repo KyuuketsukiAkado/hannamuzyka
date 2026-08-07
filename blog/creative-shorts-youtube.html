@@ -5,70 +5,71 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Закулисье генеративного креатива: 500 000 просмотров на YouTube и обход бана в ElevenLabs — Hanna Muzyka</title>
   <meta name="description" content="Кратко про запуск моих ютуб каналов и как выстраивался пайплайн работы">
+  <meta name="theme-color" content="#0b0b12">
   
+<link rel="icon" type="image/png" sizes="192x192" href="../assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
 <style>
-  :root {
-    --bg-color: #0b0b0d;
-    --card-bg: #121215;
-    --card-border: #1e1e24;
-    --text-primary: #eceef2;
-    --text-muted: #8e8e9c;
-    --accent: #ffffff;
-    --code-bg: #18181c;
-    --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
-  }
-  body { background-color: var(--bg-color); color: var(--text-primary); font-family: var(--font-sans); line-height: 1.7; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
-  a { color: inherit; text-decoration: none; }
-  .site-header { border-bottom: 1px solid var(--card-border); padding: 1.25rem 2rem; position: sticky; top: 0; background: rgba(11, 11, 13, 0.85); backdrop-filter: blur(12px); z-index: 100; }
-  .nav-container { max-width: 900px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-  .nav-logo { font-weight: 700; font-size: 1.1rem; letter-spacing: -0.02em; }
-  .nav-links a { color: var(--text-muted); margin-left: 1.5rem; font-size: 0.9rem; transition: color 0.2s; }
-  .nav-links a:hover, .nav-links a.active { color: var(--accent); }
-  .container { max-width: 780px; margin: 0 auto; padding: 3rem 1.5rem 6rem; }
-  .article-header { margin-bottom: 3rem; }
-  .article-meta { font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.75rem; }
-  .article-title { font-size: 2.4rem; font-weight: 800; letter-spacing: -0.03em; line-height: 1.2; margin: 0 0 1rem; color: #fff; }
-  .tag-badge { display: inline-block; font-family: var(--font-mono); font-size: 0.75rem; background: #1c1c22; color: var(--text-muted); padding: 0.25rem 0.6rem; border-radius: 6px; margin-right: 0.4rem; margin-bottom: 0.4rem; border: 1px solid var(--card-border); }
-  .article-body { font-size: 1.05rem; }
-  .article-body h1, .article-body h2, .article-body h3 { color: #fff; margin-top: 2.5rem; margin-bottom: 1rem; letter-spacing: -0.02em; }
-  .article-body p { margin-bottom: 1.4rem; color: #d1d1d6; }
-  .article-body ul, .article-body ol { margin-bottom: 1.4rem; padding-left: 1.5rem; color: #d1d1d6; }
-  .article-body li { margin-bottom: 0.4rem; }
-  .article-body img { max-width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--card-border); margin: 2rem 0; display: block; }
-  .article-body blockquote { border-left: 3px solid #3b3b4f; padding-left: 1.2rem; color: var(--text-muted); font-style: italic; margin: 2rem 0; }
-  .article-body pre { background: var(--code-bg); padding: 1.2rem; border-radius: 10px; overflow-x: auto; border: 1px solid var(--card-border); font-family: var(--font-mono); font-size: 0.9em; }
-  .article-body code { font-family: var(--font-mono); background: var(--code-bg); padding: 0.2rem 0.4rem; border-radius: 4px; font-size: 0.9em; }
-  .back-link { display: inline-flex; align-items: center; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 2rem; transition: color 0.2s; }
-  .back-link:hover { color: var(--accent); }
-  footer.site-footer { border-top: 1px solid var(--card-border); margin-top: 5rem; padding-top: 2rem; text-align: center; color: var(--text-muted); font-size: 0.85rem; }
+  /* ── Блог: дополнения к основному стилю сайта ── */
+  .nav-active{color:var(--blue)!important}
+  .nav-active::after{width:100%}
+  .tag-badge{display:inline-block;border:1px solid rgba(119,167,255,.2);background:rgba(119,167,255,.04);border-radius:999px;padding:5px 10px;color:var(--blue-2);font:10px 'DM Mono',monospace;margin-right:6px;margin-bottom:6px}
+  .blog-post-body img{display:block;width:100%;max-width:100%;height:auto!important;border-radius:var(--radius);border:1px solid var(--line);margin:28px 0;object-fit:contain}
+  .blog-post-body blockquote{border-left:3px solid var(--blue);background:rgba(119,167,255,.05);border-radius:0 var(--radius) var(--radius) 0;padding:18px 24px;margin:28px 0;color:var(--muted);font-style:italic}
+  .blog-post-body blockquote p{margin:0}
+  .blog-post-body a{color:var(--blue);text-decoration:underline;text-underline-offset:3px}
+  .blog-post-body a:hover{color:var(--blue-2)}
+  .blog-post-body h1{font-size:30px;letter-spacing:-.025em;margin:48px 0 18px;color:var(--text)}
 </style>
 
 </head>
 <body>
+  <a href="#top" class="skip-link">Перейти к содержимому</a>
   
 <header class="site-header">
-  <div class="nav-container">
-    <a href="../" class="nav-logo">Hanna Muzyka</a>
-    <nav class="nav-links">
-      <a href="../#work">Работы</a>
-      <a href="../#about">Обо мне</a>
-      <a href="../blog.html" class="active">Блог</a>
-      <a href="https://t.me/KyuuketsukiAkado" target="_blank" rel="noopener">Telegram ↗</a>
+    <a class="wordmark" href="../index.html" aria-label="Hanna Muzyka home">Hanna<span>Muzyka</span></a>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="../index.html#about" data-i18n="nav.about">Обо мне</a>
+      <a href="../index.html#work" data-i18n="nav.work">Работы</a>
+      <a href="../index.html#skills" data-i18n="nav.skills">Навыки</a>
+      <a href="../index.html#experience" data-i18n="nav.experience">Опыт</a>
+      <a href="../blog.html" class="nav-active" data-i18n="nav.blog">Блог</a>
+      <a href="../index.html#art" data-i18n="nav.art">Арт</a>
+    </nav>
+    <div class="header-actions">
+      <button class="lang-switch" id="lang-toggle" aria-label="Switch language">EN</button>
+      <a class="small-contact" href="../index.html#connect" data-i18n="nav.contact">Связаться</a>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Открыть меню" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+  <div class="mobile-menu" id="mobile-menu">
+    <nav class="mobile-menu-links" aria-label="Mobile navigation">
+      <a href="../index.html#about" data-i18n="nav.about">Обо мне</a>
+      <a href="../index.html#work" data-i18n="nav.work">Работы</a>
+      <a href="../index.html#skills" data-i18n="nav.skills">Навыки</a>
+      <a href="../index.html#experience" data-i18n="nav.experience">Опыт</a>
+      <a href="../blog.html" data-i18n="nav.blog">Блог</a>
+      <a href="../index.html#art" data-i18n="nav.art">Арт</a>
+      <a class="mobile-menu-contact" href="../index.html#connect" data-i18n="nav.contact">Связаться</a>
     </nav>
   </div>
-</header>
 
-  <div class="container">
-    <a href="../blog.html" class="back-link">← К списку всех статей</a>
-    <article>
-      <header class="article-header">
-        <div class="article-meta">2026-08-05</div>
-        <h1 class="article-title">Закулисье генеративного креатива: 500 000 просмотров на YouTube и обход бана в ElevenLabs</h1>
-        <div><span class="tag-badge">#YT</span></div>
-      </header>
+  <main id="top" tabindex="-1">
+    <article class="blog-post section-wrap" lang="ru">
+      <div class="blog-post-header">
+        <a class="blog-back" href="../blog.html">← Назад к блогу</a>
+        <div class="blog-post-meta">
+          <span>YT</span>
+          <span>2026-08-05</span>
+        </div>
+        <h1>Закулисье генеративного креатива: 500 000 просмотров на YouTube и обход бана в ElevenLabs</h1>
+        <p class="blog-post-sub">Кратко про запуск моих ютуб каналов и как выстраивался пайплайн работы</p>
+      </div>
       
-      <div class="article-body"><p>
+      <div class="blog-post-body"><p>
 <h2>Ты обмолвилась, что твои YouTube Shorts, сгенерированные LLM и AI-инструментами ещё в 2025 году, набрали суммарно полмиллиона просмотров, и никто даже не догадался, что это AI. В чём секрет создания контента, который не выглядит как бесдушный «нейрослоп»?</h2></p><p>
 Секрет в том, что отдавать все полностью на аутсорс AI не стоит. Да, можно допилить задумку, сгенерировать картинки и озвучку. Но при этом за всем этим всегда должно оставаться что-то человеческое. И да, могу еще сделать такой вывод: никогда не делайте видосы спустя рукава просто потому что “надо”. Алгоритмы ютуба - вещь абсолютная бездушная: сделал плохо → не залетело → меньше пул показов в будущем. Надо понимать, что ты делаешь и зачем. Если ты продюссируешь аккаунт по той теме, которая тебе не интересна, стоит заходить под иным углом, пробовать вносить свои видение и применять свои собственные подходы. А если начинать вести аккаунт исключительно по той теме, которая тебе интересна, то при правильном подходе можно не особо напрягаясь набирать тысячи просмотров — канал с контентом по моей любимой игре Cyberpunk2077 не даст соврать.</p><p>
 <img src="../assets/images/blog/creative-shorts-youtube-img-0a96d417.png" alt="Шортсы на этот канал делались под чашку кофе в DaVinci Resolve в перерывах между работой и учебой" /></p><p>
@@ -84,8 +85,26 @@
 <img src="../assets/images/blog/creative-shorts-youtube-img-36760346.png" alt="image.png" /></p><p>
 <img src="../assets/images/blog/creative-shorts-youtube-img-84a80362.png" alt="image.png" /></p><p>
 <img src="../assets/images/blog/creative-shorts-youtube-img-ae492cf5.png" alt="image.png" /></p><p></p></div>
+      <div class="blog-post-footer">
+        <div class="blog-post-links">
+          <a class="arrow-link" href="../blog.html">← Все статьи</a>
+        </div>
+      </div>
     </article>
-    <footer class="site-footer"><p>© 2026 Hanna Muzyka · <a href="../blog.html">Блог</a></p></footer>
-  </div>
+  </main>
+  
+<footer class="site-footer section-wrap">
+    <div><strong>Hanna Muzyka</strong><span>Product Designer & AI-assisted Creative Technologist</span></div>
+    <div class="footer-links">
+      <a href="https://github.com/KyuuketsukiAkado" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a href="https://www.linkedin.com/in/hannamuzyka/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a href="https://www.behance.net/repro4chful" target="_blank" rel="noopener noreferrer">Behance</a>
+      <a href="https://www.artstation.com/repro4chful" target="_blank" rel="noopener noreferrer">ArtStation</a>
+      <a href="https://t.me/KyuuketsukiAkado" target="_blank" rel="noopener noreferrer">Telegram</a>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Hanna Muzyka</span><span>repro4chful</span><a href="../assets/Hanna-Muzyka-Resume.pdf" download>Скачать CV ↓</a></div>
+  </footer>
+
+  <script src="../js/main.js"></script>
 </body>
 </html>
