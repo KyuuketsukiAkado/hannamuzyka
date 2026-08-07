@@ -272,14 +272,14 @@ async function main() {
       console.warn(`⚠️ Failed to parse blocks for ${title}:`, err.message);
     }
 
-    const imgRegex = /!\[(.*?)\]\((https?:\/\/.*?)\)/g;
-    let match;
+    const imgMatches = [...mdString.matchAll(/!\[(.*?)\]\((https?:\/\/.*?)\)/g)];
     let imgCounter = 1;
-    while ((match = imgRegex.exec(mdString)) !== null) {
+    for (const match of imgMatches) {
       const rawImgUrl = match[2];
       const ext = rawImgUrl.split('?')[0].split('.').pop() || 'png';
       const localImgPath = await downloadImage(rawImgUrl, `${slug}-img-${imgCounter}.${ext}`);
-      mdString = mdString.replace(rawImgUrl, localImgPath);
+      if (!coverUrl) coverUrl = localImgPath;
+      mdString = mdString.split(rawImgUrl).join(localImgPath);
       imgCounter++;
     }
 
