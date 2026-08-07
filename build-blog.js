@@ -23,6 +23,20 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
 const BLOG_DIR = path.join(process.cwd(), 'blog');
 const IMAGES_DIR = path.join(process.cwd(), 'assets', 'images', 'blog');
 
+// ── РУЧНЫЕ СТАТЬИ (добавлены вручную, до интеграции с Notion) ─────────────
+// Формат: { slug, title, date, description, tags }
+// Файл blog/<slug>.html должен существовать в репозитории.
+// Такие посты не затрутся синхронизацией и попадут в blog.html.
+const MANUAL_POSTS = [
+  {
+    slug: 'kadence-ai',
+    title: 'Как гуманитарий без опыта в кодинге собрал инди-игру с AI-агентом за полтора месяца',
+    date: '2026-07-30',
+    description: 'От концепт-дизайна велосипедного магазина до релизной web-игры на GitHub Pages — и почему документация оказалась важнее промптов.',
+    tags: ['GAMEDEV', 'AI'],
+  },
+];
+
 if (!fs.existsSync(BLOG_DIR)) fs.mkdirSync(BLOG_DIR, { recursive: true });
 if (!fs.existsSync(IMAGES_DIR)) fs.mkdirSync(IMAGES_DIR, { recursive: true });
 
@@ -352,6 +366,11 @@ async function main() {
     posts.push({ title, slug, date, tags, description, coverUrl });
   }
 
+    // Объединяем посты из Notion и ручные статьи
+  const notionSlugs = new Set(posts.map((p) => p.slug));
+  const manualPosts = MANUAL_POSTS.filter((m) => !notionSlugs.has(m.slug));
+  const allPosts = [...posts, ...manualPosts].sort((a, b) => (a.date > b.date ? -1 : 1));
+
   console.log('📝 Generating blog catalog (blog.html)...');
 
   const catalogHtml = `<!DOCTYPE html>
@@ -378,7 +397,7 @@ async function main() {
       <p style="color: var(--text-muted); font-size: 1.1rem;">Мысли про AI-воркфлоу, продукты, вайбкодинг и эксперименты.</p>
     </section>
     <div class="blog-grid">
-      ${posts.length === 0 ? '<p style="color: var(--text-muted);">Пока нет опубликованных статей. Поставьте галочку "Published" в Notion!</p>' : posts.map((p) => `
+        ${allPosts.length === 0 ? '<p style="color: var(--text-muted);">Пока нет опубликованных статей. Поставьте галочку "Published" в Notion!</p>' : allPosts.map((p) => `
         <a href="blog/${p.slug}.html" class="blog-card">
           <div class="article-meta">${p.date}</div>
           <div class="blog-card-title">${p.title}</div>
@@ -396,7 +415,7 @@ async function main() {
   console.log('✅ Created blog.html successfully!');
 
   // Автоматически очищаем верхушку и вставляем 2 карточки в раздел БЛОГ
-  updateHomepageBlogSection(posts);
+  updateHomepageBlogSection(allPosts);
 }
 
 main().catch((err) => {
