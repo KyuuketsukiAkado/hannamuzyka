@@ -276,8 +276,15 @@ async function main() {
 
     const imgMatches = [...mdString.matchAll(/!\[(.*?)\]\((https?:\/\/.*?)\)/g)];
     let imgCounter = 1;
+    const seenUrls = new Set();
     for (const match of imgMatches) {
+      const fullTag = match[0];
       const rawImgUrl = match[2];
+      if (seenUrls.has(rawImgUrl)) {
+        mdString = mdString.replace(fullTag, '');
+        continue;
+      }
+      seenUrls.add(rawImgUrl);
       const ext = rawImgUrl.split('?')[0].split('.').pop() || 'png';
       const localImgPath = await downloadImage(rawImgUrl, `${slug}-img-${imgCounter}.${ext}`);
       if (!coverUrl) coverUrl = localImgPath;
