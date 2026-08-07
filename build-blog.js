@@ -37,6 +37,7 @@ const MANUAL_POSTS = [
   },
 ];
 
+
 if (!fs.existsSync(BLOG_DIR)) fs.mkdirSync(BLOG_DIR, { recursive: true });
 if (!fs.existsSync(IMAGES_DIR)) fs.mkdirSync(IMAGES_DIR, { recursive: true });
 
@@ -173,60 +174,69 @@ function updateHomepageBlogSection(posts) {
   console.log('✅ Wiped top junk and placed 2 cards in blog section of index.html!');
 }
 
-const HEADER_HTML = `
-<header class="site-header">
-  <div class="nav-container">
-    <a href="../" class="nav-logo">Hanna Muzyka</a>
-    <nav class="nav-links">
-      <a href="../#work">Работы</a>
-      <a href="../#about">Обо мне</a>
-      <a href="../blog.html" class="active">Блог</a>
-      <a href="https://t.me/KyuuketsukiAkado" target="_blank" rel="noopener">Telegram ↗</a>
-    </nav>
-  </div>
-</header>
-`;
-
 const BLOG_CSS = `
+<link rel="icon" type="image/png" sizes="192x192" href="../assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
 <style>
-  :root {
-    --bg-color: #0b0b0d;
-    --card-bg: #121215;
-    --card-border: #1e1e24;
-    --text-primary: #eceef2;
-    --text-muted: #8e8e9c;
-    --accent: #ffffff;
-    --code-bg: #18181c;
-    --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
-  }
-  body { background-color: var(--bg-color); color: var(--text-primary); font-family: var(--font-sans); line-height: 1.7; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
-  a { color: inherit; text-decoration: none; }
-  .site-header { border-bottom: 1px solid var(--card-border); padding: 1.25rem 2rem; position: sticky; top: 0; background: rgba(11, 11, 13, 0.85); backdrop-filter: blur(12px); z-index: 100; }
-  .nav-container { max-width: 900px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-  .nav-logo { font-weight: 700; font-size: 1.1rem; letter-spacing: -0.02em; }
-  .nav-links a { color: var(--text-muted); margin-left: 1.5rem; font-size: 0.9rem; transition: color 0.2s; }
-  .nav-links a:hover, .nav-links a.active { color: var(--accent); }
-  .container { max-width: 780px; margin: 0 auto; padding: 3rem 1.5rem 6rem; }
-  .article-header { margin-bottom: 3rem; }
-  .article-meta { font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.75rem; }
-  .article-title { font-size: 2.4rem; font-weight: 800; letter-spacing: -0.03em; line-height: 1.2; margin: 0 0 1rem; color: #fff; }
-  .tag-badge { display: inline-block; font-family: var(--font-mono); font-size: 0.75rem; background: #1c1c22; color: var(--text-muted); padding: 0.25rem 0.6rem; border-radius: 6px; margin-right: 0.4rem; margin-bottom: 0.4rem; border: 1px solid var(--card-border); }
-  .article-body { font-size: 1.05rem; }
-  .article-body h1, .article-body h2, .article-body h3 { color: #fff; margin-top: 2.5rem; margin-bottom: 1rem; letter-spacing: -0.02em; }
-  .article-body p { margin-bottom: 1.4rem; color: #d1d1d6; }
-  .article-body ul, .article-body ol { margin-bottom: 1.4rem; padding-left: 1.5rem; color: #d1d1d6; }
-  .article-body li { margin-bottom: 0.4rem; }
-  .article-body img { max-width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--card-border); margin: 2rem 0; display: block; }
-  .article-body blockquote { border-left: 3px solid #3b3b4f; padding-left: 1.2rem; color: var(--text-muted); font-style: italic; margin: 2rem 0; }
-  .article-body pre { background: var(--code-bg); padding: 1.2rem; border-radius: 10px; overflow-x: auto; border: 1px solid var(--card-border); font-family: var(--font-mono); font-size: 0.9em; }
-  .article-body code { font-family: var(--font-mono); background: var(--code-bg); padding: 0.2rem 0.4rem; border-radius: 4px; font-size: 0.9em; }
-  .back-link { display: inline-flex; align-items: center; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 2rem; transition: color 0.2s; }
-  .back-link:hover { color: var(--accent); }
-  footer.site-footer { border-top: 1px solid var(--card-border); margin-top: 5rem; padding-top: 2rem; text-align: center; color: var(--text-muted); font-size: 0.85rem; }
+  /* ── Блог: дополнения к основному стилю сайта ── */
+  .nav-active{color:var(--blue)!important}
+  .nav-active::after{width:100%}
+  .tag-badge{display:inline-block;border:1px solid rgba(119,167,255,.2);background:rgba(119,167,255,.04);border-radius:999px;padding:5px 10px;color:var(--blue-2);font:10px 'DM Mono',monospace;margin-right:6px;margin-bottom:6px}
+  .blog-post-body img{display:block;width:100%;max-width:100%;height:auto!important;border-radius:var(--radius);border:1px solid var(--line);margin:28px 0;object-fit:contain}
+  .blog-post-body blockquote{border-left:3px solid var(--blue);background:rgba(119,167,255,.05);border-radius:0 var(--radius) var(--radius) 0;padding:18px 24px;margin:28px 0;color:var(--muted);font-style:italic}
+  .blog-post-body blockquote p{margin:0}
+  .blog-post-body a{color:var(--blue);text-decoration:underline;text-underline-offset:3px}
+  .blog-post-body a:hover{color:var(--blue-2)}
+  .blog-post-body h1{font-size:30px;letter-spacing:-.025em;margin:48px 0 18px;color:var(--text)}
 </style>
 `;
 
+const HEADER_HTML = `
+<header class="site-header">
+    <a class="wordmark" href="../index.html" aria-label="Hanna Muzyka home">Hanna<span>Muzyka</span></a>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="../index.html#about" data-i18n="nav.about">Обо мне</a>
+      <a href="../index.html#work" data-i18n="nav.work">Работы</a>
+      <a href="../index.html#skills" data-i18n="nav.skills">Навыки</a>
+      <a href="../index.html#experience" data-i18n="nav.experience">Опыт</a>
+      <a href="../blog.html" class="nav-active" data-i18n="nav.blog">Блог</a>
+      <a href="../index.html#art" data-i18n="nav.art">Арт</a>
+    </nav>
+    <div class="header-actions">
+      <button class="lang-switch" id="lang-toggle" aria-label="Switch language">EN</button>
+      <a class="small-contact" href="../index.html#connect" data-i18n="nav.contact">Связаться</a>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Открыть меню" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+  <div class="mobile-menu" id="mobile-menu">
+    <nav class="mobile-menu-links" aria-label="Mobile navigation">
+      <a href="../index.html#about" data-i18n="nav.about">Обо мне</a>
+      <a href="../index.html#work" data-i18n="nav.work">Работы</a>
+      <a href="../index.html#skills" data-i18n="nav.skills">Навыки</a>
+      <a href="../index.html#experience" data-i18n="nav.experience">Опыт</a>
+      <a href="../blog.html" data-i18n="nav.blog">Блог</a>
+      <a href="../index.html#art" data-i18n="nav.art">Арт</a>
+      <a class="mobile-menu-contact" href="../index.html#connect" data-i18n="nav.contact">Связаться</a>
+    </nav>
+  </div>
+`;
+
+const FOOTER_HTML = `
+<footer class="site-footer section-wrap">
+    <div><strong>Hanna Muzyka</strong><span>Product Designer & AI-assisted Creative Technologist</span></div>
+    <div class="footer-links">
+      <a href="https://github.com/KyuuketsukiAkado" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a href="https://www.linkedin.com/in/hannamuzyka/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a href="https://www.behance.net/repro4chful" target="_blank" rel="noopener noreferrer">Behance</a>
+      <a href="https://www.artstation.com/repro4chful" target="_blank" rel="noopener noreferrer">ArtStation</a>
+      <a href="https://t.me/KyuuketsukiAkado" target="_blank" rel="noopener noreferrer">Telegram</a>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Hanna Muzyka</span><span>repro4chful</span><a href="../assets/Hanna-Muzyka-Resume.pdf" download>Скачать CV ↓</a></div>
+  </footer>
+`;
 async function main() {
   const activeDbId = await resolveDatabaseId();
 
@@ -289,7 +299,7 @@ async function main() {
       console.warn(`⚠️ Failed to parse blocks for ${title}:`, err.message);
     }
 
-        // ── ОБРАБОТКА КАРТИНОК ──────────────────────────────────────────────
+    // ── ОБРАБОТКА КАРТИНОК ──────────────────────────────────────────────
     // ВАЖНО: имя файла = хэш URL картинки, а НЕ порядковый номер!
     // Раньше имена были img-1, img-2, ... — при добавлении/удалении картинки
     // в Notion нумерация сдвигалась, и старые файлы (уже закоммиченные в репо)
@@ -331,23 +341,34 @@ async function main() {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${title} — Hanna Muzyka</title>
   <meta name="description" content="${description || title}">
+  <meta name="theme-color" content="#0b0b12">
   ${BLOG_CSS}
 </head>
 <body>
+  <a href="#top" class="skip-link">Перейти к содержимому</a>
   ${HEADER_HTML}
-  <div class="container">
-    <a href="../blog.html" class="back-link">← К списку всех статей</a>
-    <article>
-      <header class="article-header">
-        <div class="article-meta">${date}</div>
-        <h1 class="article-title">${title}</h1>
-        ${tags.length ? `<div>${tags.map((t) => `<span class="tag-badge">#${t}</span>`).join('')}</div>` : ''}
-      </header>
-      ${pageCoverUrl ? `<img src="${pageCoverUrl}" alt="${title}" style="width:100%; border-radius:12px; margin-bottom:2rem;" />` : ''}
-      <div class="article-body"><p>${htmlContent}</p></div>
+  <main id="top" tabindex="-1">
+    <article class="blog-post section-wrap" lang="ru">
+      <div class="blog-post-header">
+        <a class="blog-back" href="../blog.html">← Назад к блогу</a>
+        <div class="blog-post-meta">
+          ${tags.length ? `<span>${tags.join(' · ')}</span>` : ''}
+          <span>${date}</span>
+        </div>
+        <h1>${title}</h1>
+        ${description ? `<p class="blog-post-sub">${description}</p>` : ''}
+      </div>
+      ${pageCoverUrl ? `<figure class="blog-figure"><img src="${pageCoverUrl}" alt="${title}" loading="lazy"></figure>` : ''}
+      <div class="blog-post-body"><p>${htmlContent}</p></div>
+      <div class="blog-post-footer">
+        <div class="blog-post-links">
+          <a class="arrow-link" href="../blog.html">← Все статьи</a>
+        </div>
+      </div>
     </article>
-    <footer class="site-footer"><p>© 2026 Hanna Muzyka · <a href="../blog.html">Блог</a></p></footer>
-  </div>
+  </main>
+  ${FOOTER_HTML}
+  <script src="../js/main.js"></script>
 </body>
 </html>`;
 
@@ -355,7 +376,7 @@ async function main() {
     posts.push({ title, slug, date, tags, description, coverUrl });
   }
 
-    // Объединяем посты из Notion и ручные статьи
+  // Объединяем посты из Notion и ручные статьи
   const notionSlugs = new Set(posts.map((p) => p.slug));
   const manualPosts = MANUAL_POSTS.filter((m) => !notionSlugs.has(m.slug));
   const allPosts = [...posts, ...manualPosts].sort((a, b) => (a.date > b.date ? -1 : 1));
@@ -369,34 +390,61 @@ async function main() {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Блог — Hanna Muzyka</title>
   <meta name="description" content="Заметки о продуктовом дизайне, AI, вайбкодинге и геймдеве">
-  ${BLOG_CSS}
+  <meta name="theme-color" content="#0b0b12">
+  ${BLOG_CSS.replace(/\.\.\//g, './')}
   <style>
-    .blog-grid { display: grid; gap: 1.5rem; margin-top: 2rem; }
-    .blog-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 1.75rem; display: block; transition: transform 0.2s, border-color 0.2s; }
-    .blog-card:hover { transform: translateY(-2px); border-color: #3b3b4f; }
-    .blog-card-title { font-size: 1.35rem; font-weight: 700; color: #fff; margin: 0.4rem 0 0.6rem; }
-    .blog-card-desc { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1rem; }
+    .blog-catalog{padding:70px 0 110px;border-top:1px solid var(--line)}
+    .blog-catalog-head{margin-bottom:48px}
+    .blog-catalog-head h1{font-size:clamp(38px,5vw,62px);line-height:1.03;letter-spacing:-.035em;margin:16px 0 18px}
+    .blog-catalog-head h1 em{font-family:Georgia,serif;font-weight:400;color:var(--purple);letter-spacing:-.03em}
+    .blog-catalog-head p{max-width:520px;color:var(--muted);font-size:16px;line-height:1.7;margin:0}
+    .catalog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;align-items:stretch}
+    .catalog-card{position:relative;display:flex;flex-direction:column;background:linear-gradient(140deg,#13182e,#141525,#101622);border:1px solid rgba(119,167,255,.15);border-radius:var(--radius);overflow:hidden;transition:border-color .3s,transform .3s,box-shadow .3s}
+    .catalog-card:hover{border-color:rgba(119,167,255,.35);transform:translateY(-3px);box-shadow:0 16px 42px #00000024}
+    .catalog-card-cover{display:block;aspect-ratio:16/9;overflow:hidden;background:#eef2ff;border-bottom:1px solid var(--line);position:relative;z-index:1}
+    .catalog-card-cover img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease}
+    .catalog-card:hover .catalog-card-cover img{transform:scale(1.04)}
+    .catalog-card-copy{padding:22px 24px 26px;display:flex;flex-direction:column;flex:1;position:relative;z-index:1}
+    .catalog-card-meta{display:flex;justify-content:space-between;gap:12px;font:10px 'DM Mono',monospace;letter-spacing:.08em;color:var(--muted);margin-bottom:12px;flex-wrap:wrap}
+    .catalog-card-meta .cat-tag{color:var(--blue)}
+    .catalog-card h2{font-size:20px;letter-spacing:-.02em;line-height:1.3;margin:0 0 10px}
+    .catalog-card h2 a{transition:color .25s}
+    .catalog-card h2 a:hover{color:var(--blue)}
+    .catalog-card-copy>p{color:var(--muted);font-size:14px;line-height:1.6;margin:0 0 16px;flex:1}
+    .catalog-card-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+    .catalog-card-tags span{border:1px solid rgba(119,167,255,.2);background:rgba(119,167,255,.04);border-radius:999px;padding:4px 9px;color:var(--blue-2);font:10px 'DM Mono',monospace}
+    .catalog-card .arrow-link{margin-top:auto}
+    @media (max-width: 560px){.catalog-grid{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
+  <a href="#top" class="skip-link">Перейти к содержимому</a>
   ${HEADER_HTML.replace(/\.\.\//g, './')}
-  <div class="container">
-    <section style="margin-bottom: 3rem;">
-      <h1 style="font-size: 2.2rem; color: #fff; margin-bottom: 0.5rem;">Заметки с полей ✦</h1>
-      <p style="color: var(--text-muted); font-size: 1.1rem;">Мысли про AI-воркфлоу, продукты, вайбкодинг и эксперименты.</p>
-    </section>
-    <div class="blog-grid">
+  <main id="top" tabindex="-1">
+    <section class="blog-catalog section-wrap">
+      <div class="blog-catalog-head">
+        <div class="section-kicker"><span>✦ БЛОГ</span></div>
+        <h1>Заметки <em>с полей.</em></h1>
+        <p>Мысли про AI-воркфлоу, продукты, вайбкодинг и эксперименты.</p>
+      </div>
+      <div class="catalog-grid">
         ${allPosts.length === 0 ? '<p style="color: var(--text-muted);">Пока нет опубликованных статей. Поставьте галочку "Published" в Notion!</p>' : allPosts.map((p) => `
-        <a href="blog/${p.slug}.html" class="blog-card">
-          <div class="article-meta">${p.date}</div>
-          <div class="blog-card-title">${p.title}</div>
-          ${p.description ? `<div class="blog-card-desc">${p.description}</div>` : ''}
-          ${p.tags.length ? `<div>${p.tags.map((t) => `<span class="tag-badge">#${t}</span>`).join('')}</div>` : ''}
-        </a>
+        <article class="catalog-card reveal">
+          ${p.coverUrl ? `<a class="catalog-card-cover" href="blog/${p.slug}.html" tabindex="-1" aria-hidden="true"><img src="${p.coverUrl.replace('../', '')}" alt="" loading="lazy"></a>` : ''}
+          <div class="catalog-card-copy">
+            <div class="catalog-card-meta"><span>${p.date}</span>${p.tags.length ? `<span class="cat-tag">${p.tags.join(' · ')}</span>` : ''}</div>
+            <h2><a href="blog/${p.slug}.html">${p.title}</a></h2>
+            ${p.description ? `<p>${p.description}</p>` : ''}
+            ${p.tags.length ? `<div class="catalog-card-tags">${p.tags.map((t) => `<span>#${t}</span>`).join('')}</div>` : ''}
+            <a class="arrow-link" href="blog/${p.slug}.html">Читать статью <span>↗</span></a>
+          </div>
+        </article>
       `).join('')}
-    </div>
-    <footer class="site-footer"><p>© 2026 Hanna Muzyka · <a href="./">Главная страница</a></p></footer>
-  </div>
+      </div>
+    </section>
+  </main>
+  ${FOOTER_HTML.replace(/\.\.\//g, './')}
+  <script src="js/main.js"></script>
 </body>
 </html>`;
 
