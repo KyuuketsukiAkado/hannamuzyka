@@ -289,38 +289,27 @@ async function main() {
       console.warn(`⚠️ Failed to parse blocks for ${title}:`, err.message);
     }
 
+        // ── ОБРАБОТКА КАРТИНОК ──────────────────────────────────────────────
+    // ВАЖНО: имя файла = хэш URL картинки, а НЕ порядковый номер!
+    // Раньше имена были img-1, img-2, ... — при добавлении/удалении картинки
+    // в Notion нумерация сдвигалась, и старые файлы (уже закоммиченные в репо)
+    // подставлялись не на свои места, а дедупликатор удалял "дубликаты".
+    // Теперь каждая картинка привязана к своему URL — порядок всегда как в Notion.
     const imgMatches = [...mdString.matchAll(/!\[(.*?)\]\((https?:\/\/.*?)\)/g)];
-    let imgCounter = 1;
-    const seenHashes = new Set();
     for (const match of imgMatches) {
-      const fullTag = match[0];
       const rawImgUrl = match[2];
-      const ext = rawImgUrl.split('?')[0].split('.').pop() || 'png';
-      const filename = `${slug}-img-${imgCounter}.${ext}`;
+      // Базовый URL без query-параметров (userId, cache и т.п. меняются от запроса к запросу)
+      const urlBase = rawImgUrl.split('?')[0];
+      const urlHash = crypto.createHash('md5').update(urlBase).digest('hex').slice(0, 8);
+      const extRaw = (urlBase.split('.').pop() || '').toLowerCase();
+      const ext = /^[a-z0-9]{2,5}$/.test(extRaw) ? extRaw : 'png';
+      const filename = `${slug}-img-${urlHash}.${ext}`;
       const localImgPath = await downloadImage(rawImgUrl, filename);
 
-      // Проверяем настоящий MD5-хеш файла, чтобы исключить любые дубликаты (даже с разными ссылками в Notion!)
-      const absPath = path.join(IMAGES_DIR, filename);
-      let isDuplicate = false;
-      if (fs.existsSync(absPath)) {
-        const fileBuffer = fs.readFileSync(absPath);
-        const hash = crypto.createHash('md5').update(fileBuffer).digest('hex');
-        if (seenHashes.has(hash)) {
-          isDuplicate = true;
-          try { fs.unlinkSync(absPath); } catch (e) {}
-        } else {
-          seenHashes.add(hash);
-        }
-      }
-
-      if (isDuplicate) {
-        mdString = mdString.replace(fullTag, '');
-        continue;
-      }
-
       if (!coverUrl) coverUrl = localImgPath;
+      // Заменяем ВСЕ вхождения этого URL — если картинка вставлена в статье
+      // несколько раз, все копии останутся на своих местах
       mdString = mdString.split(rawImgUrl).join(localImgPath);
-      imgCounter++;
     }
 
     let htmlContent = mdString
